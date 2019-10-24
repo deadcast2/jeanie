@@ -35,7 +35,7 @@ namespace jeanie.Areas.Admin.Controllers
 
                     if (context.SaveChanges() > 0)
                     {
-                        ViewData["success"] = "New reservation generated";
+                        TempData["success"] = "New reservation generated";
                         return RedirectToAction("Index");
                     }
                 }

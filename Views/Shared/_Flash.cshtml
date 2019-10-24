@@ -1,8 +1,8 @@
-﻿@if (ViewData["success"] != null)
+﻿@if (TempData["success"] != null)
 {
-    <div class="alert alert-success">@ViewData["success"]</div>
+    <div class="alert alert-success">@TempData["success"]</div>
 } 
-else if (ViewData["error"] != null)
+else if (TempData["error"] != null)
 {
-    <div class="alert alert-danger">@ViewData["error"]</div>
+    <div class="alert alert-danger">@TempData["error"]</div>
 }
