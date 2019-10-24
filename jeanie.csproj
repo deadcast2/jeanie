@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201910240039381_AddCreatedAtToReservation.Designer.cs">
       <DependentUpon>201910240039381_AddCreatedAtToReservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910241612580_RemovePhoneNumberFromReservation.cs" />
+    <Compile Include="Migrations\201910241612580_RemovePhoneNumberFromReservation.Designer.cs">
+      <DependentUpon>201910241612580_RemovePhoneNumberFromReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -293,6 +297,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910240039381_AddCreatedAtToReservation.resx">
       <DependentUpon>201910240039381_AddCreatedAtToReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910241612580_RemovePhoneNumberFromReservation.resx">
+      <DependentUpon>201910241612580_RemovePhoneNumberFromReservation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -18,9 +18,6 @@ namespace jeanie.Models
         [StringLength(100)]
         public string Grade { get; set; }
 
-        [StringLength(60)]
-        public string PhoneNumber { get; set; }
-
         public string Notes { get; set; }
 
         public DateTime? StartDate { get; set; }

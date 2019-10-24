@@ -16,7 +16,6 @@ namespace jeanie.Models
             Id = reservation.Id;
             Name = reservation.Name;
             Grade = reservation.Grade;
-            PhoneNumber = reservation.PhoneNumber;
             Notes = reservation.Notes;
             StartDate = reservation.StartDate;
             EndDate = reservation.EndDate;
@@ -27,8 +26,6 @@ namespace jeanie.Models
         public string Name { get; set; }
 
         public string Grade { get; set; }
-
-        public string PhoneNumber { get; set; }
 
         public string Notes { get; set; }
 

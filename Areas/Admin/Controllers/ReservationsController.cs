@@ -54,7 +54,6 @@ namespace jeanie.Areas.Admin.Controllers
                         Id = e.Id,
                         Name = e.Name,
                         Grade = e.Grade,
-                        PhoneNumber = e.PhoneNumber,
                         StartDate = e.StartDate,
                         EndDate = e.EndDate
                     })
