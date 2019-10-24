@@ -44,11 +44,21 @@ namespace jeanie.Areas.Admin.Controllers
             return View("Index", (model, GetReservations()));
         }
 
-        private List<Reservation> GetReservations()
+        private List<ReservationViewModel> GetReservations()
         {
             using (var context = new JeanieContext())
             {
-                return context.Reservations.OrderByDescending(e => e.CreatedAt).ToList();
+                return context.Reservations.OrderByDescending(e => e.CreatedAt)
+                    .Select(e => new ReservationViewModel
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        Grade = e.Grade,
+                        PhoneNumber = e.PhoneNumber,
+                        StartDate = e.StartDate,
+                        EndDate = e.EndDate
+                    })
+                    .ToList();
             }
         }
     }
