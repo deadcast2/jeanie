@@ -1,5 +1,54 @@
-﻿@{
+﻿@model (jeanie.Models.ReservationViewModel, List<jeanie.Models.Reservation>)
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-Adming area
+<div class="md-margin">
+    <div class="row">
+        <div class="col-lg-4">
+            <form method="post" action="@Url.Action("create")">
+                @if (Model.Item1.Errors.Count > 0)
+                {
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach (var error in Model.Item1.Errors)
+                            {
+                                <li>@error</li>
+                            }
+                        </ul>
+                    </div>
+                }
+                <div class="form-group">
+                    <label>Name</label>
+                    <input class="form-control" name="name" value="@Model.Item1.Name" />
+                </div>
+                <button type="submit" class="btn btn-success">
+                    <i class="glyphicon glyphicon-plus"></i> Generate
+                </button>
+            </form>
+        </div>
+        <div class="col-lg-8">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>Phone #</th>
+                        <th>Time Slot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model.Item2)
+                    {
+                        <tr>
+                            <td>@reservation.Name</td>
+                            <td>@reservation.Grade</td>
+                            <td>@reservation.PhoneNumber</td>
+                            <td>@reservation.StartDate</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

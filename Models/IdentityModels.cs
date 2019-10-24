@@ -21,7 +21,7 @@ namespace jeanie.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("JeanieContext", throwIfV1Schema: false)
         {
         }
 

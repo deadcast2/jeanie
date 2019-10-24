@@ -177,9 +177,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Seeds.cs" />
     <Compile Include="Migrations\201910232318044_CreateReservationsTable.cs" />
     <Compile Include="Migrations\201910232318044_CreateReservationsTable.Designer.cs">
       <DependentUpon>201910232318044_CreateReservationsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910240015486_AddComputedIdentityToReservation.cs" />
+    <Compile Include="Migrations\201910240015486_AddComputedIdentityToReservation.Designer.cs">
+      <DependentUpon>201910240015486_AddComputedIdentityToReservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910240039381_AddCreatedAtToReservation.cs" />
+    <Compile Include="Migrations\201910240039381_AddCreatedAtToReservation.Designer.cs">
+      <DependentUpon>201910240039381_AddCreatedAtToReservation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -187,6 +196,7 @@
     <Compile Include="Lib\JeanieContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\ReservationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -246,6 +256,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Flash.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -268,6 +279,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910232318044_CreateReservationsTable.resx">
       <DependentUpon>201910232318044_CreateReservationsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910240015486_AddComputedIdentityToReservation.resx">
+      <DependentUpon>201910240015486_AddComputedIdentityToReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910240039381_AddCreatedAtToReservation.resx">
+      <DependentUpon>201910240039381_AddCreatedAtToReservation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

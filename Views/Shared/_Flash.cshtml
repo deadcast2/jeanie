@@ -1,0 +1,8 @@
+﻿@if (ViewData["success"] != null)
+{
+    <div class="alert alert-success">@ViewData["success"]</div>
+} 
+else if (ViewData["error"] != null)
+{
+    <div class="alert alert-danger">@ViewData["error"]</div>
+}

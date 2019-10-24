@@ -20,12 +20,14 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Manage", "Index", "Reservations", new { area = "Admin" }, null)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content">
+        @Html.Partial("_Flash")
         @RenderBody()
         <hr />
         <footer>

@@ -1,5 +1,8 @@
 namespace jeanie.Migrations
 {
+    using jeanie.Lib;
+    using jeanie.Models;
+    using Microsoft.AspNet.Identity;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -14,10 +17,7 @@ namespace jeanie.Migrations
 
         protected override void Seed(jeanie.Lib.JeanieContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            Seeds.DefaultUser(ApplicationDbContext.Create());
         }
     }
 }
