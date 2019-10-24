@@ -1,8 +1,10 @@
 ﻿@model (jeanie.Models.ReservationViewModel, List<jeanie.Models.ReservationViewModel>)
 @{
-    ViewBag.Title = "Manage";
+    ViewBag.Title = "Admin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>@ViewBag.Title</h2>
 
 <div class="md-margin">
     <div class="row">
@@ -21,10 +23,10 @@
                 }
                 <div class="form-group">
                     <label>Name</label>
-                    <input class="form-control" name="name" value="@Model.Item1.Name" />
+                    <input class="form-control" name="name" value="@Model.Item1.Name" placeholder="Required" />
                 </div>
                 <button type="submit" class="btn btn-success">
-                    <i class="glyphicon glyphicon-plus"></i> Generate
+                    <i class="glyphicon glyphicon-plus"></i> Add Reservation
                 </button>
             </form>
         </div>
