@@ -20,7 +20,7 @@ namespace jeanie.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create(ReservationViewModel model)
         {
             if (model.IsValid)
