@@ -1,4 +1,5 @@
-﻿using System;
+﻿using jeanie.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -31,7 +32,7 @@ namespace jeanie.Lib
             List<(DateTime start, DateTime end)> bookedTimeSlots, 
             List<(DateTime start, DateTime end)> openTimeSlots)
         {
-            return openTimeSlots.Where(e => !bookedTimeSlots.Contains(e)).ToList();
+            return openTimeSlots.Where(e => IsValidTimeSlot(bookedTimeSlots, e)).ToList();
         }
 
         public static bool IsDayFullyBooked(DateTime day, List<(DateTime start, DateTime end)> bookedTimeSlots)
@@ -44,8 +45,16 @@ namespace jeanie.Lib
         {
             var valid = GetTimeSlots(newTimeSlot.start).Contains(newTimeSlot);
             valid &= !bookedTimeSlots.Any(e => newTimeSlot.start >= e.start && newTimeSlot.start < e.end);
-            valid &= !bookedTimeSlots.Any(e => newTimeSlot.end >= e.start && newTimeSlot.end < e.end);
+            valid &= !bookedTimeSlots.Any(e => newTimeSlot.end > e.start && newTimeSlot.end < e.end);
             return valid;
+        }
+
+        public static List<(DateTime start, DateTime end)> TimeSlotsAvailable(DateTime day, 
+            List<Reservation> reservations)
+        {
+            var bookedTimeSlots = reservations.Where(e => e.StartDate.HasValue && e.EndDate.HasValue)
+                .Select(e => (e.StartDate.Value, e.EndDate.Value)).ToList();
+            return FilterTimeSlots(bookedTimeSlots, GetTimeSlots(day));
         }
     }
 }

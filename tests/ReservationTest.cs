@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using jeanie.Lib;
+using jeanie.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace tests
@@ -43,19 +44,41 @@ namespace tests
         }
 
         [TestMethod]
-        public void TimeSlotsFiltered()
+        public void TimeSlotsFilteredPartially()
         {
             var timeSlots = ReservationHelper.GetTimeSlots(DateTime.Now);
 
             var bookedTimeSlots = new List<(DateTime start, DateTime end)>
             {
-                (DateTime.Now.Date.AddHours(10), DateTime.Now.Date.AddHours(13)),
-                (DateTime.Now.Date.AddHours(14), DateTime.Now.Date.AddHours(17))
+                (DateTime.Now.Date.AddHours(9), DateTime.Now.Date.AddHours(12)),
+                (DateTime.Now.Date.AddHours(15), DateTime.Now.Date.AddHours(18))
             };
 
             var openTimeSlots = ReservationHelper.FilterTimeSlots(bookedTimeSlots, timeSlots);
 
-            Assert.AreEqual(timeSlots.Count - bookedTimeSlots.Count, openTimeSlots.Count);
+            Assert.AreEqual(openTimeSlots.Count, 2);
+            Assert.AreEqual(openTimeSlots[0].start, DateTime.Now.Date.AddHours(12));
+            Assert.AreEqual(openTimeSlots[0].end, DateTime.Now.Date.AddHours(15));
+            Assert.AreEqual(openTimeSlots[1].start, DateTime.Now.Date.AddHours(18));
+            Assert.AreEqual(openTimeSlots[1].end, DateTime.Now.Date.AddHours(21));
+        }
+
+        [TestMethod]
+        public void TimeSlotsFilteredFully()
+        {
+            var timeSlots = ReservationHelper.GetTimeSlots(DateTime.Now);
+
+            var bookedTimeSlots = new List<(DateTime start, DateTime end)>
+            {
+                (DateTime.Now.Date.AddHours(9), DateTime.Now.Date.AddHours(12)),
+                (DateTime.Now.Date.AddHours(12), DateTime.Now.Date.AddHours(15)),
+                (DateTime.Now.Date.AddHours(15), DateTime.Now.Date.AddHours(18)),
+                (DateTime.Now.Date.AddHours(18), DateTime.Now.Date.AddHours(21))
+            };
+
+            var openTimeSlots = ReservationHelper.FilterTimeSlots(bookedTimeSlots, timeSlots);
+
+            Assert.AreEqual(openTimeSlots.Count, 0);
         }
 
         [TestMethod]
@@ -130,6 +153,22 @@ namespace tests
             var newTimeSlot = (DateTime.Now.Date.AddHours(21), DateTime.Now.Date.AddHours(24));
 
             Assert.IsFalse(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+        }
+
+        [TestMethod]
+        public void ChecksAvailabilityForReservation()
+        {
+            var reservations = new List<Reservation>
+            {
+                new Reservation 
+                {
+                    StartDate = DateTime.Now.Date.AddHours(14),
+                    EndDate = DateTime.Now.Date.AddHours(17) 
+                }
+            };
+            var openTimeSlots = ReservationHelper.TimeSlotsAvailable(DateTime.Now, reservations);
+
+            Assert.AreEqual(openTimeSlots.Count, 5);
         }
     }
 }
