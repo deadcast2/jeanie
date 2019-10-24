@@ -13,4 +13,6 @@
     $('[data-toggle="tooltip"]').tooltip({
         trigger: 'manual'
     });
+
+    $('.pickadate').pickadate();
 });

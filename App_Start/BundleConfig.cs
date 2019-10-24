@@ -22,12 +22,17 @@ namespace jeanie
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                      "~/Scripts/app.js"));
+            bundles.Add(new ScriptBundle("~/bundles/app")
+                .Include("~/Scripts/app.js")
+                .Include("~/Scripts/picker.js")
+                .Include("~/Scripts/picker.date.js")
+            );
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/default.css",
+                      "~/Content/default.date.css"));
         }
     }
 }
