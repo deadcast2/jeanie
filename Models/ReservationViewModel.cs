@@ -35,6 +35,9 @@ namespace jeanie.Models
 
         public string TimeSlot { get; set; }
 
+        public string FormattedTimeSlot => IsBooked ? $"{StartDate.Value.ToShortDateString()} " +
+            $"{StartDate.Value.ToShortTimeString()} - {EndDate.Value.ToShortTimeString()}" : "TBD";
+
         public string Url => $"{BaseUrl}/Reservations/Edit/{Id}";
 
         public List<string> Errors { get; private set; } = new List<string>();
