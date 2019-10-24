@@ -1,4 +1,5 @@
-﻿using System;
+﻿using jeanie.Lib;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -8,6 +9,19 @@ namespace jeanie.Models
 {
     public class ReservationViewModel
     {
+        public ReservationViewModel() { }
+
+        public ReservationViewModel(Reservation reservation)
+        {
+            Id = reservation.Id;
+            Name = reservation.Name;
+            Grade = reservation.Grade;
+            PhoneNumber = reservation.PhoneNumber;
+            Notes = reservation.Notes;
+            StartDate = reservation.StartDate;
+            EndDate = reservation.EndDate;
+        }
+
         public Guid Id { get; set; }
 
         public string Name { get; set; }
@@ -16,9 +30,13 @@ namespace jeanie.Models
 
         public string PhoneNumber { get; set; }
 
+        public string Notes { get; set; }
+
         public DateTime? StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
+
+        public string TimeSlot { get; set; }
 
         public string Url => $"{BaseUrl}/Reservations/Edit/{Id}";
 
@@ -38,6 +56,8 @@ namespace jeanie.Models
                 return Errors.Count == 0;
             }
         }
+
+        public bool IsBooked => StartDate.HasValue && EndDate.HasValue;
 
         private string BaseUrl
         {
