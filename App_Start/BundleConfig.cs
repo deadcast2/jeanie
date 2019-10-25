@@ -33,7 +33,8 @@ namespace jeanie
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/default.css",
-                      "~/Content/default.date.css"));
+                      "~/Content/default.date.css",
+                      "~/Content/default.time.css"));
         }
     }
 }
