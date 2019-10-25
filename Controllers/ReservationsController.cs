@@ -58,7 +58,8 @@ namespace jeanie.Controllers
                     }
                     else if (context.SaveChanges() > 0)
                     {
-                        TempData["success"] = "Your reservation has been successfully booked!";
+                        TempData["success"] = ViewHelpers.RenderToString(ControllerContext, 
+                            "_Success", GetReservation(model.Id));
                         return Redirect("/");
                     }
                 }

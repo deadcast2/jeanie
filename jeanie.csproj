@@ -180,6 +180,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\ViewHelpers.cs" />
     <Compile Include="Lib\ReservationHelper.cs" />
     <Compile Include="Lib\Seeds.cs" />
     <Compile Include="Migrations\201910232318044_CreateReservationsTable.cs" />
@@ -281,6 +282,7 @@
     <Content Include="Views\Shared\_Flash.cshtml" />
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Shared\_FormErrors.cshtml" />
+    <Content Include="Views\Reservations\_Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
