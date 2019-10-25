@@ -71,9 +71,16 @@ namespace jeanie.Models
 
             if (strict)
             {
+                // Presence
                 if (!Date.HasValue) Errors.Add("A date must be select");
                 if (string.IsNullOrWhiteSpace(TimeSlot)) Errors.Add("A time slot must be select");
                 if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified");
+
+                // Length
+                if (Name.Length > Reservation.MaxNameLength) 
+                    Errors.Add($"Name must be less than {Reservation.MaxNameLength} characters.");
+                if (Grade.Length > Reservation.MaxGradeLength)
+                    Errors.Add($"Grade must be less than {Reservation.MaxGradeLength} characters.");
             }
 
             return Errors.Count == 0;

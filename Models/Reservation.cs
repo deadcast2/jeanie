@@ -9,13 +9,16 @@ namespace jeanie.Models
 {
     public class Reservation
     {
+        public const int MaxNameLength = 100;
+        public const int MaxGradeLength = 100;
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Required, StringLength(100)]
+        [Required, StringLength(MaxNameLength)]
         public string Name { get; set; }
 
-        [StringLength(100)]
+        [StringLength(MaxGradeLength)]
         public string Grade { get; set; }
 
         public string Notes { get; set; }
