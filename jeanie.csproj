@@ -204,6 +204,10 @@
     <Compile Include="Migrations\201910242338440_AddUpdatedAtToReservation.Designer.cs">
       <DependentUpon>201910242338440_AddUpdatedAtToReservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910250444323_ChangeMaxLengthOfNotes.cs" />
+    <Compile Include="Migrations\201910250444323_ChangeMaxLengthOfNotes.Designer.cs">
+      <DependentUpon>201910250444323_ChangeMaxLengthOfNotes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -318,6 +322,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910242338440_AddUpdatedAtToReservation.resx">
       <DependentUpon>201910242338440_AddUpdatedAtToReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250444323_ChangeMaxLengthOfNotes.resx">
+      <DependentUpon>201910250444323_ChangeMaxLengthOfNotes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

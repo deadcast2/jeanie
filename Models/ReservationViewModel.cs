@@ -88,6 +88,8 @@ namespace jeanie.Models
                     Errors.Add($"Name must be less than {Reservation.MaxNameLength} characters.");
                 if (Grade.Length > Reservation.MaxGradeLength)
                     Errors.Add($"Grade must be less than {Reservation.MaxGradeLength} characters.");
+                if ((Notes ?? "").Length > Reservation.MaxNotesLength)
+                    Errors.Add($"Notes must be less than {Reservation.MaxNotesLength} characters.");
             }
 
             return Errors.Count == 0;

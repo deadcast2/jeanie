@@ -11,6 +11,7 @@ namespace jeanie.Models
     {
         public const int MaxNameLength = 100;
         public const int MaxGradeLength = 100;
+        public const int MaxNotesLength = 1000;
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
@@ -21,6 +22,7 @@ namespace jeanie.Models
         [StringLength(MaxGradeLength)]
         public string Grade { get; set; }
 
+        [StringLength(MaxNotesLength)]
         public string Notes { get; set; }
 
         public DateTime? StartDate { get; set; }
