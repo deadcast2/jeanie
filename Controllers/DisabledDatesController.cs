@@ -37,7 +37,7 @@ namespace jeanie.Controllers
                     }
                 }
 
-                return Content(string.Join(", ", disabledDates));
+                return Content($"[{string.Join(", ", disabledDates)}]");
             }
         }
     }

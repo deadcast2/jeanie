@@ -19,6 +19,7 @@ namespace jeanie.Models
             Notes = reservation.Notes;
             StartDate = reservation.StartDate;
             EndDate = reservation.EndDate;
+            Source = reservation;
         }
 
         public Guid Id { get; set; }
@@ -53,6 +54,12 @@ namespace jeanie.Models
 
         public string TimeSlot { get; set; }
 
+        public DateTime? StartDateFromTimeSlot => Date?.AddHours(SplitTimeSlot[0]);
+
+        public DateTime? EndDateFromTimeSlot => Date?.AddHours(SplitTimeSlot[1]);
+
+        public Reservation Source { get; private set; }
+
         public string FormattedTimeSlot => IsBooked ? $"{StartDate.Value.ToShortDateString()} " +
             $"{StartDate.Value.ToShortTimeString()} - {EndDate.Value.ToShortTimeString()}" : "TBD";
 
@@ -77,7 +84,7 @@ namespace jeanie.Models
                 if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified");
 
                 // Length
-                if (Name.Length > Reservation.MaxNameLength) 
+                if (Name.Length > Reservation.MaxNameLength)
                     Errors.Add($"Name must be less than {Reservation.MaxNameLength} characters.");
                 if (Grade.Length > Reservation.MaxGradeLength)
                     Errors.Add($"Grade must be less than {Reservation.MaxGradeLength} characters.");
@@ -97,6 +104,19 @@ namespace jeanie.Models
 #else
                 return ConfigurationManager.AppSettings["ProdBaseUrl"];
 #endif
+            }
+        }
+
+        private int[] SplitTimeSlot
+        {
+            get
+            {
+                var hourRange = (TimeSlot ?? "").Split('-');
+                if (hourRange.Length != 2) return new[] { 0, 0 };
+
+                int.TryParse(hourRange[0], out int startHour);
+                int.TryParse(hourRange[1], out int endHour);
+                return new[] { startHour, endHour };
             }
         }
     }

@@ -2,6 +2,7 @@
 using jeanie.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -34,25 +35,23 @@ namespace jeanie.Controllers
         {
             using (var context = new JeanieContext())
             {
-                var reservation = context.Reservations.Find(model.Id);
-                if (reservation == null) return Edit(model.Id);
+                var reservation = GetReservation(model.Id);
+                if (reservation == null || reservation.IsBooked) return Edit(model.Id);
 
                 // So name validation succeeds.
                 model.Name = reservation.Name;
 
-                var hourRange = (model.TimeSlot ?? "").Split('-');
-                if (model.IsValid(strict: true) && hourRange.Length == 2)
+                if (model.IsValid(strict: true))
                 {
-                    int.TryParse(hourRange[0], out int startHour);
-                    reservation.StartDate = model.Date?.AddHours(startHour);
-                    int.TryParse(hourRange[1], out int endHour);
-                    reservation.EndDate = model.Date?.AddHours(endHour);
+                    context.Reservations.Attach(reservation.Source);
 
-                    reservation.Grade = model.Grade;
-                    reservation.Notes = model.Notes;
+                    reservation.Source.StartDate = model.StartDateFromTimeSlot;
+                    reservation.Source.EndDate = model.EndDateFromTimeSlot;
+                    reservation.Source.Grade = model.Grade;
+                    reservation.Source.Notes = model.Notes;
 
                     if (!ReservationHelper.IsValidTimeSlot(ReservationHelper.GetReservations(model.Date.Value),
-                        (reservation.StartDate.Value, reservation.EndDate.Value)))
+                        (reservation.Source.StartDate.Value, reservation.Source.EndDate.Value)))
                     {
                         TempData["error"] = "Sorry but that time slot is no longer available.";
                     }

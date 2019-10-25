@@ -20,7 +20,7 @@ window.JRS.Reservation = {};
         var disableDates = function (e) {
             if (e == null || e.highlight) {
                 $.get('/disableddates/show?day=' + picker.get('view', 'yyyy/mm/dd'), function (disabled) {
-                    picker.set('disable', [JSON.parse(disabled || '{}')]);
+                    picker.set('disable', JSON.parse(disabled));
                 });
             }
         };
