@@ -60,19 +60,23 @@ namespace jeanie.Models
 
         public List<string> Errors { get; private set; } = new List<string>();
 
-        public bool IsValid
+        public bool IsValid(bool strict = false)
         {
-            get
+            Errors.Clear();
+
+            if (string.IsNullOrWhiteSpace(Name))
             {
-                Errors.Clear();
-
-                if (string.IsNullOrWhiteSpace(Name))
-                {
-                    Errors.Add("Name cannot be blank");
-                }
-
-                return Errors.Count == 0;
+                Errors.Add("Name cannot be blank");
             }
+
+            if (strict)
+            {
+                if (!Date.HasValue) Errors.Add("A date must be select");
+                if (string.IsNullOrWhiteSpace(TimeSlot)) Errors.Add("A time slot must be select");
+                if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified");
+            }
+
+            return Errors.Count == 0;
         }
 
         public bool IsBooked => StartDate.HasValue && EndDate.HasValue;

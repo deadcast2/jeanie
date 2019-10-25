@@ -23,10 +23,11 @@ namespace jeanie
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/app")
-                .Include("~/Scripts/app.js")
                 .Include("~/Scripts/picker.js")
                 .Include("~/Scripts/picker.date.js")
                 .Include("~/Scripts/picker.time.js")
+                .Include("~/Scripts/app.js")
+                .Include("~/Scripts/reservation.js")
             );
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

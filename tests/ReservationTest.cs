@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using jeanie.Lib;
-using jeanie.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace tests
@@ -158,15 +157,12 @@ namespace tests
         [TestMethod]
         public void ChecksAvailabilityForReservation()
         {
-            var reservations = new List<Reservation>
+            var bookedTimeSlots = new List<(DateTime start, DateTime end)>
             {
-                new Reservation 
-                {
-                    StartDate = DateTime.Now.Date.AddHours(14),
-                    EndDate = DateTime.Now.Date.AddHours(17) 
-                }
+                (DateTime.Now.Date.AddHours(14), DateTime.Now.Date.AddHours(17))
             };
-            var openTimeSlots = ReservationHelper.TimeSlotsAvailable(DateTime.Now, reservations);
+
+            var openTimeSlots = ReservationHelper.AvailableTimeSlots(DateTime.Now, bookedTimeSlots);
 
             Assert.AreEqual(openTimeSlots.Count, 5);
         }

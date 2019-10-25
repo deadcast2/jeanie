@@ -13,18 +13,13 @@ namespace jeanie.Controllers
         [HttpGet]
         public ActionResult Show(DateTime day)
         {
-            using (var context = new JeanieContext())
+            var availableTimeSlot = ReservationHelper.AvailableTimeSlots(day,
+                ReservationHelper.GetReservations(day));
+            return Json(availableTimeSlot.Select(e => new
             {
-                var bookedTimeSlots = context.Reservations
-                    .Where(e => day >= DbFunctions.TruncateTime(e.StartDate)
-                    && day <= DbFunctions.TruncateTime(e.EndDate)).ToList();
-                var availableTimeSlot = ReservationHelper.TimeSlotsAvailable(day, bookedTimeSlots);
-                return Json(availableTimeSlot.Select(e => new
-                {
-                    text = $"{e.start.ToShortTimeString()} - {e.end.ToShortTimeString()}",
-                    value = $"{e.start.Hour}-{e.end.Hour}"
-                }), JsonRequestBehavior.AllowGet);
-            }
+                text = $"{e.start.ToShortTimeString()} - {e.end.ToShortTimeString()}",
+                value = $"{e.start.Hour}-{e.end.Hour}"
+            }), JsonRequestBehavior.AllowGet);
         }
     }
 }

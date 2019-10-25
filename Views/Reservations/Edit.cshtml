@@ -6,6 +6,8 @@
 
 <div class="md-margin">
     <form method="post" action="@Url.Action("Update")">
+        @Html.AntiForgeryToken()
+        @Html.Partial("_FormErrors", Model)
         <input type="hidden" name="id" value="@Model.Id" />
         <h2>Step 1 - Pick a Time</h2>
         <hr />
@@ -13,14 +15,15 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="date">Date</label>
-                    <input id="date" name="date" type="text" class="form-control pickadate" placeholder="Required" />
+                    <input id="date" name="date" type="text" class="form-control pickadate"
+                           placeholder="Required" value="@(Model.Date?.ToShortDateString())" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="time_slot">Time Slot</label>
                     <select id="time_slot" name="timeslot" class="form-control">
-                        <option>Please select a date first</option>
+                        <option value="">Please select a date first</option>
                     </select>
                 </div>
             </div>
@@ -31,13 +34,13 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="grade">Grade</label>
-                    <input id="grade" name="grade" type="text" class="form-control" placeholder="Required" />
+                    <input id="grade" name="grade" type="text" class="form-control" placeholder="Required" value="@Model.Grade" />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="notes">Notes</label>
-                    <textarea id="notes" name="notes" class="form-control" placeholder="Optional"></textarea>
+                    <textarea id="notes" name="notes" class="form-control" placeholder="Optional">@Model.Notes</textarea>
                 </div>
             </div>
         </div>
@@ -48,28 +51,7 @@
 @section scripts {
     <script>
         $(function () {
-            var picker = $('.pickadate').change(function () {
-                $.get('/timeslots/show?day=' + $(this).val(), function (timeSlots) {
-                    var $timeSlot = $('#time_slot');
-                    $timeSlot.empty();
-                    $.each(timeSlots, function (i, el) {
-                        $timeSlot.append('<option value="' + el.value + '">' + el.text + '</option>');
-                    });
-                });
-            }).pickadate('picker');
-
-            var disableDates = function (e) {
-                if (e == null || e.highlight) {
-                    $.get('/disableddates/show?day=' + picker.get('view', 'yyyy/mm/dd'), function (disabled) {
-                        picker.set('disable', [JSON.parse(disabled || '{}')]);
-                    });
-                }
-            };
-
-            picker.on({
-                open: disableDates,
-                set: disableDates
-            });
+            JRS.Reservation.init('@Model.TimeSlot');
         });
     </script>
 }

@@ -245,6 +245,7 @@
     <Content Include="Scripts\picker.date.js" />
     <Content Include="Scripts\picker.js" />
     <Content Include="Scripts\picker.time.js" />
+    <Content Include="Scripts\reservation.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
