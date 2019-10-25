@@ -180,6 +180,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lib\Extensions.cs" />
     <Compile Include="Lib\ViewHelpers.cs" />
     <Compile Include="Lib\ReservationHelper.cs" />
     <Compile Include="Lib\Seeds.cs" />

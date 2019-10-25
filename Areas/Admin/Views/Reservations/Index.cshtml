@@ -36,7 +36,7 @@
                     {
                         <tr>
                             <td>@reservation.Name</td>
-                            <td>@reservation.Grade</td>
+                            <td>@reservation.Grade.Preview(20)</td>
                             <td>@reservation.FormattedTimeSlot</td>
                             <td>
                                 <form method="post" action="@Url.Action("Destroy")">
