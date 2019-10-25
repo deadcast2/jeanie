@@ -26,6 +26,7 @@ namespace jeanie
                 .Include("~/Scripts/app.js")
                 .Include("~/Scripts/picker.js")
                 .Include("~/Scripts/picker.date.js")
+                .Include("~/Scripts/picker.time.js")
             );
 
             bundles.Add(new StyleBundle("~/Content/css").Include(

@@ -198,6 +198,10 @@
     <Compile Include="Migrations\201910241612580_RemovePhoneNumberFromReservation.Designer.cs">
       <DependentUpon>201910241612580_RemovePhoneNumberFromReservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910242338440_AddUpdatedAtToReservation.cs" />
+    <Compile Include="Migrations\201910242338440_AddUpdatedAtToReservation.Designer.cs">
+      <DependentUpon>201910242338440_AddUpdatedAtToReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -224,6 +228,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Reservations\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Reservations\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\jeanie-reservations - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -272,6 +277,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Flash.cshtml" />
     <Content Include="Views\Reservations\Edit.cshtml" />
+    <Content Include="Views\Shared\_FormErrors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910241612580_RemovePhoneNumberFromReservation.resx">
       <DependentUpon>201910241612580_RemovePhoneNumberFromReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910242338440_AddUpdatedAtToReservation.resx">
+      <DependentUpon>201910242338440_AddUpdatedAtToReservation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

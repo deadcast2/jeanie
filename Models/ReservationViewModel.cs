@@ -31,7 +31,25 @@ namespace jeanie.Models
 
         public DateTime? StartDate { get; set; }
 
+        public DateTime? StartTime { get; set; }
+
         public DateTime? EndDate { get; set; }
+
+        public DateTime? EndTime { get; set; }
+
+        public DateTime? Date
+        {
+            set
+            {
+                StartDate = EndDate = value;
+                StartDate = StartDate?.Date.AddHours(StartTime?.Hour ?? 0);
+                EndDate = EndDate?.Date.AddHours(EndTime?.Hour ?? 0);
+            }
+            get
+            {
+                return StartDate?.Date;
+            }
+        }
 
         public string TimeSlot { get; set; }
 

@@ -20,7 +20,7 @@
     margin-top: 20px;
 }
 
-.pickadate[readonly] {
+.pickadate[readonly], .pickatime[readonly] {
     background-color: transparent !important;
 }
 

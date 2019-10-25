@@ -11,18 +11,7 @@
         <div class="col-lg-4">
             <form method="post" action="@Url.Action("create")">
                 @Html.AntiForgeryToken()
-
-                @if (Model.Item1.Errors.Count > 0)
-                {
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach (var error in Model.Item1.Errors)
-                            {
-                                <li>@error</li>
-                            }
-                        </ul>
-                    </div>
-                }
+                @Html.Partial("_FormErrors", Model.Item1)
                 <div class="form-group">
                     <label>Name</label>
                     <input class="form-control" name="name" value="@Model.Item1.Name" placeholder="Required" />
@@ -49,7 +38,16 @@
                             <td>@reservation.Name</td>
                             <td>@reservation.Grade</td>
                             <td>@reservation.FormattedTimeSlot</td>
-                            <td><a href="@reservation.Url" class="copy" data-toggle="tooltip" data-placement="top" title="Copied to clipboard!">Copy Link</a></td>
+                            <td>
+                                <form method="post" action="@Url.Action("Destroy")">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@reservation.Id" />
+                                    <a href="@Url.Action("Edit", new { id = reservation.Id })" class="btn btn-default btn-xs">Edit</a>
+                                    <a href="@reservation.Url" class="btn btn-default btn-xs copy" data-toggle="tooltip" data-placement="top"
+                                       title="Copied to clipboard!">Copy Link</a>
+                                    <a href="#" class="btn btn-danger btn-xs delete-confirm">Delete</a>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>
