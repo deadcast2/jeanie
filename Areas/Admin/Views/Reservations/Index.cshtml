@@ -42,16 +42,22 @@
                                 <form method="post" action="@Url.Action("Destroy")">
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@reservation.Id" />
-                                    <a href="@Url.Action("Edit", new { id = reservation.Id })" class="btn btn-default btn-xs">Edit</a>
-                                    <a href="@reservation.Url" class="btn btn-default btn-xs copy" data-toggle="tooltip" data-placement="top"
+                                    <a href="@Url.Action("Edit", new { id = reservation.Id })" class="btn btn-default btn-sm">Edit</a>
+                                    <a href="@reservation.Url" class="btn btn-default btn-sm copy" data-toggle="tooltip" data-placement="top"
                                        title="Copied to clipboard!">Copy Link</a>
-                                    <a href="#" class="btn btn-danger btn-xs delete-confirm">Delete</a>
+                                    <a href="#" class="btn btn-danger btn-sm delete-confirm">Delete</a>
                                 </form>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
+            @if (Model.Item2.Count == 0)
+            {
+                <div class="text-center">
+                    No reservations created yet
+                </div>
+            }
         </div>
     </div>
 </div>
