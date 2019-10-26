@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -57,8 +58,10 @@ namespace jeanie.Controllers
                     }
                     else if (context.SaveChanges() > 0)
                     {
-                        TempData["success"] = ViewHelpers.RenderToString(ControllerContext, 
-                            "_Success", GetReservation(model.Id));
+                        var refreshedModel = GetReservation(model.Id);
+                        Task.Run(() => Mailer.SendReservationConfirmation(ControllerContext, refreshedModel));
+                        TempData["success"] = ViewHelpers.RenderToString(ControllerContext, "_Success",
+                            refreshedModel);
                         return Redirect("/");
                     }
                 }

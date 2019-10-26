@@ -218,6 +218,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Lib\Extensions.cs" />
+    <Compile Include="Lib\Mailer.cs" />
     <Compile Include="Lib\ViewHelpers.cs" />
     <Compile Include="Lib\ReservationHelper.cs" />
     <Compile Include="Lib\Seeds.cs" />
@@ -325,6 +326,7 @@
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Shared\_FormErrors.cshtml" />
     <Content Include="Views\Reservations\_Success.cshtml" />
+    <Content Include="Views\Shared\_ReservationConfirmationEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

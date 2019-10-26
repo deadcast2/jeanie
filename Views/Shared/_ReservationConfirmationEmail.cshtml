@@ -1,0 +1,10 @@
+﻿@model jeanie.Models.ReservationViewModel
+
+<p>A new reservation was just confirmed by @Model.Name for @Model.FormattedTimeSlot.</p>
+
+<p>Grade: @Model.Grade</p>
+
+@if(!string.IsNullOrWhiteSpace(Model.Notes))
+{
+    <p>Notes: @Model.Notes</p>
+}
