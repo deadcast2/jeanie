@@ -166,5 +166,21 @@ namespace tests
 
             Assert.AreEqual(openTimeSlots.Count, 5);
         }
+
+        [TestMethod]
+        public void ReturnsTrueWhenDate72HoursInAdvance()
+        {
+            var result = ReservationHelper.IsValidDate(DateTime.Now.Date.AddDays(3));
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ReturnsFalseWhenDateNot72HoursInAdvance()
+        {
+            var result = ReservationHelper.IsValidDate(DateTime.Now.Date.AddDays(1));
+
+            Assert.IsFalse(result);
+        }
     }
 }

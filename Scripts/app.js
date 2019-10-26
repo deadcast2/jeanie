@@ -22,7 +22,8 @@
     });
 
     $('.pickadate').pickadate({
-        format: 'mm/dd/yyyy'
+        format: 'mm/dd/yyyy',
+        min: 3 // 72 Hours notice
     });
 
     $('.pickatime').pickatime({
