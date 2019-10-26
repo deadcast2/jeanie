@@ -12,8 +12,7 @@ namespace jeanie.Lib
 {
     public static class Mailer
     {
-        private static string DefaultEmail =>
-            Environment.GetEnvironmentVariable("DEFAULT_EMAIL", EnvironmentVariableTarget.Machine);
+        private static string DefaultEmail => GetSystemVariable("DEFAULT_EMAIL");
 
         public static async Task SendReservationConfirmation(ControllerContext context, ReservationViewModel reservation)
         {
@@ -23,7 +22,7 @@ namespace jeanie.Lib
 
         private static async Task Send(string to, string subject, string body)
         {
-            var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY", EnvironmentVariableTarget.Machine);
+            var apiKey = GetSystemVariable("SENDGRID_API_KEY");
             var client = new SendGridClient(apiKey);
             var message = new SendGridMessage
             {
@@ -34,6 +33,15 @@ namespace jeanie.Lib
             };
             message.AddTo(to);
             await client.SendEmailAsync(message);
+        }
+
+        private static string GetSystemVariable(string name)
+        {
+#if DEBUG
+            return Environment.GetEnvironmentVariable(name, EnvironmentVariableTarget.Machine);
+#else
+            return Environment.GetEnvironmentVariable(name);
+#endif
         }
     }
 }
