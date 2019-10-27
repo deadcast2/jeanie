@@ -9,10 +9,11 @@ namespace jeanie.Lib
 {
     public static class ReservationHelper
     {
+        public const int HoursInAdvance = 72;
+
         private const int StartTime = 9;
         private const int EndTime = 21;
         private const int SlotSize = 3;
-        public const int HoursInAdvance = 72;
 
         public static List<(DateTime start, DateTime end)> GetReservations(DateTime day)
         {
@@ -68,8 +69,8 @@ namespace jeanie.Lib
             (DateTime start, DateTime end) newTimeSlot)
         {
             var valid = GetTimeSlots(newTimeSlot.start).Contains(newTimeSlot);
-            valid &= !bookedTimeSlots.Any(e => newTimeSlot.start >= e.start && newTimeSlot.start < e.end);
-            valid &= !bookedTimeSlots.Any(e => newTimeSlot.end > e.start && newTimeSlot.end < e.end);
+            valid &= !bookedTimeSlots.Any(e => newTimeSlot.start >= e.start && newTimeSlot.start <= e.end);
+            valid &= !bookedTimeSlots.Any(e => newTimeSlot.end >= e.start && newTimeSlot.end < e.end);
             return valid;
         }
     }

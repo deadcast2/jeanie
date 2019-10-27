@@ -50,14 +50,14 @@ namespace tests
             var bookedTimeSlots = new List<(DateTime start, DateTime end)>
             {
                 (DateTime.Now.Date.AddHours(9), DateTime.Now.Date.AddHours(12)),
-                (DateTime.Now.Date.AddHours(15), DateTime.Now.Date.AddHours(18))
+                (DateTime.Now.Date.AddHours(13), DateTime.Now.Date.AddHours(16))
             };
 
             var openTimeSlots = ReservationHelper.FilterTimeSlots(bookedTimeSlots, timeSlots);
 
             Assert.AreEqual(openTimeSlots.Count, 2);
-            Assert.AreEqual(openTimeSlots[0].start, DateTime.Now.Date.AddHours(12));
-            Assert.AreEqual(openTimeSlots[0].end, DateTime.Now.Date.AddHours(15));
+            Assert.AreEqual(openTimeSlots[0].start, DateTime.Now.Date.AddHours(17));
+            Assert.AreEqual(openTimeSlots[0].end, DateTime.Now.Date.AddHours(20));
             Assert.AreEqual(openTimeSlots[1].start, DateTime.Now.Date.AddHours(18));
             Assert.AreEqual(openTimeSlots[1].end, DateTime.Now.Date.AddHours(21));
         }
@@ -70,9 +70,8 @@ namespace tests
             var bookedTimeSlots = new List<(DateTime start, DateTime end)>
             {
                 (DateTime.Now.Date.AddHours(9), DateTime.Now.Date.AddHours(12)),
-                (DateTime.Now.Date.AddHours(12), DateTime.Now.Date.AddHours(15)),
-                (DateTime.Now.Date.AddHours(15), DateTime.Now.Date.AddHours(18)),
-                (DateTime.Now.Date.AddHours(18), DateTime.Now.Date.AddHours(21))
+                (DateTime.Now.Date.AddHours(13), DateTime.Now.Date.AddHours(16)),
+                (DateTime.Now.Date.AddHours(17), DateTime.Now.Date.AddHours(20))
             };
 
             var openTimeSlots = ReservationHelper.FilterTimeSlots(bookedTimeSlots, timeSlots);
@@ -107,7 +106,7 @@ namespace tests
                 (DateTime.Now.Date.AddHours(14), DateTime.Now.Date.AddHours(17))
             };
 
-            var newTimeSlot = (DateTime.Now.Date.AddHours(17), DateTime.Now.Date.AddHours(20));
+            var newTimeSlot = (DateTime.Now.Date.AddHours(18), DateTime.Now.Date.AddHours(21));
 
             Assert.IsTrue(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
         }
@@ -155,6 +154,32 @@ namespace tests
         }
 
         [TestMethod]
+        public void ReturnsFalseWhenTimeSlotBackToBackAfter()
+        {
+            var bookedTimeSlots = new List<(DateTime start, DateTime end)>
+            {
+                (DateTime.Now.Date.AddHours(9), DateTime.Now.Date.AddHours(12))
+            };
+
+            var newTimeSlot = (DateTime.Now.Date.AddHours(12), DateTime.Now.Date.AddHours(15));
+
+            Assert.IsFalse(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+        }
+
+        [TestMethod]
+        public void ReturnsFalseWhenTimeSlotBackToBackBefore()
+        {
+            var bookedTimeSlots = new List<(DateTime start, DateTime end)>
+            {
+                (DateTime.Now.Date.AddHours(12), DateTime.Now.Date.AddHours(15))
+            };
+
+            var newTimeSlot = (DateTime.Now.Date.AddHours(9), DateTime.Now.Date.AddHours(12));
+
+            Assert.IsFalse(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+        }
+
+        [TestMethod]
         public void ChecksAvailabilityForReservation()
         {
             var bookedTimeSlots = new List<(DateTime start, DateTime end)>
@@ -164,7 +189,7 @@ namespace tests
 
             var openTimeSlots = ReservationHelper.AvailableTimeSlots(DateTime.Now, bookedTimeSlots);
 
-            Assert.AreEqual(openTimeSlots.Count, 5);
+            Assert.AreEqual(openTimeSlots.Count, 3);
         }
 
         [TestMethod]
