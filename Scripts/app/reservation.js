@@ -59,6 +59,7 @@ window.JRS.Reservation = {};
     var validate = function () {
         check($('#date'));
         check($('#time_slot'));
+        check($('#email'));
         check($('#grade'));
         return $('.has-error').length === 0;
     };

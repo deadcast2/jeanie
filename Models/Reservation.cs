@@ -10,6 +10,7 @@ namespace jeanie.Models
     public class Reservation
     {
         public const int MaxNameLength = 100;
+        public const int MaxEmailLength = 100;
         public const int MaxGradeLength = 100;
         public const int MaxNotesLength = 1000;
 
@@ -18,6 +19,9 @@ namespace jeanie.Models
 
         [Required, StringLength(MaxNameLength)]
         public string Name { get; set; }
+
+        [StringLength(MaxEmailLength)]
+        public string Email { get; set; }
 
         [StringLength(MaxGradeLength)]
         public string Grade { get; set; }

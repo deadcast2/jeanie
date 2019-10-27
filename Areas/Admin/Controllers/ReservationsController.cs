@@ -71,6 +71,7 @@ namespace jeanie.Areas.Admin.Controllers
                     if (reservation != null)
                     {
                         reservation.Name = model.Name;
+                        reservation.Email = model.Email;
                         reservation.Grade = model.Grade;
                         reservation.Notes = model.Notes;
                         reservation.StartDate = model.StartDate;

@@ -22,9 +22,9 @@ namespace jeanie.Controllers
                 TempData["error"] = "Sorry but the reservation could not be found.";
                 return Redirect("/");
             }
-            else if (reservation.IsBooked)
+            else if (reservation.IsConfirmed)
             {
-                TempData["error"] = "Sorry but the reservation has already been booked.";
+                TempData["error"] = "Sorry but the reservation has already been confirmed.";
                 return Redirect("/");
             }
 
@@ -37,7 +37,7 @@ namespace jeanie.Controllers
             using (var context = new JeanieContext())
             {
                 var reservation = GetReservation(model.Id);
-                if (reservation == null || reservation.IsBooked) return Edit(model.Id);
+                if (reservation == null || reservation.IsConfirmed) return Edit(model.Id);
 
                 // So name validation succeeds.
                 model.Name = reservation.Name;
@@ -48,6 +48,7 @@ namespace jeanie.Controllers
 
                     reservation.Source.StartDate = model.StartDateFromTimeSlot;
                     reservation.Source.EndDate = model.EndDateFromTimeSlot;
+                    reservation.Source.Email = model.Email;
                     reservation.Source.Grade = model.Grade;
                     reservation.Source.Notes = model.Notes;
 

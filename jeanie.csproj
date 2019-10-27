@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201910270401288_AddBlockedDatesTable.Designer.cs">
       <DependentUpon>201910270401288_AddBlockedDatesTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910271555580_AddEmailToReservation.cs" />
+    <Compile Include="Migrations\201910271555580_AddEmailToReservation.Designer.cs">
+      <DependentUpon>201910271555580_AddEmailToReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlockedDate.cs" />
@@ -384,6 +388,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910270401288_AddBlockedDatesTable.resx">
       <DependentUpon>201910270401288_AddBlockedDatesTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910271555580_AddEmailToReservation.resx">
+      <DependentUpon>201910271555580_AddEmailToReservation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

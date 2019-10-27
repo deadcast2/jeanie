@@ -1,6 +1,7 @@
 ﻿using jeanie.Lib;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,7 @@ namespace jeanie.Models
         {
             Id = reservation.Id;
             Name = reservation.Name;
+            Email = reservation.Email;
             Grade = reservation.Grade;
             Notes = reservation.Notes;
             StartDate = reservation.StartDate;
@@ -25,6 +27,8 @@ namespace jeanie.Models
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Email { get; set; }
 
         public string Grade { get; set; }
 
@@ -60,7 +64,7 @@ namespace jeanie.Models
 
         public Reservation Source { get; private set; }
 
-        public string FormattedTimeSlot => IsBooked ? $"{StartDate.Value.ToShortDateString()} " +
+        public string FormattedTimeSlot => IsConfirmed ? $"{StartDate.Value.ToShortDateString()} " +
             $"{StartDate.Value.ToShortTimeString()} - {EndDate.Value.ToShortTimeString()}" : "TBD";
 
         public string Url => $"{BaseUrl}/Reservations/Edit/{Id}";
@@ -79,9 +83,10 @@ namespace jeanie.Models
             if (strict)
             {
                 // Presence
-                if (!Date.HasValue) Errors.Add("A date must be select.");
-                if (string.IsNullOrWhiteSpace(TimeSlot)) Errors.Add("A time slot must be select.");
+                if (!Date.HasValue) Errors.Add("A date must be selected.");
+                if (string.IsNullOrWhiteSpace(TimeSlot)) Errors.Add("A time slot must be selected.");
                 if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified.");
+                if (!new EmailAddressAttribute().IsValid(Email)) Errors.Add("A valid email must be specified.");
 
                 // Range
                 if (Date.HasValue && !ReservationHelper.IsValidDate(Date.Value))
@@ -90,6 +95,8 @@ namespace jeanie.Models
                 // Length
                 if (Name.Length > Reservation.MaxNameLength)
                     Errors.Add($"Name must be less than {Reservation.MaxNameLength} characters.");
+                if ((Email ?? "").Length > Reservation.MaxEmailLength)
+                    Errors.Add($"Email must be less than {Reservation.MaxEmailLength} characters.");
                 if ((Grade ?? "").Length > Reservation.MaxGradeLength)
                     Errors.Add($"Grade must be less than {Reservation.MaxGradeLength} characters.");
                 if ((Notes ?? "").Length > Reservation.MaxNotesLength)
@@ -99,7 +106,7 @@ namespace jeanie.Models
             return Errors.Count == 0;
         }
 
-        public bool IsBooked => StartDate.HasValue && EndDate.HasValue;
+        public bool IsConfirmed => StartDate.HasValue && EndDate.HasValue;
 
         private string BaseUrl
         {
