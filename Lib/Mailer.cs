@@ -14,22 +14,19 @@ namespace jeanie.Lib
     {
         private static string DefaultEmail => GetSystemVariable("DEFAULT_EMAIL");
 
-        public static async Task SendConfirmationAlert(ControllerContext context, ReservationViewModel reservation)
+        public static void SendConfirmationAlert(ControllerContext context, ReservationViewModel reservation)
         {
-            await Send(DefaultEmail, "Reservation confirmed! 🎉",
-                ViewHelpers.RenderToString(context, "_ReservationConfirmationEmail", reservation));
+            var body = ViewHelpers.RenderToString(context, "_ReservationConfirmationEmail", reservation);
+            Task.Run(() => Send(DefaultEmail, "Reservation confirmed! 🎉", body));
+
+            body = ViewHelpers.RenderToString(context, "_ThankYouEmail", reservation);
+            Task.Run(() => Send(reservation.Email, "Reservation confirmed! 🎉", body));
         }
 
-        public static async Task SendThankYou(ControllerContext context, ReservationViewModel reservation)
+        public static void SendReminder(ControllerContext context, ReservationViewModel reservation)
         {
-            await Send(reservation.Email, "Reservation confirmed! 🎉",
-                ViewHelpers.RenderToString(context, "_ThankYouEmail", reservation));
-        }
-
-        public static async Task SendReminder(ControllerContext context, ReservationViewModel reservation)
-        {
-            await Send(reservation.Email, "Reservation reminder ⏰",
-                ViewHelpers.RenderToString(context, "_ReminderEmail", reservation));
+            var body = ViewHelpers.RenderToString(context, "_ReminderEmail", reservation);
+            Task.Run(() => Send(reservation.Email, "Reservation reminder ⏰", body));
         }
 
         private static async Task Send(string to, string subject, string body)

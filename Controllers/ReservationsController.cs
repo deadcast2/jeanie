@@ -60,8 +60,7 @@ namespace jeanie.Controllers
                     else if (context.SaveChanges() > 0)
                     {
                         var refreshedModel = GetReservation(model.Id);
-                        Task.Run(() => Mailer.SendConfirmationAlert(ControllerContext, refreshedModel));
-                        Task.Run(() => Mailer.SendThankYou(ControllerContext, refreshedModel));
+                        Mailer.SendConfirmationAlert(ControllerContext, refreshedModel);
                         TempData["success"] = ViewHelpers.RenderToString(ControllerContext, "_Success",
                             refreshedModel);
                         return Redirect("/");

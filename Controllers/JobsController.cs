@@ -12,9 +12,9 @@ namespace jeanie.Controllers
     public class JobsController : Controller
     {
         [HttpPost]
-        public async Task<ActionResult> SendReminders()
+        public ActionResult SendReminders()
         {
-            await Mailer.SendReminder(ControllerContext, new ReservationViewModel
+            Mailer.SendReminder(ControllerContext, new ReservationViewModel
             {
                 Email = "caleb@imap.cc"
             });
