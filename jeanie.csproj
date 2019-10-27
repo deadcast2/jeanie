@@ -348,6 +348,7 @@
     <Content Include="Views\Shared\_FormErrors.cshtml" />
     <Content Include="Views\Reservations\_Success.cshtml" />
     <Content Include="Views\Shared\_ReservationConfirmationEmail.cshtml" />
+    <Content Include="Views\Shared\_ThankYouEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
