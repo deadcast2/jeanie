@@ -15,14 +15,25 @@ namespace jeanie.Lib
         private const int EndTime = 21;
         private const int SlotSize = 3;
 
-        public static List<(DateTime start, DateTime end)> GetReservations(DateTime day)
+        public static List<(DateTime start, DateTime end)> GetReservationsForDay(DateTime day)
+        {
+            return GetReservationsForRange(day, day);
+        }
+
+        public static List<(DateTime start, DateTime end)> GetReservationsForRange(DateTime start, DateTime end)
         {
             using (var context = new JeanieContext())
             {
-                return context.Reservations
-                    .Where(e => day >= DbFunctions.TruncateTime(e.StartDate)
-                    && day <= DbFunctions.TruncateTime(e.EndDate)).ToList()
+                var reservations = context.Reservations
+                    .Where(e => DbFunctions.TruncateTime(e.StartDate) >= start
+                    && DbFunctions.TruncateTime(e.EndDate) <= end).ToList()
                     .Select(e => (e.StartDate.Value, e.EndDate.Value)).ToList();
+
+                var blockedDates = context.BlockedDates
+                    .Where(e => e.Date >= start && e.Date <= end).ToList()
+                    .Select(e => (e.Date.AddHours(StartTime), e.Date.AddHours(EndTime))).ToList();
+
+                return reservations.Concat(blockedDates).ToList();
             }
         }
 

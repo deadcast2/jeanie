@@ -51,7 +51,7 @@ namespace jeanie.Controllers
                     reservation.Source.Grade = model.Grade;
                     reservation.Source.Notes = model.Notes;
 
-                    if (!ReservationHelper.IsValidTimeSlot(ReservationHelper.GetReservations(model.Date.Value),
+                    if (!ReservationHelper.IsValidTimeSlot(ReservationHelper.GetReservationsForDay(model.Date.Value),
                         (reservation.Source.StartDate.Value, reservation.Source.EndDate.Value)))
                     {
                         TempData["error"] = "Sorry but that time slot is no longer available.";

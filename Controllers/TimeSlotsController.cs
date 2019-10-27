@@ -14,7 +14,7 @@ namespace jeanie.Controllers
         public ActionResult Show(DateTime day)
         {
             var availableTimeSlot = ReservationHelper.AvailableTimeSlots(day,
-                ReservationHelper.GetReservations(day));
+                ReservationHelper.GetReservationsForDay(day));
             return Json(availableTimeSlot.Select(e => new
             {
                 text = $"{e.start.ToShortTimeString()} - {e.end.ToShortTimeString()}",

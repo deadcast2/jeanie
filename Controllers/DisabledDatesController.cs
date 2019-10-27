@@ -20,12 +20,7 @@ namespace jeanie.Controllers
                 var disabledDates = new List<string>();
                 var dayCount = DateTime.DaysInMonth(day.Year, day.Month);
                 var monthEnd = day.Date.AddDays(dayCount);
-                var bookedTimeSlots = context.Reservations
-                    .Where(e => DbFunctions.TruncateTime(e.StartDate) >= day.Date)
-                    .Where(e => DbFunctions.TruncateTime(e.EndDate) <= monthEnd.Date)
-                    .ToList()
-                    .Select(e => (e.StartDate.Value, e.EndDate.Value))
-                    .ToList();
+                var bookedTimeSlots = ReservationHelper.GetReservationsForRange(day.Date, monthEnd);
 
                 for (int i = 0; i < dayCount; i++)
                 {
