@@ -14,19 +14,37 @@ namespace jeanie.Lib
     {
         private static string DefaultEmail => GetSystemVariable("DEFAULT_EMAIL");
 
-        public static void SendConfirmationAlert(ControllerContext context, ReservationViewModel reservation)
+        public static void SendCompleteAlert(ControllerContext context, ReservationViewModel reservation)
         {
-            var body = ViewHelpers.RenderToString(context, "_ReservationConfirmationEmail", reservation);
-            Task.Run(() => Send(DefaultEmail, "Reservation confirmed! 🎉", body));
+            var body = ViewHelpers.RenderToString(context, "_CompleteEmail", reservation);
+            Task.Run(() => Send(DefaultEmail, "Reservation complete! ✔️", body));
 
-            body = ViewHelpers.RenderToString(context, "_ThankYouEmail", reservation);
-            Task.Run(() => Send(reservation.Email, "Reservation confirmed! 🎉", body));
+            body = ViewHelpers.RenderToString(context, "_CompleteThankYouEmail", reservation);
+            Task.Run(() => Send(reservation.Email, "Reservation complete! ✔️", body));
         }
 
         public static void SendReminder(ControllerContext context, ReservationViewModel reservation)
         {
             var body = ViewHelpers.RenderToString(context, "_ReminderEmail", reservation);
             Task.Run(() => Send(reservation.Email, "Reservation reminder ⏰", body));
+        }
+
+        public static void SendConfirmationAlert(ControllerContext context, ReservationViewModel reservation)
+        {
+            var body = ViewHelpers.RenderToString(context, "_ConfirmedThankYouEmail", reservation);
+            Task.Run(() => Send(DefaultEmail, "FWD: Reservation confirmed! 🎉", body));
+
+            body = ViewHelpers.RenderToString(context, "_ConfirmedThankYouEmail", reservation);
+            Task.Run(() => Send(reservation.Email, "Reservation confirmed! 🎉", body));
+        }
+
+        public static void SendCancellationAlert(ControllerContext context, ReservationViewModel reservation)
+        {
+            var body = ViewHelpers.RenderToString(context, "_CancelledThankYouEmail", reservation);
+            Task.Run(() => Send(DefaultEmail, "FWD: Reservation cancelled ❌", body));
+
+            body = ViewHelpers.RenderToString(context, "_CancelledThankYouEmail", reservation);
+            Task.Run(() => Send(reservation.Email, "Reservation cancelled ❌", body));
         }
 
         private static async Task Send(string to, string subject, string body)

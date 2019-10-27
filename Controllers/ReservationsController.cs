@@ -1,11 +1,6 @@
 ﻿using jeanie.Lib;
 using jeanie.Models;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace jeanie.Controllers
@@ -22,9 +17,19 @@ namespace jeanie.Controllers
                 TempData["error"] = "Sorry but the reservation could not be found.";
                 return Redirect("/");
             }
+            else if (reservation.IsComplete)
+            {
+                TempData["error"] = "Sorry but the reservation has already been completed.";
+                return Redirect("/");
+            }
             else if (reservation.IsConfirmed)
             {
                 TempData["error"] = "Sorry but the reservation has already been confirmed.";
+                return Redirect("/");
+            }
+            else if (reservation.IsCancelled)
+            {
+                TempData["error"] = "Sorry but the reservation has already been cancelled.";
                 return Redirect("/");
             }
 
@@ -37,7 +42,8 @@ namespace jeanie.Controllers
             using (var context = new JeanieContext())
             {
                 var reservation = GetReservation(model.Id);
-                if (reservation == null || reservation.IsConfirmed) return Edit(model.Id);
+                if (reservation == null || reservation.IsComplete)
+                    return Edit(model.Id);
 
                 // So name validation succeeds.
                 model.Name = reservation.Name;
@@ -51,6 +57,7 @@ namespace jeanie.Controllers
                     reservation.Source.Email = model.Email;
                     reservation.Source.Grade = model.Grade;
                     reservation.Source.Notes = model.Notes;
+                    reservation.Source.Status = ReservationStatus.Complete;
 
                     if (!ReservationHelper.IsValidTimeSlot(ReservationHelper.GetReservationsForDay(model.Date.Value),
                         (reservation.Source.StartDate.Value, reservation.Source.EndDate.Value)))
@@ -60,7 +67,7 @@ namespace jeanie.Controllers
                     else if (context.SaveChanges() > 0)
                     {
                         var refreshedModel = GetReservation(model.Id);
-                        Mailer.SendConfirmationAlert(ControllerContext, refreshedModel);
+                        Mailer.SendCompleteAlert(ControllerContext, refreshedModel);
                         TempData["success"] = ViewHelpers.RenderToString(ControllerContext, "_Success",
                             refreshedModel);
                         return Redirect("/");
@@ -70,6 +77,18 @@ namespace jeanie.Controllers
 
             return View("Edit", model);
         }
+
+        [HttpGet]
+        public ActionResult Confirm(Guid id)
+        {
+            return UpdateStatus(id, ReservationStatus.Confirmed);
+        }
+
+        [HttpGet]
+        public ActionResult Cancel(Guid id)
+        {
+            return UpdateStatus(id, ReservationStatus.Cancelled);
+        }      
 
         private ReservationViewModel GetReservation(Guid? id)
         {
@@ -82,6 +101,35 @@ namespace jeanie.Controllers
                 }
 
                 return new ReservationViewModel(reservation);
+            }
+        }
+
+        private ActionResult UpdateStatus(Guid id, ReservationStatus status)
+        {
+            using (var context = new JeanieContext())
+            {
+                var reservation = GetReservation(id);
+                if (reservation == null || reservation.IsConfirmed || reservation.IsCancelled)
+                    return Edit(id);
+
+                context.Reservations.Attach(reservation.Source);
+                reservation.Source.Status = status;
+
+                if (context.SaveChanges() > 0)
+                {
+                    if (status == ReservationStatus.Confirmed)
+                    {
+                        Mailer.SendConfirmationAlert(ControllerContext, reservation);
+                        TempData["success"] = "Your reservation has been successfully confirmed!";
+                    }
+                    else
+                    {
+                        Mailer.SendCancellationAlert(ControllerContext, reservation);
+                        TempData["success"] = "Your reservation has been successfully cancelled!";
+                    }
+                }
+
+                return Redirect("/");
             }
         }
     }

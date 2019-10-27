@@ -1,3 +1,11 @@
 ﻿@model jeanie.Models.ReservationViewModel
 
-<p>This is a reminder.</p>
+<p>Hi @Model.Name!</p>
+
+<p>This an automated reminder that your appointment scheduled for <b>@Model.FormattedTimeSlot</b> is coming up soon.</p>
+
+<p>If you're still able to make the appointment please confirm by clicking the appropriate link below. You can cancel as well if you're no longer able to attend.</p>
+
+<p>Thank you!</p>
+
+<a href="@Model.BaseUrl/Reservations/Confirm/@Model.Id">Confirm</a> | <a href="@Model.BaseUrl/Reservations/Cancel/@Model.Id">Cancel</a>

@@ -256,6 +256,10 @@
     <Compile Include="Migrations\201910271555580_AddEmailToReservation.Designer.cs">
       <DependentUpon>201910271555580_AddEmailToReservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910272144205_AddReservationStatus.cs" />
+    <Compile Include="Migrations\201910272144205_AddReservationStatus.Designer.cs">
+      <DependentUpon>201910272144205_AddReservationStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlockedDate.cs" />
@@ -346,9 +350,11 @@
     <Content Include="Views\Reservations\Edit.cshtml" />
     <Content Include="Views\Shared\_FormErrors.cshtml" />
     <Content Include="Views\Reservations\_Success.cshtml" />
-    <Content Include="Views\Shared\_ReservationConfirmationEmail.cshtml" />
-    <Content Include="Views\Shared\_ThankYouEmail.cshtml" />
+    <Content Include="Views\Shared\_CompleteEmail.cshtml" />
+    <Content Include="Views\Shared\_CompleteThankYouEmail.cshtml" />
     <Content Include="Views\Shared\_ReminderEmail.cshtml" />
+    <Content Include="Views\Shared\_ConfirmedThankYouEmail.cshtml" />
+    <Content Include="Views\Shared\_CancelledThankYouEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -392,6 +398,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910271555580_AddEmailToReservation.resx">
       <DependentUpon>201910271555580_AddEmailToReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910272144205_AddReservationStatus.resx">
+      <DependentUpon>201910272144205_AddReservationStatus.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

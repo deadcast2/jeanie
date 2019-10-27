@@ -21,6 +21,7 @@ namespace jeanie.Models
             Notes = reservation.Notes;
             StartDate = reservation.StartDate;
             EndDate = reservation.EndDate;
+            Status = reservation.Status;
             Source = reservation;
         }
 
@@ -56,6 +57,10 @@ namespace jeanie.Models
             }
         }
 
+        public ReservationStatus Status { get; private set; }
+
+        public string StatusText => Status.Text();
+
         public string TimeSlot { get; set; }
 
         public DateTime? StartDateFromTimeSlot => Date?.AddHours(SplitTimeSlot[0]);
@@ -64,7 +69,8 @@ namespace jeanie.Models
 
         public Reservation Source { get; private set; }
 
-        public string FormattedTimeSlot => IsConfirmed ? $"{StartDate.Value.ToShortDateString()} " +
+        public string FormattedTimeSlot => 
+            Status >= ReservationStatus.Complete ? $"{StartDate.Value.ToShortDateString()} " +
             $"{StartDate.Value.ToShortTimeString()} - {EndDate.Value.ToShortTimeString()}" : "TBD";
 
         public string Url => $"{BaseUrl}/Reservations/Edit/{Id}";
@@ -106,9 +112,13 @@ namespace jeanie.Models
             return Errors.Count == 0;
         }
 
-        public bool IsConfirmed => StartDate.HasValue && EndDate.HasValue;
+        public bool IsComplete => Status == ReservationStatus.Complete;
 
-        private string BaseUrl
+        public bool IsConfirmed => Status == ReservationStatus.Confirmed;
+
+        public bool IsCancelled => Status == ReservationStatus.Cancelled;
+
+        public string BaseUrl
         {
             get
             {

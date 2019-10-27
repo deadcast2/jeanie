@@ -7,6 +7,8 @@ using System.Web;
 
 namespace jeanie.Models
 {
+    public enum ReservationStatus { Uncomplete, Complete, ReminderSent, Confirmed, Cancelled }
+
     public class Reservation
     {
         public const int MaxNameLength = 100;
@@ -36,5 +38,7 @@ namespace jeanie.Models
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
+
+        public ReservationStatus Status { get; set; }
     }
 }

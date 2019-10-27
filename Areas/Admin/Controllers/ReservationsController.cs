@@ -114,16 +114,8 @@ namespace jeanie.Areas.Admin.Controllers
         {
             using (var context = new JeanieContext())
             {
-                return context.Reservations.OrderByDescending(e => e.CreatedAt)
-                    .Select(e => new ReservationViewModel
-                    {
-                        Id = e.Id,
-                        Name = e.Name,
-                        Grade = e.Grade,
-                        StartDate = e.StartDate,
-                        EndDate = e.EndDate
-                    })
-                    .ToList();
+                return context.Reservations.OrderByDescending(e => e.CreatedAt).ToList()
+                    .Select(e => new ReservationViewModel(e)).ToList();
             }
         }
     }

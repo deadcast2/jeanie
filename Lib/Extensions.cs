@@ -18,5 +18,15 @@ namespace jeanie.Lib
 
             return value;
         }
+
+        public static string Text(this Enum value)
+        {
+            return new string(value.ToString()
+                .SelectMany(c =>
+                    char.IsUpper(c)
+                    ? new[] { ' ', c }
+                    : new[] { c })
+                .ToArray()).Trim();
+        }
     }
 }
