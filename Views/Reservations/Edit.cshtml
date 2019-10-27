@@ -5,7 +5,7 @@
 }
 
 <div class="md-margin">
-    <form method="post" action="@Url.Action("Update")">
+    <form id="reservation_form" method="post" action="@Url.Action("Update")">
         @Html.AntiForgeryToken()
         @Html.Partial("_FormErrors", Model)
         <input type="hidden" name="id" value="@Model.Id" />
@@ -44,9 +44,33 @@
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Book Reservation</button>
+        <button type="submit" class="btn btn-success">
+            <i class="glyphicon glyphicon-ok"></i> Book Reservation
+        </button>
     </form>
 </div>
+
+<div class="modal fade" id="confirm_modal" tabindex="-1" role="dialog" aria-labelledby="confirm_label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="confirm_label">Review your details</h4>
+            </div>
+            <div class="modal-body">
+                <div id="recap"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="confirm" class="btn btn-success"><i class="glyphicon glyphicon-thumbs-up"></i> Yes, I Confirm</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="recap_template" type="text/x-jsrender">
+    <p>You would like to make a reservation for <b>{{:date}}</b> from <b>{{:time}}</b>?</p>
+</script>
 
 @section scripts {
     <script>

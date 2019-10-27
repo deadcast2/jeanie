@@ -279,7 +279,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\blockeddate.js" />
     <Content Include="Scripts\app\reservation.js" />
@@ -293,6 +292,7 @@
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fullcalendar\core\main.min.js" />
     <Content Include="Scripts\fullcalendar\daygrid\main.min.js" />
+    <Content Include="Scripts\fullcalendar\interaction\main.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -302,14 +302,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsrender.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\pickadate\picker.date.js" />
     <Content Include="Scripts\pickadate\picker.js" />
     <Content Include="Scripts\pickadate\picker.time.js" />
-    <Content Include="Scripts\picker.date.js" />
-    <Content Include="Scripts\picker.js" />
-    <Content Include="Scripts\picker.time.js" />
-    <Content Include="Scripts\reservation.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

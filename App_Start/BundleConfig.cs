@@ -18,6 +18,7 @@ namespace jeanie
 
             bundles.Add(new ScriptBundle("~/bundles/app")
                 .Include("~/Scripts/jquery-{version}.js")
+                .Include("~/Scripts/jsrender.min.js")
                 .Include("~/Scripts/bootstrap.js")
                 .Include("~/Scripts/pickadate/picker.js")
                 .Include("~/Scripts/pickadate/picker.date.js")
