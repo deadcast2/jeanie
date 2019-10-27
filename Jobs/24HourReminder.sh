@@ -1,0 +1,1 @@
+﻿curl -X POST https://jeanie-reservation-system.azurewebsites.net/Jobs/SendReminders -d ""

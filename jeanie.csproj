@@ -212,6 +212,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DisabledDatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\TimeSlotsController.cs" />
@@ -292,6 +293,7 @@
     <Content Include="Areas\Admin\Views\Reservations\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Reservations\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BlockedDates\Index.cshtml" />
+    <Content Include="Jobs\24HourReminder.sh" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\fullcalendar\core\main.min.js" />
@@ -349,6 +351,7 @@
     <Content Include="Views\Reservations\_Success.cshtml" />
     <Content Include="Views\Shared\_ReservationConfirmationEmail.cshtml" />
     <Content Include="Views\Shared\_ThankYouEmail.cshtml" />
+    <Content Include="Views\Shared\_ReminderEmail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

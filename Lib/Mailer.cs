@@ -26,6 +26,12 @@ namespace jeanie.Lib
                 ViewHelpers.RenderToString(context, "_ThankYouEmail", reservation));
         }
 
+        public static async Task SendReminder(ControllerContext context, ReservationViewModel reservation)
+        {
+            await Send(reservation.Email, "Reservation reminder ⏰",
+                ViewHelpers.RenderToString(context, "_ReminderEmail", reservation));
+        }
+
         private static async Task Send(string to, string subject, string body)
         {
             var apiKey = GetSystemVariable("SENDGRID_API_KEY");
