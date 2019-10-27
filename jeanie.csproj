@@ -207,6 +207,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\BlockedDatesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReservationsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DisabledDatesController.cs" />
@@ -246,8 +247,13 @@
     <Compile Include="Migrations\201910250444323_ChangeMaxLengthOfNotes.Designer.cs">
       <DependentUpon>201910250444323_ChangeMaxLengthOfNotes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910270401288_AddBlockedDatesTable.cs" />
+    <Compile Include="Migrations\201910270401288_AddBlockedDatesTable.Designer.cs">
+      <DependentUpon>201910270401288_AddBlockedDatesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BlockedDate.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Lib\JeanieContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -264,18 +270,29 @@
     <Content Include="Content\default.css" />
     <Content Include="Content\default.date.css" />
     <Content Include="Content\default.time.css" />
+    <Content Include="Content\fullcalendar\core\main.min.css" />
+    <Content Include="Content\fullcalendar\daygrid\main.min.css" />
+    <Content Include="Content\pickadate\default.css" />
+    <Content Include="Content\pickadate\default.date.css" />
+    <Content Include="Content\pickadate\default.time.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\app\blockeddate.js" />
+    <Content Include="Scripts\app\reservation.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Reservations\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Reservations\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\BlockedDates\Index.cshtml" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\fullcalendar\core\main.min.js" />
+    <Content Include="Scripts\fullcalendar\daygrid\main.min.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -286,6 +303,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pickadate\picker.date.js" />
+    <Content Include="Scripts\pickadate\picker.js" />
+    <Content Include="Scripts\pickadate\picker.time.js" />
     <Content Include="Scripts\picker.date.js" />
     <Content Include="Scripts\picker.js" />
     <Content Include="Scripts\picker.time.js" />
@@ -364,6 +384,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910250444323_ChangeMaxLengthOfNotes.resx">
       <DependentUpon>201910250444323_ChangeMaxLengthOfNotes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910270401288_AddBlockedDatesTable.resx">
+      <DependentUpon>201910270401288_AddBlockedDatesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

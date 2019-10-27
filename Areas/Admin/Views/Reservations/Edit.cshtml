@@ -1,10 +1,11 @@
 ﻿@model jeanie.Models.ReservationViewModel
 @{
-    ViewBag.Title = "View Reservation";
+    ViewBag.Title = "Edit Reservation";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>@ViewBag.Title</h2>
+<hr/>
 
 <div class="md-margin">
     <form method="post" action="@Url.Action("Update")">

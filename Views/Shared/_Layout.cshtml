@@ -26,7 +26,8 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Admin", "Index", "Reservations", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Blocked Dates", "Index", "BlockedDates", new { area = "Admin" }, null)</li>
+                        <li>@Html.ActionLink("Reservations", "Index", "Reservations", new { area = "Admin" }, null)</li>
                     </ul>
                 }
                 @Html.Partial("_LoginPartial")

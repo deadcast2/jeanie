@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Blocked Dates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>Click on a date below to block and click on it again to unblock.</p>
+<hr/>
+
+<div id="calendar">Loading calendar...</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            JRS.BlockedDate.init();
+        });
+    </script>
+}

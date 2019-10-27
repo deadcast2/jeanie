@@ -19,19 +19,25 @@ namespace jeanie
             bundles.Add(new ScriptBundle("~/bundles/app")
                 .Include("~/Scripts/jquery-{version}.js")
                 .Include("~/Scripts/bootstrap.js")
-                .Include("~/Scripts/picker.js")
-                .Include("~/Scripts/picker.date.js")
-                .Include("~/Scripts/picker.time.js")
-                .Include("~/Scripts/app.js")
-                .Include("~/Scripts/reservation.js")
+                .Include("~/Scripts/pickadate/picker.js")
+                .Include("~/Scripts/pickadate/picker.date.js")
+                .Include("~/Scripts/pickadate/picker.time.js")
+                .Include("~/Scripts/fullcalendar/core/main.min.js")
+                .Include("~/Scripts/fullcalendar/daygrid/main.min.js")
+                .Include("~/Scripts/fullcalendar/interaction/main.min.js")
+                .Include("~/Scripts/app/app.js")
+                .Include("~/Scripts/app/blockeddate.js")
+                .Include("~/Scripts/app/reservation.js")
             );
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
-                      "~/Content/default.css",
-                      "~/Content/default.date.css",
-                      "~/Content/default.time.css"));
+                      "~/Content/pickadate/default.css",
+                      "~/Content/pickadate/default.date.css",
+                      "~/Content/pickadate/default.time.css",
+                      "~/Content/fullcalendar/core/main.min.css",
+                      "~/Content/fullcalendar/daygrid/main.min.css"));
 
 #if !DEBUG
             BundleTable.EnableOptimizations = true;

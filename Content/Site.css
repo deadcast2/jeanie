@@ -49,3 +49,7 @@
     vertical-align: middle;
     top: -1px;
 }
+
+.blocked-date, .fc-unthemed td.fc-today.blocked-date {
+    background-color: #d4d4d4;
+}

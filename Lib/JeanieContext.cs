@@ -13,5 +13,7 @@ namespace jeanie.Lib
         }
 
         public virtual DbSet<Reservation> Reservations { get; set; }
+
+        public virtual DbSet<BlockedDate> BlockedDates { get; set; }
     }
 }
