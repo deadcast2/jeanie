@@ -46,9 +46,9 @@
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="id" value="@reservation.Id" />
                                     <a href="@Url.Action("Edit", new { id = reservation.Id })" class="btn btn-default btn-sm">Edit</a>
-                                    <a href="@reservation.Url" class="btn btn-default btn-sm copy" data-toggle="tooltip" data-placement="top"
-                                       title="Copied to clipboard!">Copy Link</a>
-                                    <a href="#" class="btn btn-danger btn-sm delete-confirm">Delete</a>
+                                    <a href="#copy" class="btn btn-default btn-sm copy" data-toggle="tooltip" data-placement="top"
+                                       title="Copied to clipboard!" data-clipboard-text="@reservation.Url">Copy Link</a>
+                                    <a href="#delete" class="btn btn-danger btn-sm delete-confirm">Delete</a>
                                 </form>
                             </td>
                         </tr>

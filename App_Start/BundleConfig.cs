@@ -20,6 +20,7 @@ namespace jeanie
                 .Include("~/Scripts/jquery-{version}.js")
                 .Include("~/Scripts/jsrender.min.js")
                 .Include("~/Scripts/bootstrap.js")
+                .Include("~/Scripts/clipboard/clipboard.min.js")
                 .Include("~/Scripts/pickadate/picker.js")
                 .Include("~/Scripts/pickadate/picker.date.js")
                 .Include("~/Scripts/pickadate/picker.time.js")

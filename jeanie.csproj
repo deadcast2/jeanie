@@ -297,6 +297,7 @@
     <None Include="Jobs\24HourReservationReminder.rb" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\clipboard\clipboard.min.js" />
     <Content Include="Scripts\fullcalendar\core\main.min.js" />
     <Content Include="Scripts\fullcalendar\daygrid\main.min.js" />
     <Content Include="Scripts\fullcalendar\interaction\main.min.js" />
