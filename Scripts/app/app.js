@@ -23,7 +23,8 @@
 
     $('.pickadate').pickadate({
         format: 'mm/dd/yyyy',
-        min: 3 // 72 Hours notice
+        min: 3, // 72 Hours notice
+        today: ''
     });
 
     $('.pickatime').pickatime({

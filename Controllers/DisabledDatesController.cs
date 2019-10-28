@@ -13,18 +13,21 @@ namespace jeanie.Controllers
         [HttpGet]
         public ActionResult Show(DateTime day)
         {
+            const int dayMargin = 14;
+
             using (var context = new JeanieContext())
             {
                 context.Configuration.AutoDetectChangesEnabled = false;
 
                 var disabledDates = new List<string>();
-                var dayCount = DateTime.DaysInMonth(day.Year, day.Month);
-                var monthEnd = day.Date.AddDays(dayCount);
-                var bookedTimeSlots = ReservationHelper.GetReservationsForRange(day.Date, monthEnd);
+                var monthStart = day.Date.AddDays(-dayMargin);
+                var monthEnd = day.Date.AddDays(DateTime.DaysInMonth(day.Year, day.Month) + dayMargin);
+                var dayCount = (monthEnd - monthStart).Days;
+                var bookedTimeSlots = ReservationHelper.GetReservationsForRange(monthStart, monthEnd);
 
                 for (int i = 0; i < dayCount; i++)
                 {
-                    var currDay = day.AddDays(i);
+                    var currDay = monthStart.AddDays(i);
 
                     if (ReservationHelper.IsDayFullyBooked(currDay, bookedTimeSlots))
                     {
