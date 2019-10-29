@@ -14,10 +14,11 @@ namespace jeanie.Lib
         private const int StartTime = 9;
         private const int EndTime = 21;
         private const int TimeSlotSize = 3;
+        private const double TimeIncreament = 0.5;
 
         public static List<(DateTime start, DateTime end)> GetReservationsForDay(DateTime day)
         {
-            return GetReservationsForRange(day, day);
+            return GetReservationsForRange(day, day.AddDays(1));
         }
 
         public static List<(DateTime start, DateTime end)> GetReservationsForRange(DateTime start, DateTime end)
@@ -41,10 +42,10 @@ namespace jeanie.Lib
         {
             var slots = new List<(DateTime start, DateTime end)>();
 
-            for (int i = 0; i < (EndTime - StartTime); i++)
+            for (int i = 0; i < (EndTime - StartTime) * 1 / TimeIncreament; i++)
             {
-                var start = day.Date.AddHours(StartTime + i);
-                var end = day.Date.AddHours(StartTime + TimeSlotSize + i);
+                var start = day.Date.AddHours(StartTime).AddMinutes(60 * TimeIncreament * i);
+                var end = day.Date.AddHours(StartTime + TimeSlotSize).AddMinutes(60 * TimeIncreament * i);
 
                 if(end <= day.Date.AddHours(EndTime))
                     slots.Add((start, end));

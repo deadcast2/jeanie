@@ -17,21 +17,21 @@
                 <div class="form-group">
                     <label for="start_date">Date</label>
                     <input id="start_date" name="date" type="text" class="form-control pickadate"
-                           value="@(Model.Date?.ToShortDateString())" />
+                           value="@(Model.Date?.ToLocalTime().ToShortDateString())" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="start_time">Start Time</label>
                     <input id="start_time" name="starttime" type="text" class="form-control pickatime"
-                           value="@(Model.StartDate?.ToShortTimeString())" />
+                           value="@(Model.StartDate?.ToLocalTime().ToShortTimeString())" />
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="end_time">End Time</label>
                     <input id="end_time" name="endtime" type="text" class="form-control pickatime"
-                           value="@(Model.EndDate?.ToShortTimeString())" />
+                           value="@(Model.EndDate?.ToLocalTime().ToShortTimeString())" />
                 </div>
             </div>
         </div>

@@ -48,12 +48,14 @@ namespace jeanie.Models
             set
             {
                 StartDate = EndDate = value;
-                StartDate = StartDate?.Date.AddHours(StartTime?.Hour ?? 0);
-                EndDate = EndDate?.Date.AddHours(EndTime?.Hour ?? 0);
+                StartDate = StartDate?.Date.AddHours(StartTime?.Hour ?? 0)
+                    .AddMinutes(StartTime?.Minute ?? 0).ToUniversalTime();
+                EndDate = EndDate?.Date.AddHours(EndTime?.Hour ?? 0)
+                    .AddMinutes(EndTime?.Minute ?? 0).ToUniversalTime();
             }
             get
             {
-                return StartDate?.Date;
+                return StartDate?.ToLocalTime().Date;
             }
         }
 
@@ -131,15 +133,15 @@ namespace jeanie.Models
             }
         }
 
-        private int[] SplitTimeSlot
+        private double[] SplitTimeSlot
         {
             get
             {
                 var hourRange = (TimeSlot ?? "").Split('-');
-                if (hourRange.Length != 2) return new[] { 0, 0 };
+                if (hourRange.Length != 2) return new[] { 0.0, 0.0 };
 
-                int.TryParse(hourRange[0], out int startHour);
-                int.TryParse(hourRange[1], out int endHour);
+                double.TryParse(hourRange[0], out var startHour);
+                double.TryParse(hourRange[1], out var endHour);
                 return new[] { startHour, endHour };
             }
         }

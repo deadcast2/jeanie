@@ -74,8 +74,8 @@ namespace jeanie.Areas.Admin.Controllers
                         reservation.Email = model.Email;
                         reservation.Grade = model.Grade;
                         reservation.Notes = model.Notes;
-                        reservation.StartDate = model.StartDate?.ToUniversalTime();
-                        reservation.EndDate = model.EndDate?.ToUniversalTime();
+                        reservation.StartDate = model.StartDate;
+                        reservation.EndDate = model.EndDate;
                         reservation.UpdatedAt = DateTime.UtcNow;
 
                         if (context.SaveChanges() > 0)

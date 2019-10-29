@@ -15,7 +15,7 @@ namespace jeanie.Controllers
             return Json(availableTimeSlot.Select(e => new
             {
                 text = $"{e.start.ToShortTimeString()} - {e.end.ToShortTimeString()}",
-                value = $"{e.start.Hour}-{e.end.Hour}"
+                value = $"{e.start.Hour + e.start.Minute / 60.0}-{e.end.Hour + e.end.Minute / 60.0}"
             }), JsonRequestBehavior.AllowGet);
         }
     }

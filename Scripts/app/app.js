@@ -28,7 +28,7 @@
     });
 
     $('.pickatime').pickatime({
-        interval: 60,
+        interval: 30,
         min: [9, 0],
         max: [21, 0]
     });
