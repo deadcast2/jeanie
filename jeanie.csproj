@@ -220,6 +220,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Lib\Extensions.cs" />
+    <Compile Include="Lib\FileHelpers.cs" />
     <Compile Include="Lib\Mailer.cs" />
     <Compile Include="Lib\ViewHelpers.cs" />
     <Compile Include="Lib\ReservationHelper.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\attachments\Best Route to Human Sciences Building.JPG" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -294,6 +296,9 @@
     <Content Include="Areas\Admin\Views\Reservations\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Reservations\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\BlockedDates\Index.cshtml" />
+    <Content Include="Content\attachments\IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf" />
+    <Content Include="Content\attachments\ParkingMap.pdf" />
+    <Content Include="Content\attachments\Q&amp;A Flyer.docx" />
     <None Include="Jobs\24HourReservationReminder.rb" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />

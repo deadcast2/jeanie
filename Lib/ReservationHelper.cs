@@ -1,9 +1,7 @@
-﻿using jeanie.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace jeanie.Lib
 {
@@ -47,7 +45,7 @@ namespace jeanie.Lib
                 var start = day.Date.AddHours(StartTime).AddMinutes(60 * TimeIncreament * i);
                 var end = day.Date.AddHours(StartTime + TimeSlotSize).AddMinutes(60 * TimeIncreament * i);
 
-                if(end <= day.Date.AddHours(EndTime))
+                if (end <= day.Date.AddHours(EndTime))
                     slots.Add((start, end));
             }
 
@@ -55,7 +53,7 @@ namespace jeanie.Lib
         }
 
         public static List<(DateTime start, DateTime end)> FilterTimeSlots(
-            List<(DateTime start, DateTime end)> bookedTimeSlots, 
+            List<(DateTime start, DateTime end)> bookedTimeSlots,
             List<(DateTime start, DateTime end)> openTimeSlots)
         {
             return openTimeSlots.Where(e => IsValidTimeSlot(bookedTimeSlots, e)).ToList();
@@ -77,7 +75,7 @@ namespace jeanie.Lib
             return (day - DateTime.Today).TotalHours >= HoursInAdvance;
         }
 
-        public static bool IsValidTimeSlot(List<(DateTime start, DateTime end)> bookedTimeSlots, 
+        public static bool IsValidTimeSlot(List<(DateTime start, DateTime end)> bookedTimeSlots,
             (DateTime start, DateTime end) newTimeSlot)
         {
             var valid = GetTimeSlots(newTimeSlot.start).Contains(newTimeSlot);

@@ -1,10 +1,8 @@
 ﻿using jeanie.Lib;
 using jeanie.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace jeanie.Areas.Admin.Controllers

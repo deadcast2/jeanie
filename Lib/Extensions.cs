@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace jeanie.Lib
 {
@@ -11,7 +9,7 @@ namespace jeanie.Lib
         {
             if (string.IsNullOrEmpty(value)) return value;
 
-            if(value.Length > length)
+            if (value.Length > length)
             {
                 return value.Substring(0, length) + "...";
             }

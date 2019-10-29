@@ -1,6 +1,5 @@
 namespace jeanie.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
 
     public partial class CreateReservationsTable : DbMigration

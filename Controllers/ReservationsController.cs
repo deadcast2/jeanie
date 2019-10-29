@@ -69,7 +69,7 @@ namespace jeanie.Controllers
                     {
                         var refreshedModel = GetReservation(model.Id);
                         Mailer.SendCompleteAlert(ControllerContext, refreshedModel);
-                        TempData["success"] = ViewHelpers.RenderToString(ControllerContext, "_Success", 
+                        TempData["success"] = ViewHelpers.RenderToString(ControllerContext, "_Success",
                             refreshedModel);
                         return Redirect("/");
                     }
@@ -89,7 +89,7 @@ namespace jeanie.Controllers
         public ActionResult Cancel(Guid id)
         {
             return UpdateStatus(id, ReservationStatus.Cancelled);
-        }      
+        }
 
         private ReservationViewModel GetReservation(Guid? id)
         {

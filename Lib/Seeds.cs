@@ -1,11 +1,8 @@
 ﻿using jeanie.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace jeanie.Lib
 {
@@ -19,7 +16,8 @@ namespace jeanie.Lib
             {
                 new ApplicationUserManager(new UserStore<ApplicationUser>(context)).Create(new ApplicationUser
                 {
-                    UserName = email, Email = email
+                    UserName = email,
+                    Email = email
                 }, "Temp123!");
             }
         }

@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Configuration;
-using System.Linq;
-using System.Web;
 
 namespace jeanie.Models
 {
@@ -71,7 +69,7 @@ namespace jeanie.Models
 
         public Reservation Source { get; private set; }
 
-        public string FormattedTimeSlot => 
+        public string FormattedTimeSlot =>
             Status >= ReservationStatus.Complete ? $"{StartDate.Value.ToLocalTime().ToShortDateString()} " +
             $"{StartDate.Value.ToLocalTime().ToShortTimeString()} - " +
             $"{EndDate.Value.ToLocalTime().ToShortTimeString()}" : "TBD";

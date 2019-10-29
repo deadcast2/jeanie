@@ -1,9 +1,7 @@
 namespace jeanie.Lib
 {
     using jeanie.Models;
-    using System;
     using System.Data.Entity;
-    using System.Linq;
 
     public class JeanieContext : DbContext
     {
