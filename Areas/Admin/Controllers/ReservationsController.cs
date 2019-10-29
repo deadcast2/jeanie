@@ -46,12 +46,12 @@ namespace jeanie.Areas.Admin.Controllers
                     context.Reservations.Add(new Reservation
                     {
                         Name = model.Name,
-                        CreatedAt = DateTime.Now
+                        CreatedAt = DateTime.UtcNow
                     });
 
                     if (context.SaveChanges() > 0)
                     {
-                        TempData["success"] = "New reservation generated";
+                        TempData["success"] = "New reservation generated!";
                         return RedirectToAction("Index");
                     }
                 }
@@ -74,9 +74,9 @@ namespace jeanie.Areas.Admin.Controllers
                         reservation.Email = model.Email;
                         reservation.Grade = model.Grade;
                         reservation.Notes = model.Notes;
-                        reservation.StartDate = model.StartDate;
-                        reservation.EndDate = model.EndDate;
-                        reservation.UpdatedAt = DateTime.Now;
+                        reservation.StartDate = model.StartDate?.ToUniversalTime();
+                        reservation.EndDate = model.EndDate?.ToUniversalTime();
+                        reservation.UpdatedAt = DateTime.UtcNow;
 
                         if (context.SaveChanges() > 0)
                         {

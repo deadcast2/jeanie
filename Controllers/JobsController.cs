@@ -1,12 +1,9 @@
 ﻿using jeanie.Lib;
 using jeanie.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 
 namespace jeanie.Controllers
@@ -16,15 +13,18 @@ namespace jeanie.Controllers
         [HttpPost]
         public ActionResult SendReminders()
         {
+            const int HoursNotice = 48;
+
             using (var context = new JeanieContext())
             {
                 var reservations = context.Reservations
                     .Where(e => e.Status == ReservationStatus.Complete)
-                    .Where(e => DbFunctions.DiffHours(DateTime.Now, e.StartDate) <= 48)
+                    .Where(e => DbFunctions.DiffHours(DateTime.UtcNow, e.StartDate) <= HoursNotice)
                     .ToList();
                 foreach (var reservation in reservations)
                 {
                     reservation.Status = ReservationStatus.ReminderSent;
+                    reservation.UpdatedAt = DateTime.UtcNow;
                     Mailer.SendReminder(ControllerContext, new ReservationViewModel(reservation));
                 }
                 context.SaveChanges();

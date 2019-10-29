@@ -70,8 +70,9 @@ namespace jeanie.Models
         public Reservation Source { get; private set; }
 
         public string FormattedTimeSlot => 
-            Status >= ReservationStatus.Complete ? $"{StartDate.Value.ToShortDateString()} " +
-            $"{StartDate.Value.ToShortTimeString()} - {EndDate.Value.ToShortTimeString()}" : "TBD";
+            Status >= ReservationStatus.Complete ? $"{StartDate.Value.ToLocalTime().ToShortDateString()} " +
+            $"{StartDate.Value.ToLocalTime().ToShortTimeString()} - " +
+            $"{EndDate.Value.ToLocalTime().ToShortTimeString()}" : "TBD";
 
         public string Url => $"{BaseUrl}/Reservations/Edit/{Id}";
 

@@ -52,15 +52,16 @@ namespace jeanie.Controllers
                 {
                     context.Reservations.Attach(reservation.Source);
 
-                    reservation.Source.StartDate = model.StartDateFromTimeSlot;
-                    reservation.Source.EndDate = model.EndDateFromTimeSlot;
+                    reservation.Source.StartDate = model.StartDateFromTimeSlot?.ToUniversalTime();
+                    reservation.Source.EndDate = model.EndDateFromTimeSlot?.ToUniversalTime();
                     reservation.Source.Email = model.Email;
                     reservation.Source.Grade = model.Grade;
                     reservation.Source.Notes = model.Notes;
                     reservation.Source.Status = ReservationStatus.Complete;
+                    reservation.Source.UpdatedAt = DateTime.UtcNow;
 
                     if (!ReservationHelper.IsValidTimeSlot(ReservationHelper.GetReservationsForDay(model.Date.Value),
-                        (reservation.Source.StartDate.Value, reservation.Source.EndDate.Value)))
+                        (model.StartDateFromTimeSlot.Value, model.EndDateFromTimeSlot.Value)))
                     {
                         TempData["error"] = "Sorry but that time slot is no longer available.";
                     }
@@ -68,7 +69,7 @@ namespace jeanie.Controllers
                     {
                         var refreshedModel = GetReservation(model.Id);
                         Mailer.SendCompleteAlert(ControllerContext, refreshedModel);
-                        TempData["success"] = ViewHelpers.RenderToString(ControllerContext, "_Success",
+                        TempData["success"] = ViewHelpers.RenderToString(ControllerContext, "_Success", 
                             refreshedModel);
                         return Redirect("/");
                     }
@@ -114,6 +115,7 @@ namespace jeanie.Controllers
 
                 context.Reservations.Attach(reservation.Source);
                 reservation.Source.Status = status;
+                reservation.Source.UpdatedAt = DateTime.UtcNow;
 
                 if (context.SaveChanges() > 0)
                 {

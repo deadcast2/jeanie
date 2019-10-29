@@ -13,7 +13,7 @@ namespace jeanie.Lib
 
         private const int StartTime = 9;
         private const int EndTime = 21;
-        private const int SlotSize = 3;
+        private const int TimeSlotSize = 3;
 
         public static List<(DateTime start, DateTime end)> GetReservationsForDay(DateTime day)
         {
@@ -27,7 +27,7 @@ namespace jeanie.Lib
                 var reservations = context.Reservations
                     .Where(e => DbFunctions.TruncateTime(e.StartDate) >= start
                     && DbFunctions.TruncateTime(e.EndDate) <= end).ToList()
-                    .Select(e => (e.StartDate.Value, e.EndDate.Value)).ToList();
+                    .Select(e => (e.StartDate.Value.ToLocalTime(), e.EndDate.Value.ToLocalTime())).ToList();
 
                 var blockedDates = context.BlockedDates
                     .Where(e => e.Date >= start && e.Date <= end).ToList()
@@ -44,7 +44,7 @@ namespace jeanie.Lib
             for (int i = 0; i < (EndTime - StartTime); i++)
             {
                 var start = day.Date.AddHours(StartTime + i);
-                var end = day.Date.AddHours(StartTime + SlotSize + i);
+                var end = day.Date.AddHours(StartTime + TimeSlotSize + i);
 
                 if(end <= day.Date.AddHours(EndTime))
                     slots.Add((start, end));
@@ -73,7 +73,7 @@ namespace jeanie.Lib
 
         public static bool IsValidDate(DateTime day)
         {
-            return (day - DateTime.Now.Date).TotalHours >= HoursInAdvance;
+            return (day - DateTime.Today).TotalHours >= HoursInAdvance;
         }
 
         public static bool IsValidTimeSlot(List<(DateTime start, DateTime end)> bookedTimeSlots, 
