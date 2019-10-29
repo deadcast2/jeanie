@@ -20,7 +20,7 @@ namespace jeanie.Controllers
             {
                 var reservations = context.Reservations
                     .Where(e => e.Status == ReservationStatus.Complete)
-                    .Where(e => (DbFunctions.DiffHours(DateTime.Now, e.StartDate)) <= 24)
+                    .Where(e => DbFunctions.DiffHours(DateTime.Now, e.StartDate) <= 48)
                     .ToList();
                 foreach (var reservation in reservations)
                 {
