@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using jeanie.Lib;
+﻿using jeanie.Lib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace tests
 {
