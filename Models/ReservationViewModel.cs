@@ -90,7 +90,7 @@ namespace jeanie.Models
             Status >= ReservationStatus.Complete ? $"{StartDate.Value.ToShortDateString()} " +
             $"{StartDate.Value.ToShortTimeString()} - {EndDate.Value.ToShortTimeString()}" : "TBD";
 
-        public string Url => $"{BaseUrl}/Reservations/Edit/{Id}";
+        public string Url => $"{BaseUrl}/reservations/edit/{Id}";
 
         public List<string> Errors { get; private set; } = new List<string>();
 
