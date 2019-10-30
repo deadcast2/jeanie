@@ -112,8 +112,6 @@ namespace jeanie.Models
                 if (ParsedPhoneNumber == null || !PhoneUtil.IsValidNumberForRegion(ParsedPhoneNumber, "US")) 
                     Errors.Add("A valid phone # must be specified.");
                 if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified.");
-                if (string.IsNullOrWhiteSpace(LicensePlateNumber)) Errors.Add("A license plate # must be specified.");
-                if (string.IsNullOrWhiteSpace(MakeAndModel)) Errors.Add("A make & model must be specified.");
 
                 // Range
                 if (Date.HasValue && !ReservationHelper.IsValidDate(Date.Value))
