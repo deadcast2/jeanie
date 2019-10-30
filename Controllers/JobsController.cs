@@ -1,6 +1,7 @@
 ﻿using jeanie.Lib;
 using jeanie.Models;
 using System;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -10,11 +11,11 @@ namespace jeanie.Controllers
 {
     public class JobsController : Controller
     {
+        private int HoursNotice => int.Parse(ConfigurationManager.AppSettings["HoursNotice"]);
+
         [HttpPost]
         public ActionResult SendReminders()
         {
-            const int HoursNotice = 48;
-
             using (var context = new JeanieContext())
             {
                 var reservations = context.Reservations
