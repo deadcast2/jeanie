@@ -1,8 +1,7 @@
 namespace jeanie.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddPhoneNumberLicensePlateMakeAndModelToReservation : DbMigration
     {
         public override void Up()
@@ -11,7 +10,7 @@ namespace jeanie.Migrations
             AddColumn("dbo.Reservations", "LicensePlateNumber", c => c.String(maxLength: 8));
             AddColumn("dbo.Reservations", "MakeAndModel", c => c.String(maxLength: 100));
         }
-        
+
         public override void Down()
         {
             DropColumn("dbo.Reservations", "MakeAndModel");

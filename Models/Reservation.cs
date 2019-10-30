@@ -36,7 +36,7 @@ namespace jeanie.Models
 
         [StringLength(MaxMakeAndModelLength)]
         public string MakeAndModel { get; set; }
-        
+
         [StringLength(MaxNotesLength)]
         public string Notes { get; set; }
 
@@ -45,7 +45,7 @@ namespace jeanie.Models
         public DateTime? EndDate { get; set; }
 
         public ReservationStatus Status { get; set; }
-        
+
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
