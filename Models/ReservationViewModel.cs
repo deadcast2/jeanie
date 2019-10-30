@@ -36,8 +36,10 @@ namespace jeanie.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public string FormattedPhoneNumber => PhoneUtil.Format(ParsedPhoneNumber, PhoneNumberFormat.NATIONAL);
-        private PhoneNumber ParsedPhoneNumber => PhoneUtil.ParseAndKeepRawInput(PhoneNumber, "US");
+        public string FormattedPhoneNumber => 
+            ParsedPhoneNumber == null ? null : PhoneUtil.Format(ParsedPhoneNumber, PhoneNumberFormat.NATIONAL);
+        private PhoneNumber ParsedPhoneNumber =>
+            string.IsNullOrWhiteSpace(PhoneNumber) ? null : PhoneUtil.ParseAndKeepRawInput(PhoneNumber, "US");
         public string Grade { get; set; }
         public string LicensePlateNumber { get; set; }
         public string MakeAndModel { get; set; }
@@ -107,7 +109,7 @@ namespace jeanie.Models
                 if (!Date.HasValue) Errors.Add("A date must be selected.");
                 if (string.IsNullOrWhiteSpace(TimeSlot)) Errors.Add("A time slot must be selected.");
                 if (!new EmailAddressAttribute().IsValid(Email)) Errors.Add("A valid email must be specified.");
-                if (!PhoneUtil.IsValidNumberForRegion(ParsedPhoneNumber, "US")) 
+                if (ParsedPhoneNumber == null || !PhoneUtil.IsValidNumberForRegion(ParsedPhoneNumber, "US")) 
                     Errors.Add("A valid phone # must be specified.");
                 if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified.");
                 if (string.IsNullOrWhiteSpace(LicensePlateNumber)) Errors.Add("A license plate # must be specified.");
