@@ -78,7 +78,7 @@ namespace jeanie.Lib
             var client = new SendGridClient(apiKey);
             var message = new SendGridMessage
             {
-                From = new EmailAddress("jeanie-reservation-system@outlook.com", "Jeanie Reservation System"),
+                From = new EmailAddress(DefaultEmail, "Jeanie Reservation System"),
                 Subject = subject,
                 PlainTextContent = body,
                 HtmlContent = body
