@@ -6,4 +6,4 @@
 
 <p>You'll receive an email reminder @System.Configuration.ConfigurationManager.AppSettings["HoursNotice"] hours before you're scheduled to meet.</p>
 
-<p>Add to your calendar so you don't forget! <a href="@jeanie.Lib.Calendar.GoogleLink(Model)">Google</a></p>
+<p>Add to your calendar so you don't forget! <a href="@jeanie.Lib.CalendarHelpers.GoogleLink(Model)">Google</a> | <a href="@jeanie.Lib.CalendarHelpers.AppleLink(Model)">Apple</a> | <a href="@jeanie.Lib.CalendarHelpers.OutlookLink(Model)">Outlook</a></p>

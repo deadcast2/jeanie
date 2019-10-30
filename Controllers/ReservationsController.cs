@@ -94,6 +94,14 @@ namespace jeanie.Controllers
             return UpdateStatus(id, ReservationStatus.Cancelled);
         }
 
+        [HttpGet]
+        public ActionResult Download(Guid id)
+        {
+            var reservation = GetReservation(id);
+            if (reservation == null) return Edit(id);
+            return File(CalendarHelpers.File(reservation), "text/calendar", "reservation.ics");
+        }
+
         private ReservationViewModel GetReservation(Guid? id)
         {
             using (var context = new JeanieContext())
