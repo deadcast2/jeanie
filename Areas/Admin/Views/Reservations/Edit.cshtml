@@ -36,22 +36,44 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input id="name" name="name" type="text" class="form-control" placeholder="Required" value="@Model.Name" />
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input id="email" name="email" type="email" class="form-control" value="@Model.Email" />
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="phone_number">Phone #</label>
+                    <input id="phone_number" name="phonenumber" type="tel" class="form-control" value="@Model.PhoneNumber" />
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="form-group">
                     <label for="grade">Grade</label>
                     <input id="grade" name="grade" type="text" class="form-control" value="@Model.Grade" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="license_plate_number">License Plate #</label>
+                    <input id="license_plate_number" name="licenseplatenumber" type="text" class="form-control"
+                        value="@Model.LicensePlateNumber" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="make_and_model">Make & Model</label>
+                    <input id="make_and_model" name="makeandmodel" type="text" class="form-control"
+                        value="@Model.MakeAndModel" />
                 </div>
             </div>
         </div>

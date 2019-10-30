@@ -5,7 +5,7 @@
 }
 
 <div class="md-margin">
-    <form id="reservation_form" method="post" action="@Url.Action("Update")">
+    <form id="reservation_form" method="post" action="@Url.Action("Update")" novalidate>
         @Html.AntiForgeryToken()
         @Html.Partial("_FormErrors", Model)
         <input type="hidden" name="id" value="@Model.Id" />
@@ -16,13 +16,13 @@
                 <div class="form-group">
                     <label for="date">Date</label>
                     <input id="date" name="date" type="text" class="form-control pickadate"
-                           placeholder="Required" value="@(Model.Date?.ToShortDateString())" />
+                           placeholder="Required" value="@(Model.Date?.ToShortDateString())" required />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="time_slot">Time Slot</label>
-                    <select id="time_slot" name="timeslot" class="form-control">
+                    <select id="time_slot" name="timeslot" class="form-control" required>
                         <option value="">Please select a date first</option>
                     </select>
                 </div>
@@ -31,17 +31,46 @@
         <h2>Step 2 - Your Details</h2>
         <hr />
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" name="email" type="email" class="form-control" placeholder="Required" value="@Model.Email" />
+                    <input id="email" name="email" type="email" class="form-control" 
+                           placeholder="Required" value="@Model.Email" required />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="phone_number">Phone #</label>
+                    <input id="phone_number" name="phonenumber" type="tel" class="form-control" placeholder="Required" value="@Model.PhoneNumber" required />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="grade">Grade</label>
+                    <input id="grade" name="grade" type="text" class="form-control" 
+                           placeholder="Required" value="@Model.Grade" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="license_plate_number">License Plate #</label>
+                    <input id="license_plate_number" name="licenseplatenumber" type="text" class="form-control"
+                           placeholder="Required" value="@Model.LicensePlateNumber" required />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="grade">Grade</label>
-                    <input id="grade" name="grade" type="text" class="form-control" placeholder="Required" value="@Model.Grade" />
+                    <label for="make_and_model">Make & Model</label>
+                    <input id="make_and_model" name="makeandmodel" type="text" class="form-control"
+                           placeholder="Required" value="@Model.MakeAndModel" required />
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert"><i class="glyphicon glyphicon-info-sign"></i> Your license plate, make and model are needed so you can receive clearance for parking on the school campus.</div>
             </div>
         </div>
         <div class="row">

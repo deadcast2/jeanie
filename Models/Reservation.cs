@@ -10,7 +10,10 @@ namespace jeanie.Models
     {
         public const int MaxNameLength = 100;
         public const int MaxEmailLength = 100;
+        public const int MaxPhoneNumberLength = 24;
         public const int MaxGradeLength = 100;
+        public const int MaxLicensePlateNumberLength = 8;
+        public const int MaxMakeAndModelLength = 100;
         public const int MaxNotesLength = 1000;
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,9 +25,18 @@ namespace jeanie.Models
         [StringLength(MaxEmailLength)]
         public string Email { get; set; }
 
+        [StringLength(MaxPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
+
         [StringLength(MaxGradeLength)]
         public string Grade { get; set; }
 
+        [StringLength(MaxLicensePlateNumberLength)]
+        public string LicensePlateNumber { get; set; }
+
+        [StringLength(MaxMakeAndModelLength)]
+        public string MakeAndModel { get; set; }
+        
         [StringLength(MaxNotesLength)]
         public string Notes { get; set; }
 
@@ -32,10 +44,10 @@ namespace jeanie.Models
 
         public DateTime? EndDate { get; set; }
 
+        public ReservationStatus Status { get; set; }
+        
         public DateTime CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
-
-        public ReservationStatus Status { get; set; }
     }
 }
