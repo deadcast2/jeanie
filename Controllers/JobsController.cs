@@ -19,12 +19,12 @@ namespace jeanie.Controllers
             {
                 var reservations = context.Reservations
                     .Where(e => e.Status == ReservationStatus.Complete)
-                    .Where(e => DbFunctions.DiffHours(DateTime.UtcNow, e.StartDate) <= HoursNotice)
+                    .Where(e => DbFunctions.DiffHours(DateTime.Now, e.StartDate) <= HoursNotice)
                     .ToList();
                 foreach (var reservation in reservations)
                 {
                     reservation.Status = ReservationStatus.ReminderSent;
-                    reservation.UpdatedAt = DateTime.UtcNow;
+                    reservation.UpdatedAt = DateTime.Now;
                     Mailer.SendReminder(ControllerContext, new ReservationViewModel(reservation));
                 }
                 context.SaveChanges();

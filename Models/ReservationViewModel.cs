@@ -47,13 +47,13 @@ namespace jeanie.Models
             {
                 StartDate = EndDate = value;
                 StartDate = StartDate?.Date.AddHours(StartTime?.Hour ?? 0)
-                    .AddMinutes(StartTime?.Minute ?? 0).ToUniversalTime();
+                    .AddMinutes(StartTime?.Minute ?? 0);
                 EndDate = EndDate?.Date.AddHours(EndTime?.Hour ?? 0)
-                    .AddMinutes(EndTime?.Minute ?? 0).ToUniversalTime();
+                    .AddMinutes(EndTime?.Minute ?? 0);
             }
             get
             {
-                return StartDate?.ToLocalTime().Date;
+                return StartDate?.Date;
             }
         }
 
@@ -70,9 +70,8 @@ namespace jeanie.Models
         public Reservation Source { get; private set; }
 
         public string FormattedTimeSlot =>
-            Status >= ReservationStatus.Complete ? $"{StartDate.Value.ToLocalTime().ToShortDateString()} " +
-            $"{StartDate.Value.ToLocalTime().ToShortTimeString()} - " +
-            $"{EndDate.Value.ToLocalTime().ToShortTimeString()}" : "TBD";
+            Status >= ReservationStatus.Complete ? $"{StartDate.Value.ToShortDateString()} " +
+            $"{StartDate.Value.ToShortTimeString()} - {EndDate.Value.ToShortTimeString()}" : "TBD";
 
         public string Url => $"{BaseUrl}/Reservations/Edit/{Id}";
 

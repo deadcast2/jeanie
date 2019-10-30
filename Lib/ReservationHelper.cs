@@ -9,8 +9,8 @@ namespace jeanie.Lib
     {
         public const int HoursInAdvance = 72;
 
-        private const int StartTime = 9;
-        private const int EndTime = 21;
+        private const int StartHour = 9;
+        private const int EndHour = 21;
         private const int TimeSlotSize = 3;
         private const double TimeIncreament = 0.5;
 
@@ -26,11 +26,11 @@ namespace jeanie.Lib
                 var reservations = context.Reservations
                     .Where(e => DbFunctions.TruncateTime(e.StartDate) >= start
                     && DbFunctions.TruncateTime(e.EndDate) <= end).ToList()
-                    .Select(e => (e.StartDate.Value.ToLocalTime(), e.EndDate.Value.ToLocalTime())).ToList();
+                    .Select(e => (e.StartDate.Value, e.EndDate.Value)).ToList();
 
                 var blockedDates = context.BlockedDates
                     .Where(e => e.Date >= start && e.Date <= end).ToList()
-                    .Select(e => (e.Date.AddHours(StartTime), e.Date.AddHours(EndTime))).ToList();
+                    .Select(e => (e.Date.AddHours(StartHour), e.Date.AddHours(EndHour))).ToList();
 
                 return reservations.Concat(blockedDates).ToList();
             }
@@ -40,12 +40,12 @@ namespace jeanie.Lib
         {
             var slots = new List<(DateTime start, DateTime end)>();
 
-            for (int i = 0; i < (EndTime - StartTime) * 1 / TimeIncreament; i++)
+            for (int i = 0; i < (EndHour - StartHour) * 1 / TimeIncreament; i++)
             {
-                var start = day.Date.AddHours(StartTime).AddMinutes(60 * TimeIncreament * i);
-                var end = day.Date.AddHours(StartTime + TimeSlotSize).AddMinutes(60 * TimeIncreament * i);
+                var start = day.Date.AddHours(StartHour).AddMinutes(60 * TimeIncreament * i);
+                var end = day.Date.AddHours(StartHour + TimeSlotSize).AddMinutes(60 * TimeIncreament * i);
 
-                if (end <= day.Date.AddHours(EndTime))
+                if (end <= day.Date.AddHours(EndHour))
                     slots.Add((start, end));
             }
 
