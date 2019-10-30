@@ -52,13 +52,13 @@ namespace jeanie.Controllers
                 {
                     context.Reservations.Attach(reservation.Source);
 
-                    reservation.Source.StartDate = model.StartDateFromTimeSlot?.ToUniversalTime();
-                    reservation.Source.EndDate = model.EndDateFromTimeSlot?.ToUniversalTime();
+                    reservation.Source.StartDate = model.StartDateFromTimeSlot;
+                    reservation.Source.EndDate = model.EndDateFromTimeSlot;
                     reservation.Source.Email = model.Email;
                     reservation.Source.Grade = model.Grade;
                     reservation.Source.Notes = model.Notes;
                     reservation.Source.Status = ReservationStatus.Complete;
-                    reservation.Source.UpdatedAt = DateTime.UtcNow;
+                    reservation.Source.UpdatedAt = DateTime.Now;
 
                     if (!ReservationHelper.IsValidTimeSlot(ReservationHelper.GetReservationsForDay(model.Date.Value),
                         (model.StartDateFromTimeSlot.Value, model.EndDateFromTimeSlot.Value)))
@@ -115,7 +115,7 @@ namespace jeanie.Controllers
 
                 context.Reservations.Attach(reservation.Source);
                 reservation.Source.Status = status;
-                reservation.Source.UpdatedAt = DateTime.UtcNow;
+                reservation.Source.UpdatedAt = DateTime.Now;
 
                 if (context.SaveChanges() > 0)
                 {

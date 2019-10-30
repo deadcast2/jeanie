@@ -45,7 +45,7 @@ namespace jeanie.Areas.Admin.Controllers
                     context.Reservations.Add(new Reservation
                     {
                         Name = model.Name,
-                        CreatedAt = DateTime.UtcNow
+                        CreatedAt = DateTime.Now
                     });
 
                     if (context.SaveChanges() > 0)
@@ -75,7 +75,7 @@ namespace jeanie.Areas.Admin.Controllers
                         reservation.Notes = model.Notes;
                         reservation.StartDate = model.StartDate;
                         reservation.EndDate = model.EndDate;
-                        reservation.UpdatedAt = DateTime.UtcNow;
+                        reservation.UpdatedAt = DateTime.Now;
 
                         if (context.SaveChanges() > 0)
                         {
