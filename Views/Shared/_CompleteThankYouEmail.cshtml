@@ -4,4 +4,4 @@
 
 <p>Thank you for completing your reservation for <b>@Model.FormattedTimeSlot</b>.</p>
 
-<p>You'll receive an email reminder 24 hours before you're scheduled to meet.</p>
+<p>You'll receive an email reminder @System.Configuration.ConfigurationManager.AppSettings["HoursNotice"] hours before you're scheduled to meet.</p>

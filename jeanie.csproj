@@ -309,7 +309,7 @@
     <Content Include="Content\attachments\IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf" />
     <Content Include="Content\attachments\ParkingMap.pdf" />
     <Content Include="Content\attachments\Q&amp;A Flyer.docx" />
-    <None Include="Jobs\24HourReservationReminder.rb" />
+    <None Include="Jobs\ReservationReminder.rb" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\clipboard\clipboard.min.js" />
