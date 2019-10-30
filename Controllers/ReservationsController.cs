@@ -55,7 +55,10 @@ namespace jeanie.Controllers
                     reservation.Source.StartDate = model.StartDateFromTimeSlot;
                     reservation.Source.EndDate = model.EndDateFromTimeSlot;
                     reservation.Source.Email = model.Email;
+                    reservation.Source.PhoneNumber = model.FormattedPhoneNumber;
                     reservation.Source.Grade = model.Grade;
+                    reservation.Source.LicensePlateNumber = model.LicensePlateNumber;
+                    reservation.Source.MakeAndModel = model.MakeAndModel;
                     reservation.Source.Notes = model.Notes;
                     reservation.Source.Status = ReservationStatus.Complete;
                     reservation.Source.UpdatedAt = DateTime.Now;

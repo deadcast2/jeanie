@@ -57,10 +57,9 @@ window.JRS.Reservation = {};
     };
 
     var validate = function () {
-        check($('#date'));
-        check($('#time_slot'));
-        check($('#email'));
-        check($('#grade'));
+        $('input[required], select[required]').each(function (i, el) {
+            check($(el));
+        });
         return $('.has-error').length === 0;
     };
 

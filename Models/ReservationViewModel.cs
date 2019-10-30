@@ -1,4 +1,5 @@
 ﻿using jeanie.Lib;
+using PhoneNumbers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,14 +9,22 @@ namespace jeanie.Models
 {
     public class ReservationViewModel
     {
-        public ReservationViewModel() { }
+        private static PhoneNumberUtil PhoneUtil = null;
 
-        public ReservationViewModel(Reservation reservation)
+        public ReservationViewModel() 
+        {
+            PhoneUtil = PhoneNumberUtil.GetInstance();
+        }
+
+        public ReservationViewModel(Reservation reservation) : base()
         {
             Id = reservation.Id;
             Name = reservation.Name;
             Email = reservation.Email;
+            PhoneNumber = reservation.PhoneNumber;
             Grade = reservation.Grade;
+            LicensePlateNumber = reservation.LicensePlateNumber;
+            MakeAndModel = reservation.MakeAndModel;
             Notes = reservation.Notes;
             StartDate = reservation.StartDate;
             EndDate = reservation.EndDate;
@@ -24,22 +33,21 @@ namespace jeanie.Models
         }
 
         public Guid Id { get; set; }
-
         public string Name { get; set; }
-
         public string Email { get; set; }
-
+        public string PhoneNumber { get; set; }
+        public string FormattedPhoneNumber => PhoneUtil.Format(ParsedPhoneNumber, PhoneNumberFormat.NATIONAL);
+        private PhoneNumber ParsedPhoneNumber => PhoneUtil.ParseAndKeepRawInput(PhoneNumber, "US");
         public string Grade { get; set; }
-
+        public string LicensePlateNumber { get; set; }
+        public string MakeAndModel { get; set; }
         public string Notes { get; set; }
-
         public DateTime? StartDate { get; set; }
-
         public DateTime? StartTime { get; set; }
-
         public DateTime? EndDate { get; set; }
-
         public DateTime? EndTime { get; set; }
+        public string TimeSlot { get; set; }
+        public Reservation Source { get; private set; }
 
         public DateTime? Date
         {
@@ -63,7 +71,7 @@ namespace jeanie.Models
         {
             get
             {
-                switch(Status)
+                switch (Status)
                 {
                     case ReservationStatus.Confirmed: return "success";
                     case ReservationStatus.Cancelled: return "danger";
@@ -72,13 +80,9 @@ namespace jeanie.Models
             }
         }
 
-        public string TimeSlot { get; set; }
-
         public DateTime? StartDateFromTimeSlot => Date?.AddHours(SplitTimeSlot[0]);
 
         public DateTime? EndDateFromTimeSlot => Date?.AddHours(SplitTimeSlot[1]);
-
-        public Reservation Source { get; private set; }
 
         public string FormattedTimeSlot =>
             Status >= ReservationStatus.Complete ? $"{StartDate.Value.ToShortDateString()} " +
@@ -102,8 +106,12 @@ namespace jeanie.Models
                 // Presence
                 if (!Date.HasValue) Errors.Add("A date must be selected.");
                 if (string.IsNullOrWhiteSpace(TimeSlot)) Errors.Add("A time slot must be selected.");
-                if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified.");
                 if (!new EmailAddressAttribute().IsValid(Email)) Errors.Add("A valid email must be specified.");
+                if (!PhoneUtil.IsValidNumberForRegion(ParsedPhoneNumber, "US")) 
+                    Errors.Add("A valid phone # must be specified.");
+                if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified.");
+                if (string.IsNullOrWhiteSpace(LicensePlateNumber)) Errors.Add("A license plate # must be specified.");
+                if (string.IsNullOrWhiteSpace(MakeAndModel)) Errors.Add("A make & model must be specified.");
 
                 // Range
                 if (Date.HasValue && !ReservationHelper.IsValidDate(Date.Value))
@@ -114,8 +122,14 @@ namespace jeanie.Models
                     Errors.Add($"Name must be less than {Reservation.MaxNameLength} characters.");
                 if ((Email ?? "").Length > Reservation.MaxEmailLength)
                     Errors.Add($"Email must be less than {Reservation.MaxEmailLength} characters.");
+                if ((PhoneNumber ?? "").Length > Reservation.MaxPhoneNumberLength)
+                    Errors.Add($"Phone # must be less than {Reservation.MaxPhoneNumberLength} characters.");
                 if ((Grade ?? "").Length > Reservation.MaxGradeLength)
                     Errors.Add($"Grade must be less than {Reservation.MaxGradeLength} characters.");
+                if ((LicensePlateNumber ?? "").Length > Reservation.MaxLicensePlateNumberLength)
+                    Errors.Add($"License plate # must be less than {Reservation.MaxLicensePlateNumberLength} characters.");
+                if ((MakeAndModel ?? "").Length > Reservation.MaxMakeAndModelLength)
+                    Errors.Add($"Make & model must be less than {Reservation.MaxMakeAndModelLength} characters.");
                 if ((Notes ?? "").Length > Reservation.MaxNotesLength)
                     Errors.Add($"Notes must be less than {Reservation.MaxNotesLength} characters.");
             }
