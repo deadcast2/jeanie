@@ -46,10 +46,8 @@ namespace jeanie.Models
             set
             {
                 StartDate = EndDate = value;
-                StartDate = StartDate?.Date.AddHours(StartTime?.Hour ?? 0)
-                    .AddMinutes(StartTime?.Minute ?? 0);
-                EndDate = EndDate?.Date.AddHours(EndTime?.Hour ?? 0)
-                    .AddMinutes(EndTime?.Minute ?? 0);
+                StartDate = StartDate?.Date.AddHours(StartTime?.Hour ?? 0).AddMinutes(StartTime?.Minute ?? 0);
+                EndDate = EndDate?.Date.AddHours(EndTime?.Hour ?? 0).AddMinutes(EndTime?.Minute ?? 0);
             }
             get
             {
@@ -60,6 +58,19 @@ namespace jeanie.Models
         public ReservationStatus Status { get; private set; }
 
         public string StatusText => Status.Text();
+
+        public string StatusClass
+        {
+            get
+            {
+                switch(Status)
+                {
+                    case ReservationStatus.Confirmed: return "success";
+                    case ReservationStatus.Cancelled: return "danger";
+                    default: return "";
+                }
+            }
+        }
 
         public string TimeSlot { get; set; }
 

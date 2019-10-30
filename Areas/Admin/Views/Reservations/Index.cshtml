@@ -36,7 +36,7 @@
                 <tbody>
                     @foreach (var reservation in Model.Item2)
                     {
-                        <tr>
+                        <tr class="@reservation.StatusClass">
                             <td>@reservation.Name</td>
                             <td>@reservation.Grade.Preview(20)</td>
                             <td>@reservation.FormattedTimeSlot</td>
