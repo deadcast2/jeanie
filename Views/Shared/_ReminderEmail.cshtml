@@ -1,6 +1,7 @@
-﻿@model jeanie.Models.ReservationViewModel
+﻿@using jeanie.Lib
+@model jeanie.Models.ReservationViewModel
 
-<p>Hi @Model.Name!</p>
+<p>Hi @Model.Name.FirstWord()!</p>
 
 <p>This is an automated reminder that your appointment scheduled for <b>@Model.FormattedTimeSlot</b> is coming up soon.</p>
 

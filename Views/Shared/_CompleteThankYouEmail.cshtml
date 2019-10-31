@@ -1,6 +1,7 @@
-﻿@model jeanie.Models.ReservationViewModel
+﻿@using jeanie.Lib
+@model jeanie.Models.ReservationViewModel
 
-<p>Hi @Model.Name!</p>
+<p>Hi @Model.Name.FirstWord()!</p>
 
 <p>Thank you for completing your reservation for <b>@Model.FormattedTimeSlot</b>.</p>
 
