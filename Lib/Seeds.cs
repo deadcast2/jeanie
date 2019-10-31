@@ -17,7 +17,8 @@ namespace jeanie.Lib
                 new ApplicationUserManager(new UserStore<ApplicationUser>(context)).Create(new ApplicationUser
                 {
                     UserName = email,
-                    Email = email
+                    Email = email,
+                    LockoutEnabled = true
                 }, "Temp123!");
             }
         }
