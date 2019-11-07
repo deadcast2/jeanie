@@ -21,6 +21,7 @@ namespace jeanie.Controllers
                 var reservations = context.Reservations
                     .Where(e => e.Status == ReservationStatus.Complete)
                     .Where(e => DbFunctions.DiffHours(DateTime.Now, e.StartDate) <= HoursNotice)
+                    .Where(e => e.StartDate > DateTime.Now)
                     .ToList();
                 foreach (var reservation in reservations)
                 {
