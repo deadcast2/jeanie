@@ -52,9 +52,6 @@
     <Reference Include="NodaTime, Version=2.0.2.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">
       <HintPath>packages\NodaTime.2.0.2\lib\net45\NodaTime.dll</HintPath>
     </Reference>
-    <Reference Include="PhoneNumbers, Version=8.10.21.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\libphonenumber-csharp.8.10.21\lib\net46\PhoneNumbers.dll</HintPath>
-    </Reference>
     <Reference Include="SendGrid, Version=9.12.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>packages\Sendgrid.9.12.0\lib\net452\SendGrid.dll</HintPath>
     </Reference>
@@ -291,6 +288,10 @@
     <Compile Include="Migrations\201910300320251_AddPhoneNumberLicensePlateMakeAndModelToReservation.Designer.cs">
       <DependentUpon>201910300320251_AddPhoneNumberLicensePlateMakeAndModelToReservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911070456412_RemovePhoneAndLicenseInfo.cs" />
+    <Compile Include="Migrations\201911070456412_RemovePhoneAndLicenseInfo.Designer.cs">
+      <DependentUpon>201911070456412_RemovePhoneAndLicenseInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlockedDate.cs" />
@@ -440,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910300320251_AddPhoneNumberLicensePlateMakeAndModelToReservation.resx">
       <DependentUpon>201910300320251_AddPhoneNumberLicensePlateMakeAndModelToReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911070456412_RemovePhoneAndLicenseInfo.resx">
+      <DependentUpon>201911070456412_RemovePhoneAndLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
