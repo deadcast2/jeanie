@@ -78,7 +78,8 @@ namespace jeanie.Lib
             var client = new SendGridClient(apiKey);
             var message = new SendGridMessage
             {
-                From = new EmailAddress(DefaultEmail, "Jeanie Reservation System"),
+                From = new EmailAddress("noreply@jeanie-reservation-system.com", "Jeanie Reservation System"),
+                ReplyTo = new EmailAddress(DefaultEmail, "BioSocial Development Lab"),
                 Subject = subject,
                 PlainTextContent = body,
                 HtmlContent = body
