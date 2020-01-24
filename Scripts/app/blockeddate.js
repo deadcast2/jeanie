@@ -29,7 +29,7 @@ window.JRS.BlockedDate = {};
     };
 
     var loadBlockedDates = function (onComplete) {
-        $.get('/blockeddates/dates', function (dates) {
+        $.get({ cache: false, url: '/blockeddates/dates' }, function (dates) {
             blockedDates = {};
             $.each(dates, function (i, date) {
                 blockedDates[new Date(date.Date).getTime()] = date.IsDayFullyBooked
@@ -42,7 +42,7 @@ window.JRS.BlockedDate = {};
     };
 
     var showTimeSlotModal = function (date) {
-        $.get($('#time_slots_modal').data('path') + '?date=' + date.toLocaleDateString(), function (response) {
+        $.get({ cache: false, url: $('#time_slots_modal').data('path') + '?date=' + date.toISOString() }, function (response) {
             $('#time_slots').html(response);
         });
         $('#time_slots_modal .selected-date').text(date.toLocaleDateString());

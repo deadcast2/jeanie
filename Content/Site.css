@@ -50,7 +50,7 @@
     top: -1px;
 }
 
-.fc-unthemed td.fc-day.fc-today {
+.today-date, .fc-unthemed td.fc-day.fc-today {
     background-color: #d9edf7;
 }
 
@@ -60,4 +60,28 @@
 
 .partially-blocked-date, .fc-unthemed td.fc-today.partially-blocked-date {
     background-color: #fcf8e3;
+}
+
+#calendar_legend {
+    list-style: none;
+    margin-bottom: 20px;
+    padding: 0;
+}
+
+#calendar_legend li {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: default;
+}
+
+#calendar_legend i {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-bottom: -3px;
+    border: 1px solid #333;
+}
+
+#calendar_legend i.rounded {
+    border-radius: 25px;
 }

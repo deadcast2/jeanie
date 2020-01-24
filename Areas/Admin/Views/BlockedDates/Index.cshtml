@@ -8,6 +8,12 @@
 <p>Click on a date below to change which time slots are available or blocked.</p>
 <hr/>
 
+<ul id="calendar_legend">
+    <li title="Fully Blocked"><i class="fully-blocked-date rounded"></i> Fully Blocked</li>
+    <li title="Partially Blocked"><i class="partially-blocked-date rounded"></i> Partially Blocked</li>
+    <li title="Today"><i class="today-date rounded"></i> Today</li>
+</ul>
+
 <div id="calendar"></div>
 
 <div class="modal fade" id="time_slots_modal" data-path="@Url.Action("TimeSlots")" tabindex="-1" role="dialog" aria-labelledby="time_slots_label">
