@@ -19,6 +19,13 @@ window.JRS.BlockedDate = {};
                 loadBlockedDates(function () { calendar.render(); });
             });
         });
+
+        $('#time_slots_modal').on('click', '#block_all', function () {
+            $.post($(this).data('path'), function () {
+                loadBlockedDates(function () { calendar.render(); });
+                $('#time_slots_modal').modal('hide');
+            });
+        });
     };
 
     var loadBlockedDates = function (onComplete) {

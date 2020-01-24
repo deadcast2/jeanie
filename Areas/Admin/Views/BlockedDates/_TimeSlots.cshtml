@@ -1,8 +1,17 @@
 ﻿@model BlockedDatesViewModel
 
 <form action="@Url.Action("Update")">
+    <p>Click on an available time slot below to block or click on a blocked date to make available.</p>
     <div class="panel panel-success">
-        <div class="panel-heading">Available</div>
+        <div class="panel-heading">
+            Available
+            @if (Model.AvailableSlots.Count > 0)
+            {
+                <a class="btn btn-danger btn-xs pull-right" id="block_all" data-path="@Url.Action("BlockWholeDay", new { date = Model.SelectedDate })">
+                    <i class="glyphicon glyphicon-ban-circle"></i> Block All
+                </a>
+            }
+        </div>
         <div class="list-group">
             @foreach (var availableSlot in Model.AvailableSlots)
             {
