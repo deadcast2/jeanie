@@ -50,6 +50,7 @@ namespace jeanie.Areas.Admin.Controllers
                 var availableDates = ReservationHelper.AvailableTimeSlots(date.Date, blockedDates);
                 return PartialView("_TimeSlots", new BlockedDatesViewModel
                 {
+                    SelectedDate = date,
                     AvailableSlots = availableDates,
                     BookedSlots = blockedDates
                 });
@@ -61,12 +62,9 @@ namespace jeanie.Areas.Admin.Controllers
         {
             using (var context = new JeanieContext())
             {
-                if (!ReservationHelper.IsValidTimeSlot((start, end)))
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
                 var blockedDate = context.BlockedDates.FirstOrDefault(e => e.StartDate == start && e.EndDate == end);
 
-                if (action == "add" && blockedDate == null)
+                if (action == "add" && blockedDate == null && ReservationHelper.IsValidTimeSlot((start, end)))
                 {
                     context.BlockedDates.Add(new BlockedDate { StartDate = start, EndDate = end });
                 }
@@ -80,6 +78,36 @@ namespace jeanie.Areas.Admin.Controllers
             }
 
             return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+        }
+
+        [HttpPost]
+        public ActionResult BlockWholeDay(DateTime date)
+        {
+            using (var context = new JeanieContext())
+            {
+                var allTimeSlots = ReservationHelper.GetTimeSlots(date);
+                var minTimeSlot = allTimeSlots.First();
+                var maxTimeSlot = allTimeSlots.Last();
+
+                var blockedDate = context.BlockedDates.FirstOrDefault(e => e.StartDate == minTimeSlot.start 
+                    && e.EndDate == maxTimeSlot.end);
+                if (blockedDate == null)
+                {
+                    // Remove any blocked time slots for this date.
+                    foreach(var timeSlot in context.BlockedDates
+                        .Where(e => DbFunctions.TruncateTime(e.StartDate) == date))
+                    {
+                        context.Entry(timeSlot).State = EntityState.Deleted;
+                    }
+
+                    // Block whole date by adding a min and max date from all time slots.
+                    context.BlockedDates.Add(new BlockedDate { StartDate = minTimeSlot.start, EndDate = maxTimeSlot.end });
+                }
+
+                context.SaveChanges();
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
     }
 }
