@@ -1,5 +1,4 @@
-﻿using System;
-using jeanie.Lib;
+﻿using jeanie.Lib;
 using jeanie.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

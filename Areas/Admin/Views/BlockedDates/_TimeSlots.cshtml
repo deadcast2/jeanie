@@ -1,0 +1,36 @@
+﻿@model BlockedDatesViewModel
+
+<form action="@Url.Action("Update")">
+    <div class="panel panel-success">
+        <div class="panel-heading">Available</div>
+        <div class="list-group">
+            @foreach (var availableSlot in Model.AvailableSlots)
+            {
+                <button type="button" class="list-group-item time-slot"
+                        data-start="@availableSlot.start" data-end="@availableSlot.end" data-action="add">
+                    @(availableSlot.start) - @(availableSlot.end)
+                </button>
+            }
+            @if (Model.AvailableSlots.Count == 0)
+            {
+                <div class="list-group-item">No available time slots.</div>
+            }
+        </div>
+    </div>
+    <div class="panel panel-danger">
+        <div class="panel-heading">Blocked</div>
+        <div class="list-group">
+            @foreach (var bookedSlot in Model.BookedSlots)
+            {
+                <button type="button" class="list-group-item time-slot"
+                        data-start="@bookedSlot.start" data-end="@bookedSlot.end" data-action="remove">
+                    @(bookedSlot.start) - @(bookedSlot.end)
+                </button>
+            }
+            @if (Model.BookedSlots.Count == 0)
+            {
+                <div class="list-group-item">No blocked time slots.</div>
+            }
+        </div>
+    </div>
+</form>

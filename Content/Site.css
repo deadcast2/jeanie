@@ -50,6 +50,14 @@
     top: -1px;
 }
 
-.blocked-date, .fc-unthemed td.fc-today.blocked-date {
-    background-color: #d4d4d4;
+.fc-unthemed td.fc-day.fc-today {
+    background-color: #d9edf7;
+}
+
+.fully-blocked-date, .fc-unthemed td.fc-today.fully-blocked-date {
+    background-color: #f2dede;
+}
+
+.partially-blocked-date, .fc-unthemed td.fc-today.partially-blocked-date {
+    background-color: #fcf8e3;
 }

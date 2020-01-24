@@ -5,10 +5,27 @@
 
 <h2>@ViewBag.Title</h2>
 
-<p>Click on a date below to block and click on it again to unblock.</p>
+<p>Click on a date below to change which time slots are available or blocked.</p>
 <hr/>
 
 <div id="calendar"></div>
+
+<div class="modal fade" id="time_slots_modal" data-path="@Url.Action("TimeSlots")" tabindex="-1" role="dialog" aria-labelledby="time_slots_label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="time_slots_label">Time Slots for <span class="selected-date"></span></h4>
+            </div>
+            <div class="modal-body">
+                <div id="time_slots"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     <script>

@@ -2,39 +2,60 @@
 window.JRS.BlockedDate = {};
 
 (function ($, self, undefined) {
-    var blockedDates = [];
+    var calendar;
+    var blockedDates;
 
     self.init = function () {
         loadBlockedDates(loadCalendar);
+
+        $('#time_slots_modal').on('click', 'button.time-slot', function () {
+            var start = $(this).data('start');
+            $.post($(this).closest('form').attr('action'), {
+                Start: start,
+                End: $(this).data('end'),
+                Action: $(this).data('action')
+            }, function () {
+                showTimeSlotModal(new Date(start));
+                loadBlockedDates(function () { calendar.render(); });
+            });
+        });
     };
 
     var loadBlockedDates = function (onComplete) {
         $.get('/blockeddates/dates', function (dates) {
-            blockedDates = $.map(dates, function (date) {
-                return new Date(date).getTime();
+            blockedDates = {};
+            $.each(dates, function (i, date) {
+                blockedDates[new Date(date.Date).getTime()] = date.IsDayFullyBooked
+                    ? 'fully-blocked-date' : 'partially-blocked-date';
             });
-
             if (typeof onComplete === "function") {
                 onComplete();
             }
         });
     };
 
+    var showTimeSlotModal = function (date) {
+        $.get($('#time_slots_modal').data('path') + '?date=' + date.toLocaleDateString(), function (response) {
+            $('#time_slots').html(response);
+        });
+        $('#time_slots_modal .selected-date').text(date.toLocaleDateString());
+        $('#time_slots_modal').modal('show');
+    };
+
     var loadCalendar = function () {
-        new FullCalendar.Calendar($('#calendar').get(0), {
+        calendar = new FullCalendar.Calendar($('#calendar').get(0), {
             plugins: ['dayGrid', 'interaction'],
             aspectRatio: 2,
             dateClick: function (info) {
-                $.post('/blockeddates/update?date=' + info.date.toLocaleDateString(), function (response) {
-                    $(info.dayEl).toggleClass('blocked-date', response.enabled);
-                    loadBlockedDates();
-                });
+                showTimeSlotModal(info.date);
             },
             dayRender: function (info) {
-                if (blockedDates.indexOf(info.date.getTime()) > -1) {
-                    $(info.el).addClass('blocked-date');
+                var time = info.date.getTime();
+                if (blockedDates.hasOwnProperty(time)) {
+                    $(info.el).addClass(blockedDates[time]);
                 }
             }
-        }).render();
+        });
+        calendar.render();
     };
 })(jQuery, window.JRS.BlockedDate);

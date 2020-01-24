@@ -115,7 +115,7 @@ namespace tests
 
             var newTimeSlot = (DateTime.Today.AddHours(17), DateTime.Today.AddHours(20));
 
-            Assert.IsTrue(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+            Assert.IsTrue(ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, newTimeSlot));
         }
 
         [TestMethod]
@@ -129,7 +129,7 @@ namespace tests
 
             var newTimeSlot = (DateTime.Today.AddHours(11), DateTime.Today.AddHours(14));
 
-            Assert.IsFalse(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+            Assert.IsFalse(ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, newTimeSlot));
         }
 
         [TestMethod]
@@ -143,7 +143,7 @@ namespace tests
 
             var newTimeSlot = (DateTime.Today.AddHours(9), DateTime.Today.AddHours(12));
 
-            Assert.IsFalse(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+            Assert.IsFalse(ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, newTimeSlot));
         }
 
         [TestMethod]
@@ -157,7 +157,7 @@ namespace tests
 
             var newTimeSlot = (DateTime.Today.AddHours(21), DateTime.Today.AddHours(24));
 
-            Assert.IsFalse(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+            Assert.IsFalse(ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, newTimeSlot));
         }
 
         [TestMethod]
@@ -170,7 +170,7 @@ namespace tests
 
             var newTimeSlot = (DateTime.Today.AddHours(12), DateTime.Today.AddHours(15));
 
-            Assert.IsFalse(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+            Assert.IsFalse(ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, newTimeSlot));
         }
 
         [TestMethod]
@@ -183,7 +183,7 @@ namespace tests
 
             var newTimeSlot = (DateTime.Today.AddHours(9), DateTime.Today.AddHours(12));
 
-            Assert.IsFalse(ReservationHelper.IsValidTimeSlot(bookedTimeSlots, newTimeSlot));
+            Assert.IsFalse(ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, newTimeSlot));
         }
 
         [TestMethod]
@@ -211,6 +211,24 @@ namespace tests
         public void ReturnsFalseWhenDateNot72HoursInAdvance()
         {
             var result = ReservationHelper.IsValidDate(DateTime.Today.AddDays(1));
+
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod]
+        public void ReturnsTrueWhenTimeSlotInValidRange()
+        {
+            var timeSlots = ReservationHelper.GetTimeSlots(DateTime.Now);
+            var result = ReservationHelper.IsValidTimeSlot(timeSlots[0]);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ReturnsFalseWhenTimeSlotOutsideValidRange()
+        {
+            var timeSlots = ReservationHelper.GetTimeSlots(DateTime.Now);
+            var result = ReservationHelper.IsValidTimeSlot((timeSlots[0].start, timeSlots[0].end.AddHours(1)));
 
             Assert.IsFalse(result);
         }

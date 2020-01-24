@@ -237,6 +237,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BlockedDatesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReservationsController.cs" />
+    <Compile Include="Areas\Admin\Models\BlockedDatesViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DisabledDatesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -298,6 +299,10 @@
     <Compile Include="Migrations\201911070456412_RemovePhoneAndLicenseInfo.Designer.cs">
       <DependentUpon>201911070456412_RemovePhoneAndLicenseInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001230025459_AddStartAndEndDateToBlockedDatesTable.cs" />
+    <Compile Include="Migrations\202001230025459_AddStartAndEndDateToBlockedDatesTable.Designer.cs">
+      <DependentUpon>202001230025459_AddStartAndEndDateToBlockedDatesTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlockedDate.cs" />
@@ -336,6 +341,7 @@
     <Content Include="Content\attachments\IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf" />
     <Content Include="Content\attachments\ParkingMap.pdf" />
     <Content Include="Content\attachments\Q&amp;A Flyer.docx" />
+    <Content Include="Areas\Admin\Views\BlockedDates\_TimeSlots.cshtml" />
     <None Include="Jobs\ReservationReminder.rb" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -401,7 +407,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
@@ -450,6 +455,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911070456412_RemovePhoneAndLicenseInfo.resx">
       <DependentUpon>201911070456412_RemovePhoneAndLicenseInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001230025459_AddStartAndEndDateToBlockedDatesTable.resx">
+      <DependentUpon>202001230025459_AddStartAndEndDateToBlockedDatesTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
