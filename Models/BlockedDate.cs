@@ -9,7 +9,10 @@ namespace jeanie.Models
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
-        [Index(IsUnique = true)]
-        public DateTime Date { get; set; }
+        [Index("IX_StartDate_EndDate", IsUnique = true, Order = 0)]
+        public DateTime StartDate { get; set; }
+
+        [Index("IX_StartDate_EndDate", IsUnique = true, Order = 1)]
+        public DateTime EndDate { get; set; }
     }
 }
