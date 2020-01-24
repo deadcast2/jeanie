@@ -73,11 +73,10 @@ namespace jeanie.Areas.Admin.Controllers
                     context.Entry(blockedDate).State = EntityState.Deleted;
                 }
 
-                if (context.SaveChanges() > 0)
-                    return new HttpStatusCodeResult(HttpStatusCode.OK);
+                context.SaveChanges();
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpPost]
