@@ -50,6 +50,15 @@
     top: -1px;
 }
 
+.fc-day:hover {
+    background: #ededed;
+    cursor: pointer;
+}
+
+.fc-slats, .fc-content-skeleton, .fc-bgevent-skeleton {
+    pointer-events: none
+}
+
 .today-date, .fc-unthemed td.fc-day.fc-today {
     background-color: #d9edf7;
 }
