@@ -13,7 +13,9 @@ namespace jeanie.Migrations
 
         protected override void Seed(jeanie.Lib.JeanieContext context)
         {
+#if DEBUG
             Seeds.DefaultUser(ApplicationDbContext.Create());
+#endif
         }
     }
 }
