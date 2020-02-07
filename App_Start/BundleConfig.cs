@@ -28,6 +28,7 @@ namespace jeanie
                 .Include("~/Scripts/fullcalendar/interaction/main.min.js")
                 .Include("~/Scripts/datatables/datatables.min.js")
                 .Include("~/Scripts/app/app.js")
+                .Include("~/Scripts/app/admin/reservation.js")
                 .Include("~/Scripts/app/blockeddate.js")
                 .Include("~/Scripts/app/reservation.js")
             );

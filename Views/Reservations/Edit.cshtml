@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="md-margin">
+<div class="md-margin-top">
     <form id="reservation_form" method="post" action="@Url.Action("Update")" novalidate>
         @Html.AntiForgeryToken()
         @Html.Partial("_FormErrors", Model)

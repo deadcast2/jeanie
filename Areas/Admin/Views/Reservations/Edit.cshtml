@@ -7,7 +7,7 @@
 <h2>@ViewBag.Title</h2>
 <hr/>
 
-<div class="md-margin">
+<div class="md-margin-top">
     <form method="post" action="@Url.Action("Update")">
         @Html.AntiForgeryToken()
         @Html.Partial("_FormErrors", Model)
