@@ -26,6 +26,7 @@ namespace jeanie
                 .Include("~/Scripts/fullcalendar/core/main.min.js")
                 .Include("~/Scripts/fullcalendar/daygrid/main.min.js")
                 .Include("~/Scripts/fullcalendar/interaction/main.min.js")
+                .Include("~/Scripts/datatables/datatables.min.js")
                 .Include("~/Scripts/app/app.js")
                 .Include("~/Scripts/app/blockeddate.js")
                 .Include("~/Scripts/app/reservation.js")
@@ -38,7 +39,8 @@ namespace jeanie
                       "~/Content/pickadate/default.date.css",
                       "~/Content/pickadate/default.time.css",
                       "~/Content/fullcalendar/core/main.min.css",
-                      "~/Content/fullcalendar/daygrid/main.min.css"));
+                      "~/Content/fullcalendar/daygrid/main.min.css",
+                      "~/Content/datatables/datatables.min.css"));
 
 #if !DEBUG
             BundleTable.EnableOptimizations = true;

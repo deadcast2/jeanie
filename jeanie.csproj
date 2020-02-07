@@ -320,6 +320,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datatables\datatables.min.css" />
     <Content Include="Content\fullcalendar\core\main.min.css" />
     <Content Include="Content\fullcalendar\daygrid\main.min.css" />
     <Content Include="Content\pickadate\default.css" />
@@ -346,6 +347,7 @@
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\clipboard\clipboard.min.js" />
+    <Content Include="Scripts\datatables\datatables.min.js" />
     <Content Include="Scripts\fullcalendar\core\main.min.js" />
     <Content Include="Scripts\fullcalendar\daygrid\main.min.js" />
     <Content Include="Scripts\fullcalendar\interaction\main.min.js" />
