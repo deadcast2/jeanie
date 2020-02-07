@@ -330,6 +330,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\admin\reservation.js" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\blockeddate.js" />
     <Content Include="Scripts\app\reservation.js" />

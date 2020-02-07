@@ -16,8 +16,12 @@
     white-space: normal;
 }
 
-.md-margin {
+.md-margin-top {
     margin-top: 20px;
+}
+
+.md-margin-bottom {
+    margin-bottom: 20px;
 }
 
 .pickadate[readonly], .pickatime[readonly] {
