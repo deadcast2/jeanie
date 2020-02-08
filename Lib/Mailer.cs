@@ -12,13 +12,47 @@ namespace jeanie.Lib
     {
         private static string DefaultEmail => GetSystemVariable("DEFAULT_EMAIL");
 
+        private static List<Attachment> DefaultAttachments
+        {
+            get
+            {
+                return new List<Attachment>
+                {
+                    new Attachment
+                    {
+                        Filename="Best Route to Human Sciences Building.JPG",
+                        Type = "image/jpeg",
+                        Content = FileHelpers.Base64Encode("~/Content/attachments/Best Route to Human Sciences Building.JPG")
+                    },
+                    new Attachment
+                    {
+                        Filename="IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf",
+                        Type = "application/pdf",
+                        Content = FileHelpers.Base64Encode("~/Content/attachments/IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf")
+                    },
+                    new Attachment
+                    {
+                        Filename="ParkingMap.pdf",
+                        Type = "application/pdf",
+                        Content = FileHelpers.Base64Encode("~/Content/attachments/ParkingMap.pdf")
+                    },
+                    new Attachment
+                    {
+                        Filename="Q&A Flyer.docx",
+                        Type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                        Content = FileHelpers.Base64Encode("~/Content/attachments/Q&A Flyer.docx")
+                    }
+                };
+            }
+        }
+
         public static void SendCompleteAlert(ControllerContext context, ReservationViewModel reservation)
         {
             var body = ViewHelpers.RenderToString(context, "_CompleteEmail", reservation);
             Task.Run(() => Send(DefaultEmail, "Reservation complete! ✔️", body));
 
             body = ViewHelpers.RenderToString(context, "_CompleteThankYouEmail", reservation);
-            Task.Run(() => Send(reservation.Email, "Reservation complete! ✔️", body));
+            Task.Run(() => Send(reservation.Email, "Reservation complete! ✔️", body, DefaultAttachments));
         }
 
         public static void SendReminder(ControllerContext context, ReservationViewModel reservation)
@@ -32,35 +66,8 @@ namespace jeanie.Lib
             var body = ViewHelpers.RenderToString(context, "_ConfirmedThankYouEmail", reservation);
             Task.Run(() => Send(DefaultEmail, "FWD: Reservation confirmed! 🎉", body));
 
-            var attachments = new List<Attachment>
-            {
-                new Attachment
-                {
-                    Filename="Best Route to Human Sciences Building.JPG",
-                    Type = "image/jpeg",
-                    Content = FileHelpers.Base64Encode("~/Content/attachments/Best Route to Human Sciences Building.JPG")
-                },
-                new Attachment
-                {
-                    Filename="IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf",
-                    Type = "application/pdf",
-                    Content = FileHelpers.Base64Encode("~/Content/attachments/IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf")
-                },
-                new Attachment
-                {
-                    Filename="ParkingMap.pdf",
-                    Type = "application/pdf",
-                    Content = FileHelpers.Base64Encode("~/Content/attachments/ParkingMap.pdf")
-                },
-                new Attachment
-                {
-                    Filename="Q&A Flyer.docx",
-                    Type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    Content = FileHelpers.Base64Encode("~/Content/attachments/Q&A Flyer.docx")
-                }
-            };
             body = ViewHelpers.RenderToString(context, "_ConfirmedThankYouEmail", reservation);
-            Task.Run(() => Send(reservation.Email, "Reservation confirmed! 🎉", body, attachments));
+            Task.Run(() => Send(reservation.Email, "Reservation confirmed! 🎉", body, DefaultAttachments));
         }
 
         public static void SendCancellationAlert(ControllerContext context, ReservationViewModel reservation)
