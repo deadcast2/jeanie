@@ -20,25 +20,25 @@ namespace jeanie.Lib
                 {
                     new Attachment
                     {
-                        Filename="Best Route to Human Sciences Building.JPG",
+                        Filename = "Best Route to Human Sciences Building.JPG",
                         Type = "image/jpeg",
                         Content = FileHelpers.Base64Encode("~/Content/attachments/Best Route to Human Sciences Building.JPG")
                     },
                     new Attachment
                     {
-                        Filename="IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf",
+                        Filename = "IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf",
                         Type = "application/pdf",
                         Content = FileHelpers.Base64Encode("~/Content/attachments/IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf")
                     },
                     new Attachment
                     {
-                        Filename="ParkingMap.pdf",
+                        Filename = "ParkingMap.pdf",
                         Type = "application/pdf",
                         Content = FileHelpers.Base64Encode("~/Content/attachments/ParkingMap.pdf")
                     },
                     new Attachment
                     {
-                        Filename="Q&A Flyer.docx",
+                        Filename = "Q&A Flyer.docx",
                         Type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                         Content = FileHelpers.Base64Encode("~/Content/attachments/Q&A Flyer.docx")
                     }
