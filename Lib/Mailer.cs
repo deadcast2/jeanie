@@ -20,12 +20,6 @@ namespace jeanie.Lib
                 {
                     new Attachment
                     {
-                        Filename = "Best Route to Human Sciences Building.JPG",
-                        Type = "image/jpeg",
-                        Content = FileHelpers.Base64Encode("~/Content/attachments/Best Route to Human Sciences Building.JPG")
-                    },
-                    new Attachment
-                    {
                         Filename = "IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf",
                         Type = "application/pdf",
                         Content = FileHelpers.Base64Encode("~/Content/attachments/IRB2017-1063_ConsentForm_Parent_20190620_Revised.pdf")
