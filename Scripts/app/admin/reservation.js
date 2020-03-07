@@ -4,6 +4,13 @@ window.JRS.Admin.Reservation = {};
 
 (function ($, self, undefined) {
     self.init = function () {
-        $('#reservations_grid').DataTable();
+        $('#reservations_grid').DataTable({
+            "order": [[4, "desc"]],
+            "columnDefs": [{
+                "targets": 'no-sort',
+                "orderable": false
+            }],
+            "dom": 'ft<"pull-left"l>p'
+        });
     };
 })(jQuery, window.JRS.Admin.Reservation);

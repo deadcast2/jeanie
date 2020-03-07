@@ -20,6 +20,7 @@ namespace jeanie.Models
             StartDate = reservation.StartDate;
             EndDate = reservation.EndDate;
             Status = reservation.Status;
+            CreatedAt = reservation.CreatedAt;
             Source = reservation;
         }
 
@@ -33,6 +34,7 @@ namespace jeanie.Models
         public DateTime? EndDate { get; set; }
         public DateTime? EndTime { get; set; }
         public string TimeSlot { get; set; }
+        public DateTime CreatedAt { get; set; }
         public Reservation Source { get; private set; }
 
         public DateTime? Date
