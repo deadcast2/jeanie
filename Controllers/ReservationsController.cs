@@ -42,7 +42,7 @@ namespace jeanie.Controllers
             using (var context = new JeanieContext())
             {
                 var reservation = GetReservation(model.Id);
-                if (reservation == null || reservation.IsComplete)
+                if (reservation == null || reservation.Status != ReservationStatus.Uncomplete)
                     return Edit(model.Id);
 
                 // So name validation succeeds.
@@ -118,7 +118,7 @@ namespace jeanie.Controllers
             using (var context = new JeanieContext())
             {
                 var reservation = GetReservation(id);
-                if (reservation == null || reservation.IsConfirmed || reservation.IsCancelled)
+                if (reservation == null || reservation.Status != ReservationStatus.ReminderSent)
                     return Edit(id);
 
                 context.Reservations.Attach(reservation.Source);

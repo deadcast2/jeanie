@@ -115,7 +115,7 @@ namespace jeanie.Models
             return Errors.Count == 0;
         }
 
-        public bool IsComplete => Status == ReservationStatus.Complete;
+        public bool IsComplete => Status == ReservationStatus.Complete || Status == ReservationStatus.ReminderSent;
 
         public bool IsConfirmed => Status == ReservationStatus.Confirmed;
 
