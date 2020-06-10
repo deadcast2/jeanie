@@ -31,17 +31,23 @@
         <h2>Step 2 - Your Details</h2>
         <hr />
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input id="email" name="email" type="email" class="form-control" 
+                    <input id="email" name="email" type="email" class="form-control"
                            placeholder="Required" value="@Model.Email" required />
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="phone_number">Phone #</label>
+                    <input id="phone_number" name="phonenumber" type="tel" class="form-control" placeholder="Required" value="@Model.PhoneNumber" required />
+                </div>
+            </div>
+            <div class="col-md-4">
                 <div class="form-group">
                     <label for="grade">Child's Grade</label>
-                    <input id="grade" name="grade" type="text" class="form-control" 
+                    <input id="grade" name="grade" type="text" class="form-control"
                            placeholder="Required" value="@Model.Grade" required />
                 </div>
             </div>
