@@ -71,6 +71,7 @@ namespace jeanie.Areas.Admin.Controllers
                     {
                         reservation.Name = model.Name;
                         reservation.Email = model.Email;
+                        reservation.PhoneNumber = model.FormattedPhoneNumber;
                         reservation.Grade = model.Grade;
                         reservation.Notes = model.Notes;
                         reservation.StartDate = model.StartDate;

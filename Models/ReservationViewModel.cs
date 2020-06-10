@@ -1,4 +1,5 @@
 ﻿using jeanie.Lib;
+using PhoneNumbers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,13 +9,19 @@ namespace jeanie.Models
 {
     public class ReservationViewModel
     {
-        public ReservationViewModel() { }
+        private static PhoneNumberUtil PhoneUtil = null;
 
-        public ReservationViewModel(Reservation reservation)
+        public ReservationViewModel()
+        {
+            PhoneUtil = PhoneNumberUtil.GetInstance();
+        }
+
+        public ReservationViewModel(Reservation reservation) : base()
         {
             Id = reservation.Id;
             Name = reservation.Name;
             Email = reservation.Email;
+            PhoneNumber = reservation.PhoneNumber;
             Grade = reservation.Grade;
             Notes = reservation.Notes;
             StartDate = reservation.StartDate;
@@ -27,6 +34,9 @@ namespace jeanie.Models
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string FormattedPhoneNumber =>
+            ParsedPhoneNumber == null ? null : PhoneUtil.Format(ParsedPhoneNumber, PhoneNumberFormat.NATIONAL);
         public string Grade { get; set; }
         public string Notes { get; set; }
         public DateTime? StartDate { get; set; }
@@ -36,6 +46,8 @@ namespace jeanie.Models
         public string TimeSlot { get; set; }
         public DateTime CreatedAt { get; set; }
         public Reservation Source { get; private set; }
+        public string StatusText => Status.Text();
+        public ReservationStatus Status { get; private set; }
 
         public DateTime? Date
         {
@@ -51,9 +63,20 @@ namespace jeanie.Models
             }
         }
 
-        public ReservationStatus Status { get; private set; }
-
-        public string StatusText => Status.Text();
+        private PhoneNumber ParsedPhoneNumber
+        {
+            get
+            {
+                try
+                {
+                    return string.IsNullOrWhiteSpace(PhoneNumber) ? null : PhoneUtil.ParseAndKeepRawInput(PhoneNumber, "US");
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+        }
 
         public string StatusClass
         {
@@ -95,6 +118,8 @@ namespace jeanie.Models
                 if (!Date.HasValue) Errors.Add("A date must be selected.");
                 if (string.IsNullOrWhiteSpace(TimeSlot)) Errors.Add("A time slot must be selected.");
                 if (!new EmailAddressAttribute().IsValid(Email)) Errors.Add("A valid email must be specified.");
+                if (ParsedPhoneNumber == null || !PhoneUtil.IsValidNumberForRegion(ParsedPhoneNumber, "US"))
+                    Errors.Add("A valid phone # must be specified.");
                 if (string.IsNullOrWhiteSpace(Grade)) Errors.Add("A grade must be specified.");
 
                 // Range
@@ -106,6 +131,8 @@ namespace jeanie.Models
                     Errors.Add($"Name must be less than {Reservation.MaxNameLength} characters.");
                 if ((Email ?? "").Length > Reservation.MaxEmailLength)
                     Errors.Add($"Email must be less than {Reservation.MaxEmailLength} characters.");
+                if ((PhoneNumber ?? "").Length > Reservation.MaxPhoneNumberLength)
+                    Errors.Add($"Phone # must be less than {Reservation.MaxPhoneNumberLength} characters.");
                 if ((Grade ?? "").Length > Reservation.MaxGradeLength)
                     Errors.Add($"Grade must be less than {Reservation.MaxGradeLength} characters.");
                 if ((Notes ?? "").Length > Reservation.MaxNotesLength)
