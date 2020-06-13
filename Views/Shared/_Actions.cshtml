@@ -1,0 +1,16 @@
+﻿@model jeanie.Models.ReservationViewModel
+
+<form method="post" action="@Url.Action("Destroy")">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+    <a href="@Url.Action("Edit", new { id = Model.Id })" class="btn btn-default btn-sm" title="Edit">
+        <i class="glyphicon glyphicon-pencil"></i>
+    </a>
+    <a href="#copy" class="btn btn-default btn-sm copy" data-toggle="tooltip" data-placement="top"
+       title="Copied to clipboard!" data-clipboard-text="@Model.Url">
+        <i class="glyphicon glyphicon-copy"></i>
+    </a>
+    <a href="#delete" class="btn btn-danger btn-sm delete-confirm" title="Delete">
+        <i class="glyphicon glyphicon-ban-circle"></i>
+    </a>
+</form>

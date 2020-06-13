@@ -1,9 +1,9 @@
 ﻿using jeanie.Lib;
 using jeanie.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 
 namespace jeanie.Areas.Admin.Controllers
@@ -16,7 +16,55 @@ namespace jeanie.Areas.Admin.Controllers
         {
             using (var context = new JeanieContext())
             {
-                return View((new ReservationViewModel(), GetReservations()));
+                return View(new ReservationViewModel());
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Read(DataTable dataTable)
+        {
+            using (var context = new JeanieContext())
+            {
+                var reservations = context.Reservations.AsQueryable();
+
+                foreach (var order in dataTable.order)
+                {
+                    var colName = dataTable.columns[order.column].name;
+                    var property = reservations.ElementType.GetProperty(colName);
+                    var parameter = Expression.Parameter(reservations.ElementType, "r");
+                    var propertyAccess = Expression.MakeMemberAccess(parameter, property);
+                    var orderByExp = Expression.Lambda(propertyAccess, parameter);
+
+                    MethodCallExpression orderBy = Expression.Call(
+                        typeof(Queryable),
+                        order.dir == "asc" ? "OrderBy" : "OrderByDescending",
+                        new Type[] { reservations.ElementType, property.PropertyType },
+                        reservations.Expression,
+                        orderByExp);
+
+                    reservations = reservations.Provider.CreateQuery<Reservation>(orderBy);
+                }
+
+                reservations = reservations.Skip(dataTable.start).Take(dataTable.length);
+
+                var results = reservations.ToList()
+                    .Select(r => new ReservationViewModel(r)).ToList();
+
+                return Json(new
+                {
+                    dataTable.draw,
+                    recordsTotal = context.Reservations.Count(),
+                    recordsFiltered = context.Reservations.Count(),
+                    data = results.Select(r => new object[6]
+                    {
+                        r.Name,
+                        r.Grade.Preview(20),
+                        r.FormattedTimeSlot,
+                        r.StatusText,
+                        r.CreatedAt.ToShortDateString(),
+                        ViewHelpers.RenderToString(ControllerContext, "_Actions", r)
+                    })
+                });
             }
         }
 
@@ -56,7 +104,7 @@ namespace jeanie.Areas.Admin.Controllers
                 }
             }
 
-            return View("Index", (model, GetReservations()));
+            return View("Index", model);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
@@ -107,15 +155,6 @@ namespace jeanie.Areas.Admin.Controllers
                 }
 
                 return RedirectToAction("Index");
-            }
-        }
-
-        private List<ReservationViewModel> GetReservations()
-        {
-            using (var context = new JeanieContext())
-            {
-                return context.Reservations.OrderByDescending(e => e.CreatedAt).ToList()
-                    .Select(e => new ReservationViewModel(e)).ToList();
             }
         }
     }
