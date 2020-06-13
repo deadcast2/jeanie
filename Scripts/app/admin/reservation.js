@@ -5,12 +5,29 @@ window.JRS.Admin.Reservation = {};
 (function ($, self, undefined) {
     self.init = function () {
         $('#reservations_grid').DataTable({
-            "order": [[4, "desc"]],
-            "columnDefs": [{
+            order: [[4, "desc"]],
+            columnDefs: [{
                 "targets": 'no-sort',
                 "orderable": false
             }],
-            "dom": 'ft<"pull-left"l>p'
+            columns: [
+                { name: 'Name' },
+                { name: 'Grade' },
+                { name: 'StartDate' },
+                { name: 'Status' },
+                { name: 'CreatedAt' },
+                { name: 'Actions' }
+            ],
+            dom: 'ft<"pull-left"l>p',
+            serverSide: true,
+            ajax: {
+                url: '/admin/reservations/read',
+                type: 'POST'
+            }
+        }).on('draw', function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                trigger: 'manual'
+            });
         });
     };
 })(jQuery, window.JRS.Admin.Reservation);

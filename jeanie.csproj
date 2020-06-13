@@ -326,6 +326,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlockedDate.cs" />
+    <Compile Include="Models\DataTableDefs.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Lib\JeanieContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -426,6 +427,7 @@
     <Content Include="Views\Shared\_ReminderEmail.cshtml" />
     <Content Include="Views\Shared\_ConfirmedThankYouEmail.cshtml" />
     <Content Include="Views\Shared\_CancelledThankYouEmail.cshtml" />
+    <Content Include="Views\Shared\_Actions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

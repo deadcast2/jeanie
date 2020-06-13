@@ -1,7 +1,7 @@
 ﻿$(function () {
     new ClipboardJS('.copy');
 
-    $('a.copy').click(function (e) {
+    $('.container').on('click', 'a.copy', function (e) {
         e.preventDefault();
         var $this = $(this);
         $this.tooltip('show');
@@ -10,11 +10,7 @@
         }, 1500);
     });
 
-    $('[data-toggle="tooltip"]').tooltip({
-        trigger: 'manual'
-    });
-
-    $('.delete-confirm').click(function (e) {
+    $('.container').on('click', '.delete-confirm', function (e) {
         e.preventDefault();
         if (confirm('Are you sure?')) {
             $(this).closest('form').submit();
