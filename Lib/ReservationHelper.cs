@@ -1,4 +1,5 @@
-﻿using System;
+﻿using jeanie.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -87,6 +88,59 @@ namespace jeanie.Lib
             valid &= !bookedTimeSlots.Any(e => newTimeSlot.start >= e.start && newTimeSlot.start <= e.end);
             valid &= !bookedTimeSlots.Any(e => newTimeSlot.end >= e.start && newTimeSlot.end < e.end);
             return valid;
+        }
+
+        public static List<FormattedReservation> FromDataTable(DataTable dataTable, out int total, out int filtered)
+        {
+            using (var context = new JeanieContext())
+            {
+                var reservations = context.FormattedReservations.AsQueryable();
+                total = reservations.Count();
+                filtered = total;
+
+                if (!string.IsNullOrWhiteSpace(dataTable.search.value))
+                {
+                    reservations = reservations.Where(r =>
+                        r.Name.Contains(dataTable.search.value) ||
+                        r.Grade.Contains(dataTable.search.value) ||
+                        r.TimeSlot.Contains(dataTable.search.value) ||
+                        r.Status.Contains(dataTable.search.value) ||
+                        r.CreatedAt.Contains(dataTable.search.value)
+                    );
+                    filtered = reservations.Count();
+                }
+
+                foreach (var order in dataTable.order)
+                {
+                    switch (dataTable.columns[order.column].name)
+                    {
+                        case nameof(FormattedReservation.Name):
+                            reservations = order.IsAsc ? reservations.OrderBy(r => r.Name)
+                                : reservations.OrderByDescending(r => r.Name);
+                            break;
+                        case nameof(FormattedReservation.Grade):
+                            reservations = order.IsAsc ? reservations.OrderBy(r => r.Grade)
+                                : reservations.OrderByDescending(r => r.Grade);
+                            break;
+                        case nameof(FormattedReservation.TimeSlot):
+                            reservations = order.IsAsc ? reservations.OrderBy(r => r.TimeSlot)
+                                : reservations.OrderByDescending(r => r.TimeSlot);
+                            break;
+                        case nameof(FormattedReservation.Status):
+                            reservations = order.IsAsc ? reservations.OrderBy(r => r.Status)
+                                : reservations.OrderByDescending(r => r.Status);
+                            break;
+                        case nameof(FormattedReservation.CreatedAt):
+                            reservations = order.IsAsc ? reservations.OrderBy(r => r.CreatedAt)
+                                : reservations.OrderByDescending(r => r.CreatedAt);
+                            break;
+                    }
+                }
+
+                reservations = reservations.Skip(dataTable.start).Take(dataTable.length);
+
+                return reservations.ToList();
+            }
         }
     }
 }

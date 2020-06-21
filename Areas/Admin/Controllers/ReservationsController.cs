@@ -23,49 +23,23 @@ namespace jeanie.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Read(DataTable dataTable)
         {
-            using (var context = new JeanieContext())
+            var results = ReservationHelper.FromDataTable(dataTable, out var total, out var filtered);
+
+            return Json(new
             {
-                var reservations = context.Reservations.AsQueryable();
-
-                foreach (var order in dataTable.order)
+                dataTable.draw,
+                recordsTotal = total,
+                recordsFiltered = filtered,
+                data = results.Select(r => new object[6]
                 {
-                    var colName = dataTable.columns[order.column].name;
-                    var property = reservations.ElementType.GetProperty(colName);
-                    var parameter = Expression.Parameter(reservations.ElementType, "r");
-                    var propertyAccess = Expression.MakeMemberAccess(parameter, property);
-                    var orderByExp = Expression.Lambda(propertyAccess, parameter);
-
-                    MethodCallExpression orderBy = Expression.Call(
-                        typeof(Queryable),
-                        order.dir == "asc" ? "OrderBy" : "OrderByDescending",
-                        new Type[] { reservations.ElementType, property.PropertyType },
-                        reservations.Expression,
-                        orderByExp);
-
-                    reservations = reservations.Provider.CreateQuery<Reservation>(orderBy);
-                }
-
-                reservations = reservations.Skip(dataTable.start).Take(dataTable.length);
-
-                var results = reservations.ToList()
-                    .Select(r => new ReservationViewModel(r)).ToList();
-
-                return Json(new
-                {
-                    dataTable.draw,
-                    recordsTotal = context.Reservations.Count(),
-                    recordsFiltered = context.Reservations.Count(),
-                    data = results.Select(r => new object[6]
-                    {
-                        r.Name,
-                        r.Grade.Preview(20),
-                        r.FormattedTimeSlot,
-                        r.StatusText,
-                        r.CreatedAt.ToShortDateString(),
-                        ViewHelpers.RenderToString(ControllerContext, "_Actions", r)
-                    })
-                });
-            }
+                    r.Name,
+                    r.Grade.Preview(20),
+                    r.TimeSlot,
+                    r.Status,
+                    r.CreatedAt,
+                    ViewHelpers.RenderToString(ControllerContext, "_Actions", r)
+                })
+            });
         }
 
         [HttpGet]
