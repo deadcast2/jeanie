@@ -323,6 +323,10 @@
     <Compile Include="Migrations\202006100324064_AddPhoneNumberToReservation.Designer.cs">
       <DependentUpon>202006100324064_AddPhoneNumberToReservation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006211557338_CreateReservationView.cs" />
+    <Compile Include="Migrations\202006211557338_CreateReservationView.Designer.cs">
+      <DependentUpon>202006211557338_CreateReservationView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BlockedDate.cs" />
@@ -331,6 +335,7 @@
     <Compile Include="Lib\JeanieContext.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Reservation.cs" />
+    <Compile Include="Models\FormattedReservation.cs" />
     <Compile Include="Models\ReservationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -485,6 +490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006100324064_AddPhoneNumberToReservation.resx">
       <DependentUpon>202006100324064_AddPhoneNumberToReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006211557338_CreateReservationView.resx">
+      <DependentUpon>202006211557338_CreateReservationView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

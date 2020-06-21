@@ -13,7 +13,7 @@ window.JRS.Admin.Reservation = {};
             columns: [
                 { name: 'Name' },
                 { name: 'Grade' },
-                { name: 'StartDate' },
+                { name: 'TimeSlot' },
                 { name: 'Status' },
                 { name: 'CreatedAt' },
                 { name: 'Actions' }
