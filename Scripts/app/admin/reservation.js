@@ -23,6 +23,13 @@ window.JRS.Admin.Reservation = {};
             ajax: {
                 url: '/admin/reservations/read',
                 type: 'POST'
+            },
+            createdRow: function (row, data, dataIndex) {
+                if (data[3] === 'Confirmed') {
+                    $(row).addClass('success');
+                } else if (data[3] === 'Cancelled') {
+                    $(row).addClass('danger');
+                }
             }
         }).on('draw', function () {
             $('[data-toggle="tooltip"]').tooltip({

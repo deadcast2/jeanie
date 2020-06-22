@@ -78,19 +78,6 @@ namespace jeanie.Models
             }
         }
 
-        public string StatusClass
-        {
-            get
-            {
-                switch (Status)
-                {
-                    case ReservationStatus.Confirmed: return "success";
-                    case ReservationStatus.Cancelled: return "danger";
-                    default: return "";
-                }
-            }
-        }
-
         public DateTime? StartDateFromTimeSlot => Date?.AddHours(SplitTimeSlot[0]);
 
         public DateTime? EndDateFromTimeSlot => Date?.AddHours(SplitTimeSlot[1]);
