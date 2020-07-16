@@ -60,9 +60,11 @@ namespace jeanie.Lib
             return openTimeSlots.Where(e => IsAvailableTimeSlot(bookedTimeSlots, e)).ToList();
         }
 
-        public static bool IsDayFullyBooked(DateTime day, List<(DateTime start, DateTime end)> bookedTimeSlots)
+        public static bool IsDayFullyBooked(DateTime day, List<(DateTime start, DateTime end)> bookedTimeSlots, 
+            Setting setting = null)
         {
-            return AvailableTimeSlots(day, bookedTimeSlots).Count == 0;
+            var dailyLimitReached = bookedTimeSlots.Where(b => b.start.Date == day.Date).Count() >= setting?.DailyReservationLimit;
+            return dailyLimitReached || AvailableTimeSlots(day, bookedTimeSlots).Count == 0;
         }
 
         public static List<(DateTime start, DateTime end)> AvailableTimeSlots(DateTime day,
