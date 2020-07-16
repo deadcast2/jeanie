@@ -22,5 +22,13 @@ namespace jeanie.Lib
                 }, "Temp123!");
             }
         }
+
+        public static void DefaultSetting(JeanieContext context)
+        {
+            if (context.Settings.Count() == 0)
+            {
+                context.Settings.Add(new Setting());
+            }
+        }
     }
 }
