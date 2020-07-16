@@ -335,8 +335,13 @@
     <Compile Include="Migrations\202006211557338_CreateReservationView.Designer.cs">
       <DependentUpon>202006211557338_CreateReservationView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007160239228_CreateSettingsTable.cs" />
+    <Compile Include="Migrations\202007160239228_CreateSettingsTable.designer.cs">
+      <DependentUpon>202007160239228_CreateSettingsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\BlockedDate.cs" />
     <Compile Include="Models\DataTableDefs.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -591,6 +596,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006211557338_CreateReservationView.resx">
       <DependentUpon>202006211557338_CreateReservationView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007160239228_CreateSettingsTable.resx">
+      <DependentUpon>202007160239228_CreateSettingsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
