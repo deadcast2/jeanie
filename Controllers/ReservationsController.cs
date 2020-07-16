@@ -1,6 +1,7 @@
 ﻿using jeanie.Lib;
 using jeanie.Models;
 using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace jeanie.Controllers
@@ -61,8 +62,13 @@ namespace jeanie.Controllers
                     reservation.Source.Status = ReservationStatus.Complete;
                     reservation.Source.UpdatedAt = DateTime.Now;
 
-                    if (!ReservationHelper.IsAvailableTimeSlot(ReservationHelper.GetReservationsForDay(model.Date.Value),
-                        (model.StartDateFromTimeSlot.Value, model.EndDateFromTimeSlot.Value)))
+                    var bookedTimeSlots = ReservationHelper.GetReservationsForDay(model.Date.Value);
+                    var setting = context.Settings.FirstOrDefault();
+
+                    if (ReservationHelper.IsDayFullyBooked(model.StartDateFromTimeSlot.Value,
+                            bookedTimeSlots, setting) 
+                        || !ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, (model.StartDateFromTimeSlot.Value, 
+                            model.EndDateFromTimeSlot.Value)))
                     {
                         TempData["error"] = "Sorry but that time slot is no longer available.";
                     }

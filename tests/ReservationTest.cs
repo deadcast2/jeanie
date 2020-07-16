@@ -1,4 +1,5 @@
 ﻿using jeanie.Lib;
+using jeanie.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -102,6 +103,51 @@ namespace tests
         public void ReturnsTrueWhenDayFullyBooked()
         {
             Assert.IsTrue(ReservationHelper.IsDayFullyBooked(DateTime.Now, FullDay));
+        }
+
+        [TestMethod]
+        public void ReturnsTrueWhenDailyLimitReachedExactly()
+        {
+            var bookedTimeSlots = new List<(DateTime start, DateTime end)>
+            {
+                (DateTime.Today.AddHours(9), DateTime.Today.AddHours(12)),
+                (DateTime.Today.AddHours(13), DateTime.Today.AddHours(16))
+            };
+
+            var result = ReservationHelper.IsDayFullyBooked(DateTime.Now, bookedTimeSlots,
+                new Setting { DailyReservationLimit = 2 });
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ReturnsTrueWhenDailyLimitReachedGreaterThan()
+        {
+            var bookedTimeSlots = new List<(DateTime start, DateTime end)>
+            {
+                (DateTime.Today.AddHours(9), DateTime.Today.AddHours(12)),
+                (DateTime.Today.AddHours(13), DateTime.Today.AddHours(16))
+            };
+
+            var result = ReservationHelper.IsDayFullyBooked(DateTime.Now, bookedTimeSlots,
+                new Setting { DailyReservationLimit = 1 });
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void ReturnsFalseWhenDailyLimitNotReached()
+        {
+            var bookedTimeSlots = new List<(DateTime start, DateTime end)>
+            {
+                (DateTime.Today.AddHours(9), DateTime.Today.AddHours(12)),
+                (DateTime.Today.AddHours(13), DateTime.Today.AddHours(16))
+            };
+
+            var result = ReservationHelper.IsDayFullyBooked(DateTime.Now, bookedTimeSlots,
+                new Setting { DailyReservationLimit = 3 });
+
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
