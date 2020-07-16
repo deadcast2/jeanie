@@ -259,6 +259,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\SettingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\BlockedDatesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReservationsController.cs" />
     <Compile Include="Areas\Admin\Models\BlockedDatesViewModel.cs" />
@@ -388,6 +389,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\Admin\Views\Settings\Show.cshtml" />
     <None Include="Jobs\ReservationReminder.rb" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
