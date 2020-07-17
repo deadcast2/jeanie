@@ -49,7 +49,7 @@ namespace jeanie.Controllers
                 // So name validation succeeds.
                 model.Name = reservation.Name;
 
-                if (model.IsValid(strict: true))
+                if (model.IsValid())
                 {
                     context.Reservations.Attach(reservation.Source);
 

@@ -1,4 +1,4 @@
-﻿@model jeanie.Models.Setting
+﻿@model jeanie.Models.SettingViewModel
 @{
     ViewBag.Title = "Settings";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,6 +10,7 @@
 <div class="md-margin-top">
     <form method="post" action="@Url.Action("Update")">
         @Html.AntiForgeryToken()
+        @Html.Partial("_FormErrors", Model)
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">

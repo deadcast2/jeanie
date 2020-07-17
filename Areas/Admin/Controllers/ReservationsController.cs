@@ -84,7 +84,7 @@ namespace jeanie.Areas.Admin.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Update(ReservationViewModel model)
         {
-            if (model.IsValid())
+            if (model.IsValid(partial: true))
             {
                 using (var context = new JeanieContext())
                 {
