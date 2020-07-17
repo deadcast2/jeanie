@@ -10,7 +10,7 @@ namespace jeanie.Lib
     {
         public const int HoursInAdvance = 72;
 
-        private const int StartHour = 9;
+        private const int StartHour = 10;
         private const int EndHour = 20;
         private const int TimeSlotSize = 3;
         private const double TimeIncreament = 0.5;
