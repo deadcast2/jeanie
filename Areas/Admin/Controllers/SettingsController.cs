@@ -16,7 +16,7 @@ namespace jeanie.Areas.Admin.Controllers
                 var setting = context.Settings.FirstOrDefault();
                 if (setting != null)
                 {
-                    return View(setting);
+                    return View(new SettingViewModel(setting));
                 }
                 TempData["error"] = "Settings have not yet been configured.";
                 return RedirectToAction("Index", "Reservations");
@@ -24,21 +24,27 @@ namespace jeanie.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(Setting setting)
+        public ActionResult Update(SettingViewModel model)
         {
-            using (var context = new JeanieContext())
+            if (model.IsValid())
             {
-                var trackedSetting = context.Settings.FirstOrDefault();
-                if (trackedSetting != null)
+                using (var context = new JeanieContext())
                 {
-                    trackedSetting.DailyReservationLimit = setting.DailyReservationLimit;
-                    if (context.SaveChanges() > 0)
+                    var trackedSetting = context.Settings.FirstOrDefault();
+                    if (trackedSetting != null)
                     {
-                        TempData["success"] = "Changes saved!";
+                        trackedSetting.DailyReservationLimit = model.DailyReservationLimit;
+                        if (context.SaveChanges() > 0)
+                        {
+                            TempData["success"] = "Changes saved!";
+                        }
                     }
+
+                    return RedirectToAction("Index", "Reservations");
                 }
             }
-            return RedirectToAction("Show");
+
+            return View("Show", model);
         }
     }
 }

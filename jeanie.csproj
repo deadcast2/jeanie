@@ -342,6 +342,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IValidatable.cs" />
     <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\BlockedDate.cs" />
     <Compile Include="Models\DataTableDefs.cs" />
@@ -351,6 +352,7 @@
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\FormattedReservation.cs" />
     <Compile Include="Models\ReservationViewModel.cs" />
+    <Compile Include="Models\SettingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
