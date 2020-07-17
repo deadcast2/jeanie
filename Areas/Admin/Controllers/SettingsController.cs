@@ -9,7 +9,7 @@ namespace jeanie.Areas.Admin.Controllers
     public class SettingsController : Controller
     {
         [HttpGet]
-        public ActionResult Show()
+        public ActionResult Edit()
         {
             using (var context = new JeanieContext())
             {
@@ -44,7 +44,7 @@ namespace jeanie.Areas.Admin.Controllers
                 }
             }
 
-            return View("Show", model);
+            return View("Edit", model);
         }
     }
 }
