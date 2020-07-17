@@ -23,7 +23,7 @@ namespace jeanie.Areas.Admin.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Update(SettingViewModel model)
         {
             if (model.IsValid())
