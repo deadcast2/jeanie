@@ -391,7 +391,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Areas\Admin\Views\Settings\Show.cshtml" />
+    <Content Include="Areas\Admin\Views\Settings\Edit.cshtml" />
     <None Include="Jobs\ReservationReminder.rb" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
