@@ -1,6 +1,7 @@
 ﻿using jeanie.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 
@@ -8,12 +9,11 @@ namespace jeanie.Lib
 {
     public static class ReservationHelper
     {
-        public const int HoursInAdvance = 72;
-
-        private const int StartHour = 10;
-        private const int EndHour = 20;
-        private const int TimeSlotSize = 3;
-        private const double TimeIncreament = 0.5;
+        public static int HoursInAdvance => int.Parse(ConfigurationManager.AppSettings["HoursInAdvance"]);
+        private static int StartHour => int.Parse(ConfigurationManager.AppSettings["StartHour"]);
+        private static int EndHour => int.Parse(ConfigurationManager.AppSettings["EndHour"]);
+        private static int TimeSlotSize => int.Parse(ConfigurationManager.AppSettings["TimeSlotSize"]);
+        private static double TimeIncreament => double.Parse(ConfigurationManager.AppSettings["TimeIncreament"]);
 
         public static List<(DateTime start, DateTime end)> GetReservationsForDay(DateTime day)
         {
