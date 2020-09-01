@@ -10,8 +10,8 @@ namespace jeanie.Lib
     public static class ReservationHelper
     {
         public static int HoursInAdvance => int.Parse(ConfigurationManager.AppSettings["HoursInAdvance"]);
-        private static int StartHour => int.Parse(ConfigurationManager.AppSettings["StartHour"]);
-        private static int EndHour => int.Parse(ConfigurationManager.AppSettings["EndHour"]);
+        private static double StartHour => double.Parse(ConfigurationManager.AppSettings["StartHour"]);
+        private static double EndHour => double.Parse(ConfigurationManager.AppSettings["EndHour"]);
         private static int TimeSlotSize => int.Parse(ConfigurationManager.AppSettings["TimeSlotSize"]);
         private static double TimeIncreament => double.Parse(ConfigurationManager.AppSettings["TimeIncreament"]);
 
