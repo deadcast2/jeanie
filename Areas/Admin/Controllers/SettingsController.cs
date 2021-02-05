@@ -34,6 +34,7 @@ namespace jeanie.Areas.Admin.Controllers
                     if (trackedSetting != null)
                     {
                         trackedSetting.DailyReservationLimit = model.DailyReservationLimit;
+                        trackedSetting.EmailTemplate = model.EmailTemplate;
                         if (context.SaveChanges() > 0)
                         {
                             TempData["success"] = "Changes saved!";

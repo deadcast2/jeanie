@@ -27,6 +27,7 @@ namespace jeanie
                 .Include("~/Scripts/fullcalendar/daygrid/main.min.js")
                 .Include("~/Scripts/fullcalendar/interaction/main.min.js")
                 .Include("~/Scripts/datatables/datatables.min.js")
+                .Include("~/Scripts/summernote/summernote.min.js")
                 .Include("~/Scripts/app/app.js")
                 .Include("~/Scripts/app/admin/reservation.js")
                 .Include("~/Scripts/app/blockeddate.js")
@@ -34,14 +35,15 @@ namespace jeanie
             );
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/pickadate/default.css",
-                      "~/Content/pickadate/default.date.css",
-                      "~/Content/pickadate/default.time.css",
-                      "~/Content/fullcalendar/core/main.min.css",
-                      "~/Content/fullcalendar/daygrid/main.min.css",
-                      "~/Content/datatables/datatables.min.css"));
+                "~/Content/bootstrap.css",
+                "~/Content/site.css",
+                "~/Content/pickadate/default.css",
+                "~/Content/pickadate/default.date.css",
+                "~/Content/pickadate/default.time.css",
+                "~/Content/fullcalendar/core/main.min.css",
+                "~/Content/fullcalendar/daygrid/main.min.css",
+                "~/Content/datatables/datatables.min.css",
+                "~/Content/summernote/summernote.min.css"));
 
 #if !DEBUG
             BundleTable.EnableOptimizations = true;

@@ -20,7 +20,26 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label for="EmailTemplate">Email Template</label>
+                    <textarea class="form-control" id="EmailTemplate" name="EmailTemplate">@Model.EmailTemplate</textarea>
+                    <p class="help-block">Special keyword #reservation-link will be replaced with actual link to the reservation.</p>
+                </div>
+            </div>
+        </div>
         <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save Changes</button>
         <a href="@Url.Action("Index", "Reservations")" class="btn btn-default">Go Back</a>
     </form>
 </div>
+
+@section scripts {
+    <script>
+        $(function(){
+            $('#EmailTemplate').summernote({
+                height: 300
+            });
+        });
+    </script>
+}
