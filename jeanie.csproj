@@ -340,6 +340,10 @@
     <Compile Include="Migrations\202007160239228_CreateSettingsTable.designer.cs">
       <DependentUpon>202007160239228_CreateSettingsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102050234235_AddEmailTemplateToSettingsTable.cs" />
+    <Compile Include="Migrations\202102050234235_AddEmailTemplateToSettingsTable.designer.cs">
+      <DependentUpon>202102050234235_AddEmailTemplateToSettingsTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IValidatable.cs" />
@@ -367,6 +371,7 @@
     <Content Include="Content\pickadate\default.css" />
     <Content Include="Content\pickadate\default.date.css" />
     <Content Include="Content\pickadate\default.time.css" />
+    <Content Include="Content\summernote\summernote.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -392,6 +397,10 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Areas\Admin\Views\Settings\Edit.cshtml" />
+    <Content Include="Content\summernote\font\summernote.eot" />
+    <Content Include="Content\summernote\font\summernote.ttf" />
+    <Content Include="Content\summernote\font\summernote.woff" />
+    <Content Include="Content\summernote\font\summernote.woff2" />
     <None Include="Jobs\ReservationReminder.rb" />
     <None Include="Properties\PublishProfiles\jeanie-reservation-system - Web Deploy.pubxml" />
     <Content Include="Scripts\bootstrap.js" />
@@ -492,6 +501,7 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\summernote\summernote.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -603,6 +613,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007160239228_CreateSettingsTable.resx">
       <DependentUpon>202007160239228_CreateSettingsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102050234235_AddEmailTemplateToSettingsTable.resx">
+      <DependentUpon>202102050234235_AddEmailTemplateToSettingsTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

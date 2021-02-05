@@ -10,5 +10,8 @@ namespace jeanie.Models
         public Guid Id { get; set; }
 
         public int? DailyReservationLimit { get; set; }
+
+        [MaxLength]
+        public string EmailTemplate { get; set; }
     }
 }

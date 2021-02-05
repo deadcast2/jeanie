@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace jeanie.Models
 {
     public class SettingViewModel : IValidatable
     {
         public int? DailyReservationLimit { get; set; }
+
+        [AllowHtml]
+        public string EmailTemplate { get; set; }
 
         public IList<string> Errors { get; set; } = new List<string>();
 
@@ -13,6 +17,7 @@ namespace jeanie.Models
         public SettingViewModel(Setting setting)
         {
             DailyReservationLimit = setting.DailyReservationLimit;
+            EmailTemplate = setting.EmailTemplate;
         }
 
         public bool IsValid(bool partial = false)
