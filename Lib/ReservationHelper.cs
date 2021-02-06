@@ -125,16 +125,16 @@ namespace jeanie.Lib
                                 : reservations.OrderByDescending(r => r.Grade);
                             break;
                         case nameof(FormattedReservation.TimeSlot):
-                            reservations = order.IsAsc ? reservations.OrderBy(r => r.TimeSlot)
-                                : reservations.OrderByDescending(r => r.TimeSlot);
+                            reservations = order.IsAsc ? reservations.OrderBy(r => r.StartDate)
+                                : reservations.OrderByDescending(r => r.StartDate);
                             break;
                         case nameof(FormattedReservation.Status):
-                            reservations = order.IsAsc ? reservations.OrderBy(r => r.Status)
-                                : reservations.OrderByDescending(r => r.Status);
+                            reservations = order.IsAsc ? reservations.OrderBy(r => r.RawStatus)
+                                : reservations.OrderByDescending(r => r.RawStatus);
                             break;
                         case nameof(FormattedReservation.CreatedAt):
-                            reservations = order.IsAsc ? reservations.OrderBy(r => r.CreatedAt)
-                                : reservations.OrderByDescending(r => r.CreatedAt);
+                            reservations = order.IsAsc ? reservations.OrderBy(r => r.RawCreatedAt)
+                                : reservations.OrderByDescending(r => r.RawCreatedAt);
                             break;
                     }
                 }

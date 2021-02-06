@@ -9,8 +9,11 @@ namespace jeanie.Models
         public string Name { get; set; }
         public string Grade { get; set; }
         public string TimeSlot { get; set; }
+        public DateTime? StartDate { get; set; }
         public string Status { get; set; }
+        public ReservationStatus RawStatus { get; set; }
         public string CreatedAt { get; set; }
+        public DateTime RawCreatedAt { get; set; }
 
         [NotMapped]
         public string Url => new ReservationViewModel { Id = Id }.Url;
