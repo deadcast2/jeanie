@@ -95,7 +95,7 @@ namespace jeanie.Models
             Errors.Clear();
 
             if (string.IsNullOrWhiteSpace(Name)) Errors.Add("Name cannot be blank.");
-            if (Name.Length > Reservation.MaxNameLength)
+            if ((Name ?? "").Length > Reservation.MaxNameLength)
                 Errors.Add($"Name must be less than {Reservation.MaxNameLength} characters.");
             if ((Email ?? "").Length > Reservation.MaxEmailLength)
                 Errors.Add($"Email must be less than {Reservation.MaxEmailLength} characters.");
