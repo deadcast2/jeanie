@@ -66,8 +66,8 @@ namespace jeanie.Controllers
                     var setting = context.Settings.FirstOrDefault();
 
                     if (ReservationHelper.IsDayFullyBooked(model.StartDateFromTimeSlot.Value,
-                            bookedTimeSlots, setting) 
-                        || !ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, (model.StartDateFromTimeSlot.Value, 
+                            bookedTimeSlots, setting)
+                        || !ReservationHelper.IsAvailableTimeSlot(bookedTimeSlots, (model.StartDateFromTimeSlot.Value,
                             model.EndDateFromTimeSlot.Value)))
                     {
                         TempData["error"] = "Sorry but that time slot is no longer available.";
