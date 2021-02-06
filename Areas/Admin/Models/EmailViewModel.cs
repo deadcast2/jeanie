@@ -27,7 +27,7 @@ namespace jeanie.Areas.Admin.Models
         public string GetBody()
         {
             var url = new ReservationViewModel { Id = Reservation.Id }.Url;
-            var name = Reservation.Name.Split(' ').First(); // Try to get the first name.
+            var name = Reservation.Name.FirstWord();
 
             return Setting.EmailTemplate.Replace("$name", name).Replace("$link", $"<a href=\"{url}\">{url}</a>");
         }
