@@ -25,11 +25,11 @@
                 <div class="form-group">
                     <label for="EmailTemplate">Email Template</label>
                     <textarea class="form-control" id="EmailTemplate" name="EmailTemplate">@Model.EmailTemplate</textarea>
-                    <p class="help-block">Special keyword #reservation-link will be replaced with actual link to the reservation.</p>
+                    <p class="help-block">Special keywords <b>$link</b> will be replaced with actual link to the reservation and <b>$name</b> to the name of the person the reservation was created for.</p>
                 </div>
             </div>
         </div>
-        <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save Changes</button>
+        <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i> Save Changes</button>
         <a href="@Url.Action("Index", "Reservations")" class="btn btn-default">Go Back</a>
     </form>
 </div>
