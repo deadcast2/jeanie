@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <input class="form-control" style="min-width:250px;" name="name" value="@Model.Name" placeholder="Name Required" />
                 </div>
-                <button type="submit" class="btn btn-success">
+                <button type="submit" class="btn btn-primary">
                     <i class="glyphicon glyphicon-plus"></i> Add Reservation
                 </button>
             </form>
@@ -32,6 +32,33 @@
                     </tr>
                 </thead>              
             </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="email_modal" data-path="@Url.Action("Show", "Email")" tabindex="-1" role="dialog" aria-labelledby="email_label">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form method="post" action="@Url.Action("Create", "Email")">
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="email_label">Review email before sending</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="email" name="To" class="form-control" placeholder="Send to email address..." required />
+                    </div>
+                    <textarea id="email_template" name="Body"></textarea>
+                    <p class="help-block">A copy will be forwarded to @Mailer.DefaultEmail</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-send"></i> Send
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
-﻿using jeanie.Models;
+﻿using jeanie.Areas.Admin.Models;
+using jeanie.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;
@@ -10,7 +11,7 @@ namespace jeanie.Lib
 {
     public static class Mailer
     {
-        private static string DefaultEmail => GetSystemVariable("DEFAULT_EMAIL");
+        public static string DefaultEmail => GetSystemVariable("DEFAULT_EMAIL");
 
         private static List<Attachment> DefaultAttachments
         {
@@ -71,6 +72,12 @@ namespace jeanie.Lib
 
             body = ViewHelpers.RenderToString(context, "_CancelledThankYouEmail", reservation);
             Task.Run(() => Send(reservation.Email, "Reservation cancelled! ❌", body));
+        }
+
+        public static void SendReservation(EmailViewModel email)
+        {
+            Task.Run(() => Send(email.To, "Reservation from Jeanie", email.Body));
+            Task.Run(() => Send(DefaultEmail, "FWD: Reservation from Jeanie", email.Body));
         }
 
         private static async Task Send(string to, string subject, string body, List<Attachment> attachments)

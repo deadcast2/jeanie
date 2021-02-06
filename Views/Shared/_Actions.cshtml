@@ -10,6 +10,12 @@
        title="Copied to clipboard!" data-clipboard-text="@Model.Url">
         <i class="glyphicon glyphicon-copy"></i>
     </a>
+    @if (Model.Status == "Uncomplete")
+    {
+        <a href="#email" class="btn btn-default btn-sm" title="Email" data-toggle="modal" data-target="#email_modal" data-id="@Model.Id">
+            <i class="glyphicon glyphicon-envelope"></i>
+        </a>
+    }
     <a href="#delete" class="btn btn-danger btn-sm delete-confirm" title="Delete">
         <i class="glyphicon glyphicon-ban-circle"></i>
     </a>
