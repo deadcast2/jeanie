@@ -88,12 +88,12 @@ namespace jeanie.Areas.Admin.Controllers
                 var minTimeSlot = allTimeSlots.First();
                 var maxTimeSlot = allTimeSlots.Last();
 
-                var blockedDate = context.BlockedDates.FirstOrDefault(e => e.StartDate == minTimeSlot.start 
+                var blockedDate = context.BlockedDates.FirstOrDefault(e => e.StartDate == minTimeSlot.start
                     && e.EndDate == maxTimeSlot.end);
                 if (blockedDate == null)
                 {
                     // Remove any blocked time slots for this date.
-                    foreach(var timeSlot in context.BlockedDates
+                    foreach (var timeSlot in context.BlockedDates
                         .Where(e => DbFunctions.TruncateTime(e.StartDate) == date))
                     {
                         context.Entry(timeSlot).State = EntityState.Deleted;
