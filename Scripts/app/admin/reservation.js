@@ -5,6 +5,7 @@ window.JRS.Admin.Reservation = {};
 (function ($, self, undefined) {
     self.init = function () {
         $('#reservations_grid').DataTable({
+            processing: true,
             order: [[4, "desc"]],
             columnDefs: [{
                 "targets": 'no-sort',
@@ -18,7 +19,7 @@ window.JRS.Admin.Reservation = {};
                 { name: 'CreatedAt' },
                 { name: 'Actions' }
             ],
-            dom: 'ft<"pull-left"l>p',
+            dom: 'ft<"pull-left"l>pr',
             serverSide: true,
             ajax: {
                 url: '/admin/reservations/read',
