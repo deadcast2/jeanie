@@ -10,7 +10,7 @@
        title="Copied to clipboard!" data-clipboard-text="@Model.Url">
         <i class="glyphicon glyphicon-copy"></i>
     </a>
-    @if (Model.Status == "Uncomplete")
+    @if (Model.RawStatus == jeanie.Models.ReservationStatus.Uncomplete)
     {
         <a href="#email" class="btn btn-default btn-sm" title="Email" data-toggle="modal" data-target="#email_modal" data-id="@Model.Id">
             <i class="glyphicon glyphicon-envelope"></i>
