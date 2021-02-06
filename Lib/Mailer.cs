@@ -89,7 +89,6 @@ namespace jeanie.Lib
                 From = new EmailAddress("noreply@jeanie-reservation-system.com", "Jeanie Reservation System"),
                 ReplyTo = new EmailAddress(DefaultEmail, "BioSocial Development Lab"),
                 Subject = subject,
-                PlainTextContent = body,
                 HtmlContent = body
             };
             message.AddTo(to);
