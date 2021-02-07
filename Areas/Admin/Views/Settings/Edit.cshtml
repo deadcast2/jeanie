@@ -11,21 +11,39 @@
     <form method="post" action="@Url.Action("Update")">
         @Html.AntiForgeryToken()
         @Html.Partial("_FormErrors", Model)
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="DailyReservationLimit">Daily Reservation Limit</label>
-                    <input type="number" class="form-control" value="@Model.DailyReservationLimit" name="DailyReservationLimit" />
-                    <p class="help-block">Leave blank to remove daily limit.</p>
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#reservation" aria-controls="reservation" role="tab" data-toggle="tab">Reservation</a></li>
+            <li role="presentation"><a href="#email-template" aria-controls="email-template" role="tab" data-toggle="tab">Email Template</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="reservation">
+                <div class="row md-margin-top">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="DailyReservationLimit">Daily Limit</label>
+                            <input type="number" class="form-control" value="@Model.DailyReservationLimit" id="DailyReservationLimit" name="DailyReservationLimit" />
+                            <p class="help-block">Leave blank to remove daily limit.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label for="EmailTemplate">Email Template</label>
-                    <textarea class="form-control" id="EmailTemplate" name="EmailTemplate">@Model.EmailTemplate</textarea>
-                    <p class="help-block">Special keywords <b>$link</b> will be replaced with actual link to the reservation and <b>$name</b> to the name of the person the reservation was created for.</p>
+            <div role="tabpanel" class="tab-pane" id="email-template">
+                <div class="row md-margin-top">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="EmailTemplateSubject">Subject</label>
+                            <input class="form-control" id="EmailTemplateSubject" name="EmailTemplateSubject" value="@Model.EmailTemplateSubject" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="EmailTemplateBody">Body</label>
+                            <textarea class="form-control" id="EmailTemplateBody" name="EmailTemplateBody">@Model.EmailTemplateBody</textarea>
+                            <p class="help-block">Special keywords <b>$link</b> will be replaced with the actual link to the reservation and <b>$name</b> to the first word from the reservation's name.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -37,7 +55,7 @@
 @section scripts {
     <script>
         $(function(){
-            $('#EmailTemplate').summernote({
+            $('#EmailTemplateBody').summernote({
                 height: 300
             });
         });

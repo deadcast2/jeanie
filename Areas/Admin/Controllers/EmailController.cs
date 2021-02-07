@@ -17,14 +17,15 @@ namespace jeanie.Areas.Admin.Controllers
                 var setting = context.Settings.FirstOrDefault();
                 var reservation = context.Reservations.Find(id);
 
-                return Content(new EmailViewModel(setting, reservation).GetBody());
+                return Json(new EmailViewModel(setting, reservation), JsonRequestBehavior.AllowGet);
             }
         }
 
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Create(EmailViewModel model)
         {
-            model.Send();
+            Mailer.SendReservation(model);
+
             TempData["success"] = $"Reservation successfully emailed to {model.To}!";
 
             return RedirectToAction("Index", "Reservations");

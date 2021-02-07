@@ -13,6 +13,8 @@ namespace jeanie.Areas.Admin.Models
 
         public string To { get; set; }
 
+        public string Subject { get; set; }
+
         [AllowHtml]
         public string Body { get; set; }
 
@@ -24,17 +26,23 @@ namespace jeanie.Areas.Admin.Models
             Reservation = reservation ?? throw new Exception("Reservation cannot be null");
         }
 
-        public string GetBody()
+        public string DefaultSubject
         {
-            var url = new ReservationViewModel { Id = Reservation.Id }.Url;
-            var name = Reservation.Name.FirstWord();
-
-            return Setting.EmailTemplate.Replace("$name", name).Replace("$link", $"<a href=\"{url}\">{url}</a>");
+            get
+            {
+                return Setting.EmailTemplateSubject;
+            }
         }
 
-        public void Send()
+        public string DefaultBody
         {
-            Mailer.SendReservation(this);
+            get
+            {
+                var url = new ReservationViewModel { Id = Reservation.Id }.Url;
+                var name = Reservation.Name.FirstWord();
+
+                return Setting.EmailTemplateBody.Replace("$name", name).Replace("$link", $"<a href=\"{url}\">{url}</a>");
+            }
         }
     }
 }

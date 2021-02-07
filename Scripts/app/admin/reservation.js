@@ -38,13 +38,14 @@ window.JRS.Admin.Reservation = {};
             });
         });
 
-        $('#email_template').summernote({ height: 300 });
+        $('#email_modal #Body').summernote({ height: 300 });
 
         $('#email_modal').on('show.bs.modal', function (e) {
             var id = $(e.relatedTarget).data('id');
 
             $.get({ cache: false, url: $(this).data('path') + '?id=' + id }, function (response) {
-                $('#email_template').summernote('code', response);
+                $('#email_modal #Subject').val(response.DefaultSubject);
+                $('#email_modal #Body').summernote('code', response.DefaultBody);
             });
         });
     };

@@ -6,12 +6,17 @@ namespace jeanie.Models
 {
     public class Setting
     {
+        public const int MaxEmailTemplateSubjectLength = 255;
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         public int? DailyReservationLimit { get; set; }
 
+        [StringLength(MaxEmailTemplateSubjectLength)]
+        public string EmailTemplateSubject { get; set; }
+
         [MaxLength]
-        public string EmailTemplate { get; set; }
+        public string EmailTemplateBody { get; set; }
     }
 }

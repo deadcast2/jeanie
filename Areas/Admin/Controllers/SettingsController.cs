@@ -14,10 +14,12 @@ namespace jeanie.Areas.Admin.Controllers
             using (var context = new JeanieContext())
             {
                 var setting = context.Settings.FirstOrDefault();
+                
                 if (setting != null)
                 {
                     return View(new SettingViewModel(setting));
                 }
+
                 TempData["error"] = "Settings have not yet been configured.";
                 return RedirectToAction("Index", "Reservations");
             }
@@ -31,10 +33,13 @@ namespace jeanie.Areas.Admin.Controllers
                 using (var context = new JeanieContext())
                 {
                     var trackedSetting = context.Settings.FirstOrDefault();
+                    
                     if (trackedSetting != null)
                     {
                         trackedSetting.DailyReservationLimit = model.DailyReservationLimit;
-                        trackedSetting.EmailTemplate = model.EmailTemplate;
+                        trackedSetting.EmailTemplateSubject = model.EmailTemplateSubject;
+                        trackedSetting.EmailTemplateBody = model.EmailTemplateBody;
+
                         if (context.SaveChanges() > 0)
                         {
                             TempData["success"] = "Changes saved!";
