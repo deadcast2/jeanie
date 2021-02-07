@@ -76,8 +76,8 @@ namespace jeanie.Lib
 
         public static void SendReservation(EmailViewModel email)
         {
-            Task.Run(() => Send(email.To, "Reservation from Jeanie", email.Body, DefaultAttachments));
-            Task.Run(() => Send(DefaultEmail, "FWD: Reservation from Jeanie", email.Body, DefaultAttachments));
+            Task.Run(() => Send(email.To, email.Subject, email.Body, DefaultAttachments));
+            Task.Run(() => Send(DefaultEmail, $"FWD: {email.Subject}", email.Body, DefaultAttachments));
         }
 
         private static async Task Send(string to, string subject, string body, List<Attachment> attachments)

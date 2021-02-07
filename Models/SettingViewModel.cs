@@ -7,8 +7,10 @@ namespace jeanie.Models
     {
         public int? DailyReservationLimit { get; set; }
 
+        public string EmailTemplateSubject { get; set; }
+
         [AllowHtml]
-        public string EmailTemplate { get; set; }
+        public string EmailTemplateBody { get; set; }
 
         public IList<string> Errors { get; set; } = new List<string>();
 
@@ -17,7 +19,8 @@ namespace jeanie.Models
         public SettingViewModel(Setting setting)
         {
             DailyReservationLimit = setting.DailyReservationLimit;
-            EmailTemplate = setting.EmailTemplate;
+            EmailTemplateSubject = setting.EmailTemplateSubject;
+            EmailTemplateBody = setting.EmailTemplateBody;
         }
 
         public bool IsValid(bool partial = false)
@@ -26,7 +29,12 @@ namespace jeanie.Models
 
             if (DailyReservationLimit < 1)
             {
-                Errors.Add("Daily reservation limit must be greater than 0");
+                Errors.Add("Daily reservation limit must be greater than 0.");
+            }
+
+            if ((EmailTemplateSubject ?? "").Length > Setting.MaxEmailTemplateSubjectLength)
+            {
+                Errors.Add($"Subject must be less than {Setting.MaxEmailTemplateSubjectLength + 1} characters.");
             }
 
             return Errors.Count == 0;
