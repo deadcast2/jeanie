@@ -64,7 +64,7 @@ namespace jeanie.Lib
             Setting setting = null)
         {
             var dailyLimitReached = bookedTimeSlots.Where(b => b.start.Date == day.Date).Count() >= setting?.DailyReservationLimit;
-            return dailyLimitReached || AvailableTimeSlots(day, bookedTimeSlots).Count == 0;
+            return dailyLimitReached || AvailableTimeSlots(day, bookedTimeSlots).Count == 0 || day >= DateTime.Parse("08/01/2022");
         }
 
         public static List<(DateTime start, DateTime end)> AvailableTimeSlots(DateTime day,
