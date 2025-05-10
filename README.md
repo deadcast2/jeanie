@@ -34,7 +34,10 @@ For participants, the system offers:
 
 ## Screenshots
 
-*[Screenshots would be added here]*
+![Screenshot 2025-05-10 112505](https://github.com/user-attachments/assets/c90c32df-8154-4205-9c4b-8246e857e95f)
+![Screenshot 2025-05-10 112521](https://github.com/user-attachments/assets/0df4ad9d-2210-4ab4-8cfb-d3c2a7ef11c3)
+![Screenshot 2025-05-10 114150](https://github.com/user-attachments/assets/ea80cc34-9a51-4d3e-bcd9-ec2c626c345d)
+![Screenshot 2025-05-10 114158](https://github.com/user-attachments/assets/c3224ec4-cb75-46e1-aa9f-e3a22e91c809)
 
 ## Installation
 
