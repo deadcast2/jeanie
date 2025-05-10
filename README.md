@@ -81,6 +81,8 @@ For participants, the system offers:
    
    **Important**: Change this password immediately after first login!
 
+8. Execute the formatted_reservation_view.sql to generate the view needed for reservations
+
 ## Configuration
 
 In the `Web.config` file, you can adjust the following settings:
